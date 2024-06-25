@@ -39,7 +39,7 @@ public class Stat
         switch(unitCode)
         {
             case UnitCode.Vengeful_Warrior: //이름, 최대체력, 공격력, 속도, 공격범위, 공격속도, 선딜 _순서
-                stat = new Stat(unitCode, "Vengeful_Warrior", 150, 20, 3f, 2f, 2f, 1f);
+                stat = new Stat(unitCode, "Vengeful_Warrior", 150, 20, 2f, 2f, 2f, 1f);
                 break;
             case UnitCode.Grudge_Archer:
                 stat = new Stat(unitCode, "Grudge_Archer", 100, 20, 2f, 6f, 4f, 2f);
