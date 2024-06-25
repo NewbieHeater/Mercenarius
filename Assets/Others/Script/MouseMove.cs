@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class MouseMove : MonoBehaviour
 {
+    public SOSkill Soskill;
     private float orginSpeed = 8;//나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
     public float curSpeed;
     public float dashPower = 5;

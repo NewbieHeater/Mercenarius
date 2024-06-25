@@ -27,12 +27,10 @@ public class MoveState : MonoBehaviour, IState<MonsterController>
         {
             _monsterController.nav.SetDestination(_monsterController.target.transform.position);
             _monsterController.sprite.flipX = _monsterController.target.position.x < _monsterController.enemyRb.position.x;
-            Debug.Log("이동중");
         }
         else
         {
             _monsterController.nav.SetDestination(transform.position);
-            Debug.Log("이동완료");
         }
 
         //_monsterController.sprite.flipX = _monsterController.target.position.x < _monsterController.enemyRb.position.x;

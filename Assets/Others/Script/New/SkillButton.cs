@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour
 {
+    public string SkillType;
+
     // ScriptableObject 로 생성한 스킬
     public SOSkill SOSkill;
 
@@ -26,17 +28,23 @@ public class SkillButton : MonoBehaviour
         imgCool.fillAmount = 0;
     }
 
-    public void OnClicked()
+    public void Update()
     {
-        // Cool 이미지의 fillAmount 가 0 보다 크다는 것은
-        // 아직 쿨타임이 끝나지 않았다는 뜻
-        if (imgCool.fillAmount > 0) return;
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            // Cool 이미지의 fillAmount 가 0 보다 크다는 것은
+            // 아직 쿨타임이 끝나지 않았다는 뜻
+            if (imgCool.fillAmount > 0) return;
+            // Player 객체의 ActivateSkill 호출     
+            player.ActivateSkill(SOSkill);
 
-        // Player 객체의 ActivateSkill 호출     
-        player.ActivateSkill(SOSkill);
+            // 스킬 Cool 처리
+            StartCoroutine(SC_Cool());
+        }
+        
+        
 
-        // 스킬 Cool 처리
-        StartCoroutine(SC_Cool());
+        
     }
 
     IEnumerator SC_Cool()
