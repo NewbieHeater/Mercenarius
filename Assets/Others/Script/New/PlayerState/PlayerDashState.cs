@@ -77,6 +77,6 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
 
     public void OperateExit(PlayerController sender)
     {
-        StopCoroutine(Dash(transform.position, transform.position));
+        
     }
 }

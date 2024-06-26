@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && imgCool.fillAmount == 0)
         {
             Dash = false;
             smp.SetState(dicState[PlayerState.Dash]);
