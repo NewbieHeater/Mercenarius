@@ -51,7 +51,6 @@ public class MonsterController : MonoBehaviour
         stat = new Stat();
         stat = stat.SetUnitStat(unitCode);
     }
-    // Start is called before the first frame update
     void Start()
     {
         //GetComponentInParent

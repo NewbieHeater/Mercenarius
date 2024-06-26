@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -12,8 +13,8 @@ public class MouseMove : MonoBehaviour
     public float curSpeed;
     private float dashPowerOrigin = 5f;
     public float dashPower = 5f;
-
-    RaycastHit DashHit;
+    public SpriteRenderer spriteRender;
+    RaycastHit DashHit; 
     NavMeshAgent agent;     //네비매쉬
     Animator anim;
     public Transform spot;  //마우스 클릭시 클릭 위치 표시를 위해 과녁모양가져오기
@@ -26,6 +27,7 @@ public class MouseMove : MonoBehaviour
     public Image imgCool;
     private void Awake()
     {
+        spriteRender = GetComponentInChildren<SpriteRenderer>();
         agent = this.GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         agent.speed = orginSpeed;
@@ -40,10 +42,13 @@ public class MouseMove : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hit))
             {
+                spriteRender.flipX = hit.point.x < transform.position.x;
                 agent.isStopped = false;
-                agent.SetDestination(hit.point);    //이동
-                
-                spot.gameObject.SetActive(true);    //과녁 활성화
+                //이동
+                agent.SetDestination(hit.point);    
+                anim.SetBool("Running", true);
+                //과녁 활성화
+                spot.gameObject.SetActive(true);    
                 spot.position = hit.point;
             }
         }
@@ -51,8 +56,9 @@ public class MouseMove : MonoBehaviour
         {
             if (imgCool.fillAmount > 0)
                 return;
-            StartCoroutine(CoolDown(Soskill.Cooltime));
-            
+            StartCoroutine(CoolDown(Soskill.Cooltime, imgCool));
+            anim.SetBool("Running", false);
+            anim.SetTrigger("Dashing");
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -65,7 +71,7 @@ public class MouseMove : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, dashDestDir, out DashHit, dashPower))
                     if (DashHit.collider.tag.Equals("Wall"))
-                        dashPower = DashHit.distance - 0.7f;
+                        dashPower = DashHit.distance - 0.3f;
                         
                 //최종목표 위치
                 Vector3 dashDest = transform.position + dashDestDir * dashPower;
@@ -80,6 +86,7 @@ public class MouseMove : MonoBehaviour
             //agent.velocity = Vector3.zero;
             //정지시 애니메이션 넣으면 됨
             spot.gameObject.SetActive(false);
+            anim.SetBool("Running", false);
         }
     }
     public void ActivateSkill(SOSkill skill)
@@ -89,6 +96,7 @@ public class MouseMove : MonoBehaviour
     }
     IEnumerator dash(Vector3 Dest, Vector3 pos)
     {
+        spriteRender.flipX = Dest.x < pos.x;
         float t = 0;
         while (t < 1f)
         {
@@ -98,24 +106,26 @@ public class MouseMove : MonoBehaviour
             Debug.Log(t);
             yield return null;
         }
+        Debug.Log("대쉬끗");
         dashPower = dashPowerOrigin;
     }
-    IEnumerator CoolDown(float cool) 
+    IEnumerator CoolDown(float cool, Image coolDownSkill) 
     {
         float tick = 1f / cool;
         float t = 0;
 
-        imgCool.fillAmount = 1;
+        coolDownSkill.fillAmount = 1;
 
         // 10초에 걸쳐 1 -> 0 으로 변경하는 값을
         // imgCool.fillAmout 에 넣어주는 코드
-        while (imgCool.fillAmount > 0)
+        while (coolDownSkill.fillAmount > 0)
         {
-            imgCool.fillAmount = Mathf.Lerp(1, 0, t);
+            coolDownSkill.fillAmount = Mathf.Lerp(1, 0, t);
             t += (Time.deltaTime * tick);
 
             yield return null;
         }
+        Debug.Log("쿨다운끝");
     }
 
 }
