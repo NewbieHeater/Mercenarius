@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     public float curSpeed;
     public float dashPowerOrigin = 5f;
     public float dashPower = 5f;
-    public float dashSpeed = 6f;
-    public bool Dash = false;
+    public float dashSpeed = 5f;
+    public bool DashEnable = false;
 
     public SpriteRenderer spriteRender;
     public RaycastHit DashHit;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         Move,
         Attack,
         Dash,
+        Roll
     }
 
     //public string[] strings = ;
@@ -60,11 +61,13 @@ public class PlayerController : MonoBehaviour
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
         IState<PlayerController> attack = gameObject.AddComponent<PlayerAttackState>();
         IState<PlayerController> dash = gameObject.AddComponent<PlayerDashState>();
+        IState<PlayerController> roll = gameObject.AddComponent<PlayerDashState>();
 
         dicState.Add(PlayerState.Idle, idle);
         dicState.Add(PlayerState.Move, move);
         dicState.Add(PlayerState.Attack, attack);
         dicState.Add(PlayerState.Dash, dash);
+        dicState.Add(PlayerState.Roll, roll);
 
         smp = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
@@ -74,16 +77,13 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.A) && imgCool.fillAmount == 0)
         {
-            Dash = false;
+            DashEnable = true;
             smp.SetState(dicState[PlayerState.Dash]);
-        }
-            
+        }    
         else if (Input.GetMouseButtonDown(0))
             smp.SetState(dicState[PlayerState.Move]);
-        else if (anim.GetBool("Running") == false && Dash == true)
+        else if (anim.GetBool("Running") == false && DashEnable == false)
             smp.SetState(dicState[PlayerState.Idle]);
-
-
 
         smp.DoOperateUpdate();
     }

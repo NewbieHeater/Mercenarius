@@ -23,10 +23,11 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             Vector3 dashDestPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             //마우스 클릭 위치 - 현재 위치 (각도계산)
             Vector3 dashDestDir = (dashDestPos - transform.position).normalized;
-
+            //플레이어에서 마우스로 Ray발사
             if (Physics.Raycast(transform.position, dashDestDir, out _playerController.DashHit, _playerController.dashPower))
-                if (_playerController.DashHit.collider.tag.Equals("Wall"))
-                    _playerController.dashPower = _playerController.DashHit.distance - 0.3f;
+                if (_playerController.DashHit.collider.tag.Equals("Wall"))                      //Ray가 벽에 닿으면
+                    _playerController.dashPower = _playerController.DashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
+
 
             //최종목표 위치
             Vector3 dashDest = transform.position + dashDestDir * _playerController.dashPower;
@@ -37,18 +38,18 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     }
     IEnumerator Dash(Vector3 Dest, Vector3 pos)
     {
+        Debug.Log(Dest.x);
+        //걷기와 비슷하게 좌우반전해주기
         _playerController.spriteRender.flipX = Dest.x < pos.x;
         float t = 0;
         while (t < (1f/_playerController.dashSpeed))
         {
-
+            //이동
             transform.position = Vector3.Lerp(pos, Dest, t * _playerController.dashSpeed);
             t += Time.deltaTime;
-            Debug.Log(t);
             yield return null;
         }
-        Debug.Log("대쉬끗");
-        _playerController.Dash = true;
+        _playerController.DashEnable = false;
         _playerController.dashPower = _playerController.dashPowerOrigin;
     }
 
@@ -56,7 +57,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     {
         float tick = 1f / cool;
         float t = 0;
-
+        //스킬 사용후 아이콘에 회색 채우기
         coolDownSkill.fillAmount = 1;
 
         // 10초에 걸쳐 1 -> 0 으로 변경하는 값을
@@ -68,7 +69,6 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
 
             yield return null;
         }
-        Debug.Log("쿨다운끝");
     }
     public void OperateUpdate(PlayerController sender)
     {

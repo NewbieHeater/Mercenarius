@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -153,9 +153,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,9 +174,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,9 +195,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,9 +216,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,7 +226,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3f162d6227173743bec69445171d09b
+      spriteID: 9846618414a29c444ab21f931d1855af
       internalID: 1336225362
       vertices: []
       indices: 
@@ -237,9 +237,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,7 +247,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93de57b320e30fc48b95bcb8d82c1705
+      spriteID: 96c52fbeaaaa652499a1be89b48ac890
       internalID: 1365143850
       vertices: []
       indices: 
@@ -258,9 +258,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 500
-        y: 0
+        y: 4
         width: 100
-        height: 64
+        height: 60
       alignment: 9
       pivot: {x: 0.6, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,7 +268,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 132637b3135e4bf4ea364fae794e53c1
+      spriteID: 1b84f3e37e70bb048939756e058d0168
       internalID: -395653411
       vertices: []
       indices: 
