@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     public MouseMove player;
     public ObjectPooler pool;
-    public SpawnInfo spawnInfo;
     //public EnemyVariables variables;
 
     void Awake()

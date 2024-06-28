@@ -6,20 +6,26 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using static MonsterController;
 
 
 public class PlayerController : MonoBehaviour
 {
     public SOSkill Soskill;
+    public bool dashUpGrade = false;
+
     public float coolDownDash = 0;
-    public float orginSpeed = 5;//나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
-    public float curSpeed;
     public float dashPowerOrigin = 5f;
     public float dashPower = 5f;
     public float dashSpeed = 5f;
     public bool DashEnable = false;
 
+    public int maxHealth = 100;
+    public int curHealth = 100;
+    public int atkDamage = 1;
+
+    public float orginSpeed = 5;//나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
+    public float curSpeed;
+    
     public SpriteRenderer spriteRender;
     public RaycastHit DashHit;
     public NavMeshAgent agent;     //네비매쉬
@@ -61,7 +67,7 @@ public class PlayerController : MonoBehaviour
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
         IState<PlayerController> attack = gameObject.AddComponent<PlayerAttackState>();
         IState<PlayerController> dash = gameObject.AddComponent<PlayerDashState>();
-        IState<PlayerController> roll = gameObject.AddComponent<PlayerDashState>();
+        IState<PlayerController> roll = gameObject.AddComponent<PlayerRollState>();
 
         dicState.Add(PlayerState.Idle, idle);
         dicState.Add(PlayerState.Move, move);
@@ -75,11 +81,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.A) && imgCool.fillAmount == 0)
+        if (Input.GetKeyDown(KeyCode.A) && imgCool.fillAmount == 0 && dashUpGrade == true)
         {
+            dashSpeed = 5f;
             DashEnable = true;
             smp.SetState(dicState[PlayerState.Dash]);
-        }    
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && imgCool.fillAmount == 0 && dashUpGrade == false)
+        {
+            dashSpeed = 2f;
+            DashEnable = true;
+            smp.SetState(dicState[PlayerState.Roll]);
+        }
         else if (Input.GetMouseButtonDown(0))
             smp.SetState(dicState[PlayerState.Move]);
         else if (anim.GetBool("Running") == false && DashEnable == false)

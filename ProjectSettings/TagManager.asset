@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Enemy
   - EnemyAttack
+  - Void
   layers:
   - Default
   - TransparentFX
