@@ -11,17 +11,16 @@ public class TestPlayer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-
-            if (hit.collider != null)
-            {
-                HitCheckObject(hit);
-            }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+                if (hit.collider != null)
+                {
+                    HitCheckObject(hit);
+                }
         }
     }
 
-    void HitCheckObject(RaycastHit2D hit)
+    void HitCheckObject(RaycastHit hit)
     {
         IObjectItem clickInterface = hit.transform.gameObject.GetComponent<IObjectItem>();
 
