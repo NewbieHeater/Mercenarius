@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public float gameTIme;
     public float maxGameTIme = 2 * 10f;
 
-    public MouseMove player;
+    public PlayerController player;
     public ObjectPooler pool;
     //public EnemyVariables variables;
 

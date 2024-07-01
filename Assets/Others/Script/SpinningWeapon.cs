@@ -20,7 +20,7 @@ public class SpinningWeapon : MonoBehaviour
     private void Update()
     {
         // "Standard" 키가 눌렸을 때 실행하고 쿨다운 중이 아닌 경우에만 실행
-        if (Input.GetKeyDown(KeyCode.Z) && !isCoolingDown)
+        if (Input.GetKeyDown(KeyCode.Q) && !isCoolingDown)
         {
             // 쿨다운 시작
             StartCoroutine(CoolDown());

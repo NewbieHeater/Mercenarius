@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
+    public GameObject Abcd;
     public GameObject Item1;
     public GameObject Item2;
     public GameObject Item3;
@@ -32,7 +33,7 @@ public class Store : MonoBehaviour
     {
         int currentNumber = Random.Range(min, max);
 
-        for (int i = 0; i < 3;)
+        for (int i = 0; i < 2;)
         {
             if (itemList.Contains(currentNumber))
             {

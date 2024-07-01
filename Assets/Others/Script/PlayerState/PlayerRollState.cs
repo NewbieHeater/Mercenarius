@@ -11,7 +11,7 @@ public class PlayerRollState : MonoBehaviour, IState<PlayerController>
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        StartCoroutine(CoolDown(_playerController.Soskill.Cooltime, _playerController.imgCool));
+        StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
 
         _playerController.anim.SetTrigger("Dashing");
         _playerController.agent.isStopped = true;
@@ -25,7 +25,7 @@ public class PlayerRollState : MonoBehaviour, IState<PlayerController>
             Vector3 dashDestDir = (dashDestPos - transform.position).normalized;
             //플레이어에서 마우스로 Ray발사
             if (Physics.Raycast(transform.position, dashDestDir, out _playerController.DashHit, _playerController.dashPower))
-                if (_playerController.DashHit.collider.tag.Equals("Wall") || _playerController.DashHit.collider.tag.Equals("Void"))                      //Ray가 벽에 닿으면
+                if (_playerController.DashHit.collider.CompareTag("Wall") || _playerController.DashHit.collider.CompareTag("Void"))                      //Ray가 벽에 닿으면
                     _playerController.dashPower = _playerController.DashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
 
 
