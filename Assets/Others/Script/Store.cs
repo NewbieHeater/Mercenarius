@@ -15,7 +15,7 @@ public class Store : MonoBehaviour
     List<int> itemList = new List<int>();
 
     int min=0;
-    int max=2;
+    int max=10;
 
     void Start()
     {
@@ -26,6 +26,7 @@ public class Store : MonoBehaviour
         {
             Debug.Log(itemList[i]);
         }
+
     }
 
     // 랜덤 생성 (중복 배제)
@@ -33,7 +34,7 @@ public class Store : MonoBehaviour
     {
         int currentNumber = Random.Range(min, max);
 
-        for (int i = 0; i < 2;)
+        for (int i = 0; i < 3;)
         {
             if (itemList.Contains(currentNumber))
             {
@@ -45,8 +46,6 @@ public class Store : MonoBehaviour
                 i++;
             }
         }
-        num1 = itemList[0];
-        num2 = itemList[1];
-        num3 = itemList[2];
+        
     }
 }

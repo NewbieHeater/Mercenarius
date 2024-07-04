@@ -10,29 +10,34 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
     {
         _playerController = sender;
         _playerController.anim.SetTrigger("Attacking");
+        StartCoroutine(StartAttack());
         // 레이를 쏘아 목표 방향을 설정
+
+
+    }
+    IEnumerator StartAttack()
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
         {
             // 플레이어 오브젝트의 회전 각도 계산
-            
+            //, Mathf.Infinity
             Vector3 LookRotation = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             Quaternion lookTarget = Quaternion.LookRotation(LookRotation - transform.position);
             // 플레이어 위치의 오른쪽으로 farDistance 거리만큼 떨어진 위치 계산
             Vector3 sidePos1 = transform.position;
-            // 오른쪽의 프리팹을 생성하고 이동시키는 코루틴 실행
-            //StartCoroutine(MovePrefab(prefab, sidePos1, sidePos1 + (hit.point - transform.position).normalized * SOSkill.SkillDistance));
-
-            // movementDuration초 후에 실행되는 함수 호출
-            //StartCoroutine(DelayedPrefabCreation(hit, transform.position));
-            GameObject instance = Instantiate(_playerController.BasicAttackPrefab[0], sidePos1, lookTarget);
+            _playerController.spriteRender.flipX = hit.point.x < transform.position.x;
+            _playerController.weaponHitBox.transform.LookAt(LookRotation);
+            _playerController.weaponHitBox.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            _playerController.weaponHitBox.SetActive(false);
+            yield return null;
         }
-
     }
 
     public void OperateUpdate(PlayerController sender)
     {
-
+        //_playerController.anim
     }
 
     public void OperateExit(PlayerController sender)

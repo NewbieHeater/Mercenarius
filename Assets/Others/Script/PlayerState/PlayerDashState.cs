@@ -17,7 +17,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         _playerController.agent.isStopped = true;
         _playerController.agent.velocity = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
         {
             //마우스 클릭 위치
             Vector3 dashDestPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);

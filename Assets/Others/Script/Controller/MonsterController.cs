@@ -35,8 +35,8 @@ public class MonsterController : MonoBehaviour
     public Transform AttackPoint;
     public SpriteRenderer sprite;
     public UnityEvent onPlayerDead;
-    public Rigidbody enemyRb;//Àû ÇÁ¸®ÆÕÀÇ ¸®Áöµå¹Ùµð
-    public Rigidbody target;//ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍÀÇ ¸®Áöµå ¹Ùµð
+    public Rigidbody enemyRb;//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ùµï¿½
+    public Rigidbody target;//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ùµï¿½
     public NavMeshAgent nav;
     public NavMeshObstacle navObs;
     public Animator anim;
@@ -59,13 +59,13 @@ public class MonsterController : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         navObs = GetComponent<NavMeshObstacle>();
         anim = GetComponentInChildren<Animator>();
-        nav.updateRotation = false; //È¸Àü¸·±â
+        nav.updateRotation = false; //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //MainBody = transform.parent;
         enemyRb = GetComponent<Rigidbody>();
-        //Àû Á¤º¸ ¹Þ¾Æ¿À±â
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
         enemytype = stat.name;
         originalHealth = stat.maxHp;
-        health = originalHealth; //Ã¼·Â ÃÊ±âÈ­
+        health = originalHealth; //Ã¼ï¿½ï¿½ ï¿½Ê±ï¿½È­
         originalSpeed = stat.originalSpeed;
         attackRange = stat.AttackRange;
         attackSpeed = stat.AttackSpeed;
@@ -96,15 +96,15 @@ public class MonsterController : MonoBehaviour
     void OnEnable()
     {
         MoveAble = true;
-        target = GameManager.instance.player.GetComponent<Rigidbody>(); //ÇÁ¸®ÆÕ »óÅÂ¿¡¼­´Â ÇÃ·¹ÀÌ¾îÀÇ ¸®Áöµå¹Ùµð¸¦ ¸ø°¡Áö°í ¿È ±×·¡¼­ È°¼ºÈ­ÈÄ °¡Á®¿À±â
-        health = originalHealth; //Àç»ç¿ë½Ã Ã¼·Â ÃÊ±âÈ­
+        target = GameManager.instance.player.GetComponent<Rigidbody>(); 
+        health = originalHealth; 
         isLive = true;
     }
 
     void Update()
     {
 
-        if (health <= 0) //¸¸¾à Ã¼·ÂÀÌ 0ÀÌ ¾Æ´Ï¶ó¸é
+        if (health <= 0) 
         {
             //onPlayerDead.Invoke();
             sm.SetState(dicState[MonsterState.Dead]);
@@ -112,16 +112,17 @@ public class MonsterController : MonoBehaviour
         }
         
         float dist = Vector3.Distance(target.transform.position, transform.position);
-        if (isHit == true)
-        {
-            sm.SetState(dicState[MonsterState.Hit]);
-            return;
-        }
+        
             
         switch (enemytype)
         {
             case "Vengeful_Warrior":
-                if (dist >= attackRange && MoveAble)
+                if (isHit == true)
+                {
+                    sm.SetState(dicState[MonsterState.Hit]);
+
+                }
+                else if (dist >= attackRange && MoveAble)
                 {
                     sm.SetState(dicState[MonsterState.Move]);
                 }
@@ -156,19 +157,19 @@ public class MonsterController : MonoBehaviour
 
     void OnDisable()
     {
-        ObjectPooler.ReturnToPool(gameObject);    // ÇÑ °´Ã¼¿¡ ÇÑ¹ø¸¸ 
-        CancelInvoke();    // Monobehaviour¿¡ Invoke°¡ ÀÖ´Ù¸é 
+        ObjectPooler.ReturnToPool(gameObject);  
+        CancelInvoke();    
     }
 
-    public void AnimeEnded() //¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®·Î À¯´ÖÀÇ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ³¡³ª¸é ¹ßµ¿
+    public void AnimeEnded() 
     {
         MoveAble = true;
 
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.gameObject.CompareTag("PlayerAttack"))
+        if (other.gameObject.CompareTag("PlayerAttack"))
         {
             isHit = true;
         }

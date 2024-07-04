@@ -25,7 +25,6 @@ public class AttackState : MonoBehaviour, IState<MonsterController>
         yield return new WaitForSeconds(_monsterController.beforCastDelay);
         _monsterController.anim.SetTrigger("Attack");
         //_monsterController.MoveAble = true;
-        Debug.Log("발사");
         yield return new WaitForSeconds(_monsterController.attackSpeed);
         StartCoroutine(Fire());
     }

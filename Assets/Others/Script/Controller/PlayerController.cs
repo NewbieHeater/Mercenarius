@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour
     public float attackSpeed = 0;
     public float orginSpeed = 0;//나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
     public float curSpeed;
-    
+
+    //private string[] curState =
+
+    public GameObject weaponHitBox;
     public SpriteRenderer spriteRender;
     public RaycastHit DashHit;
     public NavMeshAgent agent;     //네비매쉬
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
     //public string[] strings = ;
 
     private Dictionary<PlayerState, IState<PlayerController>> dicState = new Dictionary<PlayerState, IState<PlayerController>>();
-    private StateMachine<PlayerController> smp;
+    private StateMachine<PlayerController> stateMachinePlayer;
 
     public WeaponTypeCode weaponTypeCode;
     public PlayerStat pStat;
@@ -94,36 +97,35 @@ public class PlayerController : MonoBehaviour
         dicState.Add(PlayerState.Dash, dash);
         dicState.Add(PlayerState.Roll, roll);
 
-        smp = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
+        stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
 
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == true)
         {
             DashEnable = true;
-            smp.SetState(dicState[PlayerState.Dash]);
+            stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
         }
         else if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == false)
         {
             dashSpeed = 2f;
             DashEnable = true;
-            smp.SetState(dicState[PlayerState.Roll]);
+            stateMachinePlayer.SetState(dicState[PlayerState.Roll]);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            smp.SetState(dicState[PlayerState.Attack]);
+            stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
         }
         else if (Input.GetMouseButtonDown(0))
-            smp.SetState(dicState[PlayerState.Move]);
-        else if (anim.GetBool("Running") == false && DashEnable == false)
-            smp.SetState(dicState[PlayerState.Idle]);
+            stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+        else if (anim.GetBool("Running") == false && DashEnable == false && anim.GetBool("Idle") == true)
+            stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
         
 
-        smp.DoOperateUpdate();
+        stateMachinePlayer.DoOperateUpdate();
     }
-    //전태건님만 오늘까지 영상 모두 시청하시면 내일 실습 나갑니다.
+
     public void AnimeEnded() //애니메이션 이벤트로 유닛의 애니메이션이 끝나면 발동
     {
         MoveAble = true;
@@ -132,6 +134,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetIdle()
     {
-        smp.SetState(dicState[PlayerState.Idle]);
+        stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
     }
 }

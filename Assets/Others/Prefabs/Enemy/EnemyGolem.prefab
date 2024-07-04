@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 5070235987053252998}
   - component: {fileID: 942677648532263242}
   - component: {fileID: 3138010812616551439}
+  - component: {fileID: 539613084523375591}
   m_Layer: 7
   m_Name: EnemyGolem
   m_TagString: Enemy
@@ -416,3 +417,26 @@ MonoBehaviour:
   navObs: {fileID: 0}
   anim: {fileID: 0}
   unitCode: 0
+--- !u!136 &539613084523375591
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937843225039185342}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.9
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: -0.15}

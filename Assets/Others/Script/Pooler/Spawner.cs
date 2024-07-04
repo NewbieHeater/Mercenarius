@@ -28,7 +28,6 @@ public class Spawner : MonoBehaviour
         
         for (int i = 0; i < spawnData.Length; i++)
         {
-            Debug.Log(spawnData.Length);
             for (int j = 0; j < spawnData[typeNum].num; j++)
             {
                 GameObject enemy =

@@ -64,6 +64,7 @@ public class SpinningWeapon : MonoBehaviour
     {
         // 프리팹을 시작 위치에 생성
         GameObject instance = Instantiate(prefab, startPos, Quaternion.identity);
+        //GameObject enemy = ObjectPooler.SpawnFromPool("Spear", startPos);
         instantiatedPrefabs.Add(instance); // 리스트에 추가
 
         // 경과 시간 초기화

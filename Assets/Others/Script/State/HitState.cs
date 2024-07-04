@@ -17,7 +17,7 @@ public class HitState : MonoBehaviour, IState<MonsterController>
         
         
     }
-    int knockbackSpeed = 20;
+    float knockbackSpeed = 0.3f;
     IEnumerator startNokBack()
     {
         _monsterController.nav.enabled = false;
@@ -29,13 +29,19 @@ public class HitState : MonoBehaviour, IState<MonsterController>
         //var disy = _monsterController.target.transform.position.y - _monsterController.enemyRb.transform.position.y;
         //float a = Mathf.Sqrt(Mathf.Pow(disx,2) + Mathf.Pow(disy,2));
         //_monsterController.enemyRb.AddForce(disx/a*100,disy/a*100,0);
-        Vector3 KnockBackPos = transform.position + (-_monsterController.target.transform.position + _monsterController.enemyRb.transform.position).normalized * knockbackSpeed; // 넉백 시 이동할 위치
-
-        transform.position = Vector3.Lerp(transform.position, KnockBackPos, 5 * Time.fixedDeltaTime);
+        Vector3 KnockBackPos = transform.position + (-_monsterController.target.transform.position + transform.position).normalized * knockbackSpeed; // 넉백 시 이동할 위치
+        float t = 0;
+        while (t < 1f/3f)
+        {
+            transform.position = Vector3.Lerp(transform.position, KnockBackPos, 3 * t);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        
 
         //_monsterController.enemyRb.transform.position += b;
         //_monsterController.enemyRb.AddForce(b*-1f,ForceMode.Impulse);
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSeconds(0.05f);
         _monsterController.isHit = false;
         _monsterController.MoveAble = true;
         //StartCoroutine(isHit());
