@@ -13,7 +13,7 @@ public class PlayerRollState : MonoBehaviour, IState<PlayerController>
         _playerController = sender;
         StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
 
-        _playerController.anim.SetTrigger("Dashing");
+        _playerController.anim.SetBool("Dash", true);
         _playerController.agent.isStopped = true;
         _playerController.agent.velocity = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -49,7 +49,7 @@ public class PlayerRollState : MonoBehaviour, IState<PlayerController>
             t += Time.deltaTime;
             yield return null;
         }
-        _playerController.DashEnable = false;
+        _playerController.anim.SetBool("Dash", false);
         _playerController.dashPower = _playerController.dashPowerOrigin;
     }
 
@@ -77,6 +77,6 @@ public class PlayerRollState : MonoBehaviour, IState<PlayerController>
 
     public void OperateExit(PlayerController sender)
     {
-
+        
     }
 }

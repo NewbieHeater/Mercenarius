@@ -9,10 +9,11 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        _playerController.anim.SetTrigger("Attacking");
+        _playerController.anim.SetBool("Attack", true);
         StartCoroutine(StartAttack());
         // 레이를 쏘아 목표 방향을 설정
-
+        _playerController.agent.isStopped = true;
+        _playerController.agent.velocity = Vector3.zero;
 
     }
     IEnumerator StartAttack()
@@ -30,6 +31,7 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
             _playerController.weaponHitBox.transform.LookAt(LookRotation);
             _playerController.weaponHitBox.SetActive(true);
             yield return new WaitForSeconds(0.1f);
+            //_playerController.anim.SetBool("Attack", false);
             _playerController.weaponHitBox.SetActive(false);
             yield return null;
         }
@@ -37,11 +39,15 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
 
     public void OperateUpdate(PlayerController sender)
     {
+        if(AnimationEnd.Instance.attackAnimationEnded == true)
+        {
+            _playerController.anim.SetBool("Attack", false);
+        }
         //_playerController.anim
     }
 
     public void OperateExit(PlayerController sender)
     {
-
+        _playerController.anim.SetBool("Attack", false);
     }
 }

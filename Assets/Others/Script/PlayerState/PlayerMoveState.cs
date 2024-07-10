@@ -20,13 +20,13 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         if (Input.GetMouseButtonDown(0))
         {
             //달리기가 안끝났을 때 클릭시 방향전환
-            _playerController.anim.SetBool("Running", true);
+            _playerController.anim.SetBool("Run", true);
             Move();
         }
         else if (_playerController.agent.remainingDistance < 0.1f)
         {
             //애니메이션 종료
-            _playerController.anim.SetBool("Running", false);
+            _playerController.anim.SetBool("Run", false);
 
             //이동목표의 과녁 비활성화
             _playerController.spot.gameObject.SetActive(false);
@@ -35,6 +35,7 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
 
     public void OperateExit(PlayerController sender)
     {
+        _playerController.anim.SetBool("Run", false);
         //State를 나갈 때 애니매이션 달리기 상태 해제
         //_playerController.anim.SetBool("Running", false);
         //_playerController.agent.isStopped = true;
@@ -53,7 +54,7 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
             //이동
             _playerController.agent.SetDestination(hit.point);
             //달리기 상태 활성
-            _playerController.anim.SetBool("Running", true);
+            _playerController.anim.SetBool("Run", true);
             //과녁 활성화
             _playerController.spot.gameObject.SetActive(true);
             _playerController.spot.position = hit.point;
