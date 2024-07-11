@@ -20,8 +20,8 @@ public class InventorySlot : MonoBehaviour
 
     [Header("해당 슬롯에 어떠한 타입만 들어올 수 있는지 타입 마스크")]
     [SerializeField] private ItemType mSlotMask;
-
-    private int mItemCount; //획득한 아이템의 개수
+    [SerializeField]
+    private int mItemCount = 0; //획득한 아이템의 개수
 
 
     [Header("아이템 슬롯에 있는 UI 오브젝트")]
@@ -61,7 +61,14 @@ public class InventorySlot : MonoBehaviour
         }
         else
         {
-            mTextCount.text = mItemCount.ToString();
+            if(mItemCount > 1)
+            {
+                mTextCount.text = mItemCount.ToString();
+            }
+            else
+            {
+                mTextCount.text = "";
+            }
         }
 
         SetColor(1);
@@ -71,8 +78,15 @@ public class InventorySlot : MonoBehaviour
     public void UpdateSlotCount(int count)
     {
         mItemCount += count;
-        mTextCount.text = mItemCount.ToString();
-
+        if (mItemCount > 1)
+        {
+            mTextCount.text = mItemCount.ToString();
+        }
+        else
+        {
+            mTextCount.text = "";
+        }
+        
         if (mItemCount <= 0)
             ClearSlot();
     }
