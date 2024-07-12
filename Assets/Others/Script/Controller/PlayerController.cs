@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] BasicAttackPrefab;
     public SOSkill Soskill;
     public bool dashUpGrade = false;
-
+    public bool isFacingRight = true;
     public float coolDownDash = 0;
     public float dashPowerOrigin = 0f;
     public float dashPower = 0f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float curSpeed;
 
     //private string[] curState =
-
+    
     public GameObject weaponHitBox;
     public SpriteRenderer spriteRender;
     public RaycastHit DashHit;
@@ -100,6 +100,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(transform.position.x - curPosition.x);
+
+        if (isFacingRight == true)
+        {
+            spriteRender.flipX = false;
+        }
+        else
+        {
+            spriteRender.flipX = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == true)
         {
             stateMachinePlayer.SetState(dicState[PlayerState.Dash]);

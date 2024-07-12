@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using static PlayerController;
@@ -41,7 +42,14 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     {
         Debug.Log(Dest.x);
         //걷기와 비슷하게 좌우반전해주기
-        _playerController.spriteRender.flipX = Dest.x < pos.x;
+        if (Dest.x < pos.x)
+        {
+            _playerController.isFacingRight = false;
+        }
+        else
+        {
+            _playerController.isFacingRight = true;
+        }
         float t = 0;
         while (t < (1f/_playerController.dashSpeed))
         {
