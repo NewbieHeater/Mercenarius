@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float coolDownDash = 0;
     public float dashPowerOrigin = 0f;
     public float dashPower = 0f;
+    public float dashSpeedOrigin = 0f;
     public float dashSpeed = 0f;
 
     public int maxHealth = 0;
@@ -72,16 +73,24 @@ public class PlayerController : MonoBehaviour
     public string weaponType = "Null";
     void Start()
     {
+        //무기 타입
         weaponType = pStat.weaponName;
+        //체력
         maxHealth = pStat.maxHp;
         curHealth = maxHealth; //체력 초기화
-        orginSpeed = pStat.originalSpeed;
+        //공격속도
         attackSpeed = pStat.AttackSpeed;
+        //이동속도
+        orginSpeed = pStat.originalSpeed;
         curSpeed = orginSpeed;
+        //대쉬 쿨타임
         coolDownDash = pStat.originalDashCoolDown;
+        //대쉬거리
         dashPowerOrigin = pStat.originalDashPower;
         dashPower = dashPowerOrigin;
-        dashSpeed = pStat.originalDashSpeed;
+        //대쉬속도
+        dashSpeedOrigin = pStat.originalDashSpeed;
+        dashSpeed = dashSpeedOrigin;
 
         IState<PlayerController> idle = gameObject.AddComponent<PlayerIdleState>();
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
@@ -120,11 +129,15 @@ public class PlayerController : MonoBehaviour
             dashSpeed = 2f;
             stateMachinePlayer.SetState(dicState[PlayerState.Roll]);
         }
-        else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false)
+        else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
         {
             AnimationEnd.Instance.atkStart();
             stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
         }
+        //else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == true)
+        //{
+
+        //}
         else if (Input.GetMouseButtonDown(0) && anim.GetBool("Attack") == false)
             stateMachinePlayer.SetState(dicState[PlayerState.Move]);
         else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)

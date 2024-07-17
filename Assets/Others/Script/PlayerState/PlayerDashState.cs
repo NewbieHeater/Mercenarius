@@ -28,8 +28,10 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             //플레이어에서 마우스로 Ray발사
             if (Physics.Raycast(transform.position, dashDestDir, out _playerController.DashHit, _playerController.dashPower))
                 if (_playerController.DashHit.collider.CompareTag("Wall"))                      //Ray가 벽에 닿으면
+                {
                     _playerController.dashPower = _playerController.DashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
-
+                    _playerController.dashSpeed = _playerController.DashHit.distance + _playerController.dashSpeed;
+                }
 
             //최종목표 위치
             Vector3 dashDest = transform.position + dashDestDir * _playerController.dashPower;
@@ -37,10 +39,14 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             StartCoroutine(Dash(dashDest, curPosition));
 
         }
+        else
+        {
+            _playerController.anim.SetBool("Dash", false);
+        }
     }
     IEnumerator Dash(Vector3 Dest, Vector3 pos)
     {
-        Debug.Log(Dest.x);
+        //Debug.Log(Dest.x);
         //걷기와 비슷하게 좌우반전해주기
         if (Dest.x < pos.x)
         {
@@ -60,6 +66,8 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         }
         _playerController.anim.SetBool("Dash", false);
         _playerController.dashPower = _playerController.dashPowerOrigin;
+        _playerController.dashSpeed = _playerController.dashSpeedOrigin;
+        yield return null;
     }
 
     IEnumerator CoolDown(float cool, Image coolDownSkill)
