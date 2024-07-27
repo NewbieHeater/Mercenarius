@@ -116,21 +116,6 @@ public class MonsterController : MonoBehaviour
             
         switch (enemytype)
         {
-            case "Vengeful_Warrior":
-                if (isHit == true)
-                {
-                    sm.SetState(dicState[MonsterState.Hit]);
-
-                }
-                else if (dist >= attackRange && MoveAble)
-                {
-                    sm.SetState(dicState[MonsterState.Move]);
-                }
-                else if (dist <= attackRange)
-                {
-                    sm.SetState(dicState[MonsterState.Attack]);
-                }
-                break;
             case "Grudge_Archer":
                 if (dist >= attackRange && MoveAble)
                 {

@@ -27,7 +27,15 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
             Quaternion lookTarget = Quaternion.LookRotation(LookRotation - transform.position);
             // 플레이어 위치의 오른쪽으로 farDistance 거리만큼 떨어진 위치 계산
             Vector3 sidePos1 = transform.position;
-            _playerController.spriteRender.flipX = hit.point.x < transform.position.x;
+            if(hit.point.x < transform.position.x)
+            {
+                _playerController.isFacingRight = false;
+            }
+            else
+            {
+                _playerController.isFacingRight = true;
+            }
+            //_playerController.spriteRender.flipX = hit.point.x < transform.position.x;
             _playerController.weaponHitBox.transform.LookAt(LookRotation);
             _playerController.weaponHitBox.SetActive(true);
             yield return new WaitForSeconds(0.1f);
