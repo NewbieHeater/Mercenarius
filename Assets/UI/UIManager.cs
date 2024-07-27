@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
+    
     /*
     private Stack<UIPopup> openPopups = new Stack<UIPanel>();
     private Queue<UIPopup> pendingPopups = new Queue<UIPanel>(); // 예약된 팝업을 위한 큐
