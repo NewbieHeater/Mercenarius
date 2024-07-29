@@ -96,7 +96,7 @@ public class MonsterController : MonoBehaviour
     void OnEnable()
     {
         MoveAble = true;
-        target = GameManager.instance.player.GetComponent<Rigidbody>(); 
+        target = GameManager._instance.player.GetComponent<Rigidbody>(); 
         health = originalHealth; 
         isLive = true;
     }

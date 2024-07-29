@@ -8,7 +8,7 @@ public class StateMachine<T>
 
     //현재 상태를 담는 프로퍼티
     public IState<T> CurState { get; set; }
-
+    
 
     //기본 상태를 생성시에 설정하게 생성자 선언
     public StateMachine(T sender, IState<T> state)
@@ -30,7 +30,7 @@ public class StateMachine<T>
 
         if (CurState == state)
         {
-            //Debug.LogWarningFormat("Same state : ", state);
+            Debug.LogWarningFormat("Same state : ", state);
             return;
         }
 
@@ -45,7 +45,7 @@ public class StateMachine<T>
             CurState.OperateEnter(m_sender);
 
         Debug.Log("SetNextState : " + state);
-
+        Debug.Log(CurState + "dlrjdke");
     }
 
     //State용 Update 함수.

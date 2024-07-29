@@ -106,11 +106,11 @@ public class PlayerController : MonoBehaviour
 
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
-
+    
     void Update()
     {
         //Debug.Log(transform.position.x - curPosition.x);
-
+        
         if (isFacingRight == true)
         {
             spriteRender.flipX = false;
@@ -119,30 +119,71 @@ public class PlayerController : MonoBehaviour
         {
             spriteRender.flipX = true;
         }
+        switch (stateMachinePlayer.CurState)
+        {
+            case PlayerIdleState:
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
+                }
+                else if (Input.GetKeyDown(KeyCode.A))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+                }
+                else if (Input.GetMouseButtonDown(0))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+                }
+                break;
+            case PlayerMoveState:
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
+                }
+                else if (Input.GetKeyDown(KeyCode.A))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+                }
+                else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
 
-        if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == true)
-        {
-            stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
+                break;
+            case PlayerAttackState:
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
+                }
+                else if (Input.GetMouseButtonDown(0) && anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+                }
+                else if (anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
+                break;
         }
-        else if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == false)
-        {
-            dashSpeed = 2f;
-            stateMachinePlayer.SetState(dicState[PlayerState.Roll]);
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
-        {
-            AnimationEnd.Instance.atkStart();
-            stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
-        }
-        //else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == true)
+        //if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == true)
         //{
-
+        //    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
         //}
-        else if (Input.GetMouseButtonDown(0) && anim.GetBool("Attack") == false)
-            stateMachinePlayer.SetState(dicState[PlayerState.Move]);
-        else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
-            stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
-        
+        //else if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == false)
+        //{
+        //    dashSpeed = 2f;
+        //    stateMachinePlayer.SetState(dicState[PlayerState.Roll]);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+        //{
+        //    AnimationEnd.Instance.atkStart();
+        //    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+        //}
+        //else if (Input.GetMouseButtonDown(0) && anim.GetBool("Attack") == false)
+        //    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+        //else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+        //    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+
 
         stateMachinePlayer.DoOperateUpdate();
     }
