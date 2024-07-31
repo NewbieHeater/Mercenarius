@@ -9,6 +9,7 @@ TagManager:
   - EnemyAttack
   - Void
   - PlayerAttack
+  - Gruond
   layers:
   - Default
   - TransparentFX
