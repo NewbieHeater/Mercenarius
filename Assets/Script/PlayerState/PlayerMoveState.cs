@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using static PlayerController;
-using static Unity.Burst.Intrinsics.X86.Avx;
+using UnityEngine.AI;
 
 public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
 {
     private PlayerController _playerController;
+    private SpriteRenderer spriteRender;
+    private NavMeshAgent agent;
+    private Animator anim;
+
     public Vector3 curPosition;
     public Vector3 prevPosition;
     
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
+
+        if (!spriteRender) spriteRender = GetComponentInChildren<SpriteRenderer>();
+        if (!agent) agent = GetComponent<NavMeshAgent>();
+        if (!anim) anim = GetComponentInChildren<Animator>();
+
         prevPosition = transform.position;
         Move();
     }
@@ -52,10 +59,10 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
             _playerController.anim.SetBool("Run", true);
             Move();
         }
-        else if (_playerController.agent.remainingDistance < 0.1f)
+        else if (agent.remainingDistance < 0.1f)
         {
             //애니메이션 종료
-            _playerController.anim.SetBool("Run", false);
+            anim.SetBool("Run", false);
 
             //이동목표의 과녁 비활성화
             _playerController.spot.gameObject.SetActive(false);
@@ -65,7 +72,7 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
     public void OperateExit(PlayerController sender)
     {
         //StopCoroutine(ChangeSpriteX());
-        _playerController.anim.SetBool("Run", false);
+        anim.SetBool("Run", false);
         //State를 나갈 때 애니매이션 달리기 상태 해제
         //_playerController.anim.SetBool("Running", false);
         //_playerController.agent.isStopped = true;
@@ -81,11 +88,11 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         {
             //이동목표지점이 현재 지점보다 오른쪽이면 캐릭터 그림 방향 전환
             //_playerController.spriteRender.flipX = hit.point.x < transform.position.x;
-            _playerController.agent.isStopped = false;
+            agent.isStopped = false;
             //이동
-            _playerController.agent.SetDestination(hit.point);
+            agent.SetDestination(hit.point);
             //달리기 상태 활성
-            _playerController.anim.SetBool("Run", true);
+            anim.SetBool("Run", true);
             //과녁 활성화
             _playerController.spot.gameObject.SetActive(true);
             _playerController.spot.position = hit.point;
