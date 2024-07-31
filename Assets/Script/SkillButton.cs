@@ -11,7 +11,7 @@ public class SkillButton : MonoBehaviour
     public SOSkill SOSkill;
 
     // Player 객체 연결
-    public MouseMove player;
+    public PlayerController player;
 
     // 스킬 이미지
     public Image imgIcon;
@@ -36,7 +36,7 @@ public class SkillButton : MonoBehaviour
             // 아직 쿨타임이 끝나지 않았다는 뜻
             if (imgCool.fillAmount > 0) return;
             // Player 객체의 ActivateSkill 호출     
-            player.ActivateSkill(SOSkill);
+            //player.ActivateSkill(SOSkill);
 
             // 스킬 Cool 처리
             StartCoroutine(SC_Cool());

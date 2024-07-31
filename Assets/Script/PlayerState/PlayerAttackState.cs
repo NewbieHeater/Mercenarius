@@ -1,23 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
 {
     private PlayerController _playerController;
-
+    private NavMeshAgent agent;
+    private Animator anim;
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        _playerController.anim.SetBool("Attack", true);
-        StartCoroutine(StartAttack());
-        // 레이를 쏘아 목표 방향을 설정
-        _playerController.agent.isStopped = true;
-        _playerController.agent.velocity = Vector3.zero;
+        
+        if (!agent) agent = GetComponent<NavMeshAgent>();
+        if (!anim) anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", true);
 
+        StartAttack();
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        //_playerController.comboCount = 0;
     }
-    IEnumerator StartAttack()
+    public void StartAttack()
     {
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
         {
@@ -35,27 +41,24 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
             {
                 _playerController.isFacingRight = true;
             }
-            //_playerController.spriteRender.flipX = hit.point.x < transform.position.x;
             _playerController.weaponHitBox.transform.LookAt(LookRotation);
-            _playerController.weaponHitBox.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-            //_playerController.anim.SetBool("Attack", false);
-            _playerController.weaponHitBox.SetActive(false);
-            yield return null;
         }
     }
 
     public void OperateUpdate(PlayerController sender)
     {
-        if(AnimationEnd.Instance.attackAnimationEnded == true)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            _playerController.anim.SetBool("Attack", false);
+            _playerController.comboCount++;
+            _playerController.CheckAttackReInput(1f);
+            StartAttack();
+            
+            anim.SetInteger("AttackCombo", _playerController.comboCount);
         }
-        //_playerController.anim
     }
 
     public void OperateExit(PlayerController sender)
     {
-        _playerController.anim.SetBool("Attack", false);
+        anim.SetBool("Attack", false);
     }
 }

@@ -2,21 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 using static PlayerController;
 
 public class PlayerDashState : MonoBehaviour, IState<PlayerController>
 {
     private PlayerController _playerController;
+    private NavMeshAgent agent;
+    private Animator anim;
+    private Vector3 dashDest;
+    private Vector3 curPosition;
+    private RaycastHit dashHit;
 
+    private float time = 0;
+    
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
+
+        if (!agent) agent = GetComponent<NavMeshAgent>();
+        if (!anim) anim = GetComponentInChildren<Animator>();
+
         StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
 
-        _playerController.anim.SetBool("Dash", true);
-        _playerController.agent.isStopped = true;
-        _playerController.agent.velocity = Vector3.zero;
+        time = 0;
+        anim.SetBool("Dash", true);
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
@@ -26,29 +39,23 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             //마우스 클릭 위치 - 현재 위치 (각도계산)
             Vector3 dashDestDir = (dashDestPos - transform.position).normalized;
             //플레이어에서 마우스로 Ray발사
-            if (Physics.Raycast(transform.position, dashDestDir, out _playerController.DashHit, _playerController.dashPower))
-                if (_playerController.DashHit.collider.CompareTag("Wall"))                      //Ray가 벽에 닿으면
+            if (Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower))
+                if (dashHit.collider.CompareTag("Wall"))                      //Ray가 벽에 닿으면
                 {
-                    _playerController.dashPower = _playerController.DashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
-                    _playerController.dashSpeed = _playerController.DashHit.distance + _playerController.dashSpeed;
+                    _playerController.dashPower = dashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
+                    _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
                 }
 
             //최종목표 위치
-            Vector3 dashDest = transform.position + dashDestDir * _playerController.dashPower;
-            Vector3 curPosition = transform.position;
-            StartCoroutine(Dash(dashDest, curPosition));
-
+            dashDest = transform.position + dashDestDir * _playerController.dashPower;
+            curPosition = transform.position;
         }
         else
         {
-            _playerController.anim.SetBool("Dash", false);
+            anim.SetBool("Dash", false);
         }
-    }
-    IEnumerator Dash(Vector3 Dest, Vector3 pos)
-    {
-        //Debug.Log(Dest.x);
-        //걷기와 비슷하게 좌우반전해주기
-        if (Dest.x < pos.x)
+
+        if (dashDest.x < curPosition.x)
         {
             _playerController.isFacingRight = false;
         }
@@ -56,18 +63,6 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         {
             _playerController.isFacingRight = true;
         }
-        float t = 0;
-        while (t < (1f/_playerController.dashSpeed))
-        {
-            //이동
-            transform.position = Vector3.Lerp(pos, Dest, t * _playerController.dashSpeed);
-            t += Time.deltaTime;
-            yield return null;
-        }
-        _playerController.anim.SetBool("Dash", false);
-        _playerController.dashPower = _playerController.dashPowerOrigin;
-        _playerController.dashSpeed = _playerController.dashSpeedOrigin;
-        yield return null;
     }
 
     IEnumerator CoolDown(float cool, Image coolDownSkill)
@@ -89,7 +84,14 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     }
     public void OperateUpdate(PlayerController sender)
     {
-
+        if(time >= (1f / _playerController.dashSpeed))
+        {
+            anim.SetBool("Dash", false);
+            return;
+        }
+            
+        transform.position = Vector3.Lerp(curPosition, dashDest, time * _playerController.dashSpeed);
+        time += Time.deltaTime;
     }
 
     public void OperateExit(PlayerController sender)

@@ -6,42 +6,43 @@ using UnityEngine.AI;
 
 public class MoveStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 {
-    private EnemyGolemController _monsterController;
+    private EnemyGolemController _golemController;
+    private NavMeshAgent nav;
+    private Animator anim;
+    private Rigidbody enemyRb;
+    private SpriteRenderer sprite;
 
     public void OperateEnter(EnemyGolemController sender)
     {
-        _monsterController = sender;
+        _golemController = sender;
 
+        if (!nav) nav = GetComponent<NavMeshAgent>();
+        if (!anim) anim = GetComponentInChildren<Animator>();
+        if (!enemyRb) enemyRb = GetComponent<Rigidbody>();
+        if (!sprite) sprite = GetComponentInChildren<SpriteRenderer>();
 
-        _monsterController.anim.SetBool("Move", true);
-        _monsterController.nav.enabled = true; //움직이기
-
-        _monsterController.nav.speed = _monsterController.CurSpeed;
-
+        anim.SetBool("Move", true);
+        nav.enabled = true; //움직이기
+        nav.speed = _golemController.CurSpeed;
     }
 
 
     public void OperateUpdate(EnemyGolemController sender)
     {
-        if (_monsterController.enemyRb.transform.position != _monsterController.target.transform.position)
+        if (enemyRb.transform.position != _golemController.target.transform.position)
         {
-            _monsterController.nav.SetDestination(_monsterController.target.transform.position);
-            _monsterController.sprite.flipX = _monsterController.target.position.x < _monsterController.enemyRb.position.x;
+            nav.SetDestination(_golemController.target.transform.position);
+            sprite.flipX = _golemController.target.transform.position.x < enemyRb.position.x;
         }
         else
         {
-            _monsterController.nav.SetDestination(transform.position);
+            nav.SetDestination(transform.position);
         }
-
-        //_monsterController.sprite.flipX = _monsterController.target.position.x < _monsterController.enemyRb.position.x;
-
     }
 
     public void OperateExit(EnemyGolemController sender)
     {
-        _monsterController.nav.speed = 0;
-        _monsterController.anim.SetBool("Move", false);
-        // _monsterController.nav.enabled = false;
-
+        nav.speed = 0;
+        anim.SetBool("Move", false);
     }
 }

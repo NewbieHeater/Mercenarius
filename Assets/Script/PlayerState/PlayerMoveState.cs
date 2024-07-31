@@ -9,9 +9,10 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
     private SpriteRenderer spriteRender;
     private NavMeshAgent agent;
     private Animator anim;
+    private GameObject spot;
 
-    public Vector3 curPosition;
-    public Vector3 prevPosition;
+    private Vector3 curPosition;
+    private Vector3 prevPosition;
     
     public void OperateEnter(PlayerController sender)
     {
@@ -20,6 +21,7 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         if (!spriteRender) spriteRender = GetComponentInChildren<SpriteRenderer>();
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
+        if (!spot) spot = GameObject.Find("Spot");
 
         prevPosition = transform.position;
         Move();
@@ -37,11 +39,11 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         {
             if (_playerController.isFacingRight == true)
             {
-                _playerController.spriteRender.flipX = false;
+                spriteRender.flipX = false;
             }
             else
             {
-                _playerController.spriteRender.flipX = true;
+                spriteRender.flipX = true;
             }
         }
         else
@@ -50,13 +52,10 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         }
         prevPosition = curPosition;
 
-        //_playerController.spriteRender.flipX = _playerController.agent. < transform.position.x;
-        //Debug.Log("움직임");
         if (Input.GetMouseButtonDown(0))
         {
-            
             //달리기가 안끝났을 때 클릭시 방향전환
-            _playerController.anim.SetBool("Run", true);
+            anim.SetBool("Run", true);
             Move();
         }
         else if (agent.remainingDistance < 0.1f)
@@ -65,41 +64,30 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
             anim.SetBool("Run", false);
 
             //이동목표의 과녁 비활성화
-            _playerController.spot.gameObject.SetActive(false);
+            spot.gameObject.SetActive(false);
         }
     }
 
     public void OperateExit(PlayerController sender)
     {
-        //StopCoroutine(ChangeSpriteX());
         anim.SetBool("Run", false);
-        //State를 나갈 때 애니매이션 달리기 상태 해제
-        //_playerController.anim.SetBool("Running", false);
-        //_playerController.agent.isStopped = true;
-        //_playerController.agent.velocity = Vector3.zero;
     }
 
     //이동로직
     private void Move()
     {
-        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
         {
             //이동목표지점이 현재 지점보다 오른쪽이면 캐릭터 그림 방향 전환
             //_playerController.spriteRender.flipX = hit.point.x < transform.position.x;
-            agent.isStopped = false;
-            //이동
-            agent.SetDestination(hit.point);
-            //달리기 상태 활성
-            anim.SetBool("Run", true);
-            //과녁 활성화
-            _playerController.spot.gameObject.SetActive(true);
-            _playerController.spot.position = hit.point;
+            agent.isStopped = false;                            //일단정지  
+            agent.SetDestination(hit.point);                    //이동목표설정
+            anim.SetBool("Run", true);                          //달리기 상태 활성
+
+            spot.gameObject.SetActive(true);  //과녁 활성화
+            spot.transform.position = hit.point;
         }
         //Debug.Log(transform.position);
-        
     }
-
-
 }

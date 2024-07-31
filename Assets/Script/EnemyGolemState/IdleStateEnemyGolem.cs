@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class IdleStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 {
-    private EnemyGolemController _playerController;
+    private EnemyGolemController _golemController;
 
     public void OperateEnter(EnemyGolemController sender)
     {
-        _playerController = sender;
+        _golemController = sender;
 
     }
 

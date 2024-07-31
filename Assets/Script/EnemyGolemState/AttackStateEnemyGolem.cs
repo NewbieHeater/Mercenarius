@@ -1,17 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 {
-    private EnemyGolemController _monsterController;
+    private EnemyGolemController _golemController;
+    private NavMeshAgent nav;
+    private Animator anim;
+    private Transform Rotation;
+    private Rigidbody enemyRb;
+    private SpriteRenderer sprite;
 
-    public Transform Rotation;
     public void OperateEnter(EnemyGolemController sender)
     {
-        _monsterController = sender;
-        _monsterController.MoveAble = false;
-        _monsterController.nav.avoidancePriority = 96;
+        _golemController = sender;
+        
+        if (!nav) nav = GetComponent<NavMeshAgent>();
+        if (!anim) anim = GetComponentInChildren<Animator>();
+        if (!enemyRb) enemyRb = GetComponent<Rigidbody>();
+        if (!sprite) sprite = GetComponentInChildren<SpriteRenderer>();
+
+        sprite.flipX = _golemController.target.transform.position.x < enemyRb.position.x;
+
+        _golemController.MoveAble = false;
+        nav.avoidancePriority = 96;
         //_monsterController.navObs.enabled = true;
         //_monsterController.navObs.carving = true;
         //Debug.Log("근접 공격");
@@ -19,13 +32,13 @@ public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
     }
     IEnumerator Fire()
     {
+        sprite.flipX = _golemController.target.transform.position.x < enemyRb.position.x;
+        _golemController.AttackPoint.LookAt(_golemController.target.transform);
 
-        _monsterController.AttackPoint.LookAt(_monsterController.target.transform);
-
-        yield return new WaitForSeconds(_monsterController.beforCastDelay);
-        _monsterController.anim.SetBool("Attack", true);
+        yield return new WaitForSeconds(_golemController.beforCastDelay);
+        anim.SetBool("Attack", true);
         //_monsterController.MoveAble = true;
-        yield return new WaitForSeconds(_monsterController.attackSpeed);
+        yield return new WaitForSeconds(_golemController.attackSpeed);
         StartCoroutine(Fire());
     }
     public void OperateUpdate(EnemyGolemController sender)
@@ -35,11 +48,7 @@ public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 
     public void OperateExit(EnemyGolemController sender)
     {
-        //_monsterController.navObs.carving = false;
-        //_monsterController.navObs.enabled = false;
         StopAllCoroutines();
-        
-        _monsterController.nav.avoidancePriority = 98;
-        //Debug.Log("근접 공격 해제");
+        nav.avoidancePriority = 98;
     }
 }

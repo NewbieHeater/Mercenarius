@@ -24,24 +24,19 @@ public class PlayerController : MonoBehaviour
     public int curHealth = 0;
     public int atkDamage = 0;
     public float attackSpeed = 0;
-    public float orginSpeed = 0;//나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
+    public float orginSpeed = 0;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
     public float curSpeed;
-
-    //private string[] curState =
     
     public GameObject weaponHitBox;
-    public SpriteRenderer spriteRender;
-    public RaycastHit DashHit;
-    public NavMeshAgent agent;     //네비매쉬
-    public Animator anim;
-    public Transform spot;  //마우스 클릭시 클릭 위치 표시를 위해 과녁모양가져오기
+    private SpriteRenderer spriteRender;
+    private NavMeshAgent agent;          //네비매쉬
+    private Animator anim;
+    private Transform spot;              //마우스 클릭시 클릭 위치 표시를 위해 과녁모양가져오기
     [SerializeField]
     private Rigidbody rg = null;
-    public bool MoveAble;
-    // 스킬 이미지
-    public Image imgIcon;
-    // Cooldown 이미지
-    public Image imgCool;
+    public bool MoveAble;  
+    public Image imgIcon;               // 스킬 이미지
+    public Image imgCool;               // Cooldown 이미지
 
     public enum PlayerState
     {
@@ -68,29 +63,23 @@ public class PlayerController : MonoBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         agent.speed = orginSpeed;
-        agent.updateRotation = false;   //회적막기
+        agent.updateRotation = false;   //회전막기
     }
     public string weaponType = "Null";
     void Start()
     {
-        //무기 타입
-        weaponType = pStat.weaponName;
-        //체력
-        maxHealth = pStat.maxHp;
-        curHealth = maxHealth; //체력 초기화
-        //공격속도
-        attackSpeed = pStat.AttackSpeed;
-        //이동속도
-        orginSpeed = pStat.originalSpeed;
-        curSpeed = orginSpeed;
-        //대쉬 쿨타임
-        coolDownDash = pStat.originalDashCoolDown;
-        //대쉬거리
-        dashPowerOrigin = pStat.originalDashPower;
-        dashPower = dashPowerOrigin;
-        //대쉬속도
-        dashSpeedOrigin = pStat.originalDashSpeed;
-        dashSpeed = dashSpeedOrigin;
+        
+        weaponType = pStat.weaponName;              //무기타입
+        maxHealth = pStat.maxHp;                    //최대체력 설정
+        curHealth = maxHealth;                      //현재체력 초기화       
+        attackSpeed = pStat.AttackSpeed;            //공격속도        
+        orginSpeed = pStat.originalSpeed;           //이동속도
+        curSpeed = orginSpeed;                      //현재속도 설정
+        coolDownDash = pStat.originalDashCoolDown;  //대쉬 쿨타임        
+        dashPowerOrigin = pStat.originalDashPower;  //원래 대쉬거리
+        dashPower = dashPowerOrigin;                //현재 대쉬거리
+        dashSpeedOrigin = pStat.originalDashSpeed;  //원래 대쉬속도
+        dashSpeed = dashSpeedOrigin;                //현재 대쉬속도
 
         IState<PlayerController> idle = gameObject.AddComponent<PlayerIdleState>();
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
@@ -110,7 +99,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Debug.Log(transform.position.x - curPosition.x);
-        
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    bool isAbleToAttack = (!anim.GetBool("Attack")) && (comboCount == 0);
+        //}
+
         if (isFacingRight == true)
         {
             spriteRender.flipX = false;
@@ -119,14 +112,16 @@ public class PlayerController : MonoBehaviour
         {
             spriteRender.flipX = true;
         }
+
+        //상태전환
         switch (stateMachinePlayer.CurState)
         {
             case PlayerIdleState:
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A))
+                else if (Input.GetKeyDown(KeyCode.A) && (!anim.GetBool("Attack")) && (comboCount == 0))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -134,9 +129,13 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
+                else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
                 break;
             case PlayerMoveState:
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
@@ -151,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerAttackState:
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
@@ -164,38 +163,60 @@ public class PlayerController : MonoBehaviour
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
                 break;
+            case PlayerDashState:
+                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
+                }
+                else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+                }
+                else if (Input.GetMouseButtonDown(0) && anim.GetBool("Dash") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+                }
+                else if (anim.GetBool("Attack") == false && anim.GetBool("Dash") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
+                break;
         }
-        //if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == true)
-        //{
-        //    stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0 && dashUpGrade == false)
-        //{
-        //    dashSpeed = 2f;
-        //    stateMachinePlayer.SetState(dicState[PlayerState.Roll]);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
-        //{
-        //    AnimationEnd.Instance.atkStart();
-        //    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
-        //}
-        //else if (Input.GetMouseButtonDown(0) && anim.GetBool("Attack") == false)
-        //    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
-        //else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
-        //    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
-
-
         stateMachinePlayer.DoOperateUpdate();
     }
 
     public void AnimeEnded() //애니메이션 이벤트로 유닛의 애니메이션이 끝나면 발동
     {
-        MoveAble = true;
-
+        anim.SetBool("Attack", false);
     }
     
     public void SetIdle()
     {
         stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
     }
+    private Coroutine checkAttackReInputCor;
+    public int comboCount;
+    public void CheckAttackReInput(float reInputTime)
+    {
+        if (checkAttackReInputCor != null)
+            StopCoroutine(checkAttackReInputCor);
+        checkAttackReInputCor = StartCoroutine(CheckAttackReInputCoroutine(reInputTime));
+    }
+
+    private IEnumerator CheckAttackReInputCoroutine(float reInputTime)
+    {
+        float currentTime = 0f;
+        while (true)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime >= reInputTime)
+                break;
+            yield return null;
+        }
+
+        comboCount = 0;
+        anim.SetInteger("AttackCombo", 0);
+    }
+    
+    
 }

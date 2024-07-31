@@ -41,7 +41,7 @@ public class AnimationEnd : MonoBehaviour
         attackAnimationEnded = false;
     }
 
-    private void atkEnd()
+    public void atkEnd()
     {
         attackAnimationEnded = true;
     }

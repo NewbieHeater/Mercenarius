@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static PlayerController;
 
 public class EnemyGolemController : MonoBehaviour
 {
@@ -35,12 +36,12 @@ public class EnemyGolemController : MonoBehaviour
 
     public Image Hpbar; 
     public Transform AttackPoint;
-    public SpriteRenderer sprite;
     public UnityEvent onPlayerDead;
-    public Rigidbody enemyRb;
     public Rigidbody target;
-    public NavMeshAgent nav;
-    public Animator anim;
+    private SpriteRenderer sprite;
+    private Rigidbody enemyRb;    
+    private NavMeshAgent nav;
+    private Animator anim;
     //public Transform MainBody;
     public UnitCode unitCode;
     public Stat stat;
@@ -105,7 +106,6 @@ public class EnemyGolemController : MonoBehaviour
 
     void Update()
     {
-
         if (curHealth <= 0)
         {
             //onPlayerDead.Invoke();
@@ -121,19 +121,62 @@ public class EnemyGolemController : MonoBehaviour
 
         }
         */
-        if (dist >= attackRange && MoveAble && anim.GetBool("Hit") == false)
-        {
-            stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
-        }
-        else if (dist <= attackRange && anim.GetBool("Hit") == false)
-        {
-            stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
-        }
-        else if (anim.GetBool("Hit") == false && anim.GetBool("Attack") == false && anim.GetBool("Move") == false && anim.GetBool("Idle") == true)
-        {
-            stateMachineGolem.SetState(dicState[enemyGolemState.Idle]);
-        }
 
+        switch (stateMachineGolem.CurState)
+        {
+            case IdleStateEnemyGolem:
+                if (dist >= attackRange && anim.GetBool("Hit") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
+                }
+                if (dist <= attackRange && anim.GetBool("Hit") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
+                }
+                break;
+            case MoveStateEnemyGolem:
+                if (dist >= attackRange && anim.GetBool("Hit") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
+                }
+                if (dist <= attackRange && anim.GetBool("Hit") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
+                }
+                if (anim.GetBool("Hit") == false && anim.GetBool("Attack") == false && anim.GetBool("Move") == false && anim.GetBool("Idle") == true)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Idle]);
+                }
+                break;
+            case AttackStateEnemyGolem:
+                if (dist >= attackRange && MoveAble && anim.GetBool("Hit") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
+                }
+                else if (dist <= attackRange && anim.GetBool("Hit") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
+                }
+                if (anim.GetBool("Hit") == false && anim.GetBool("Attack") == false && anim.GetBool("Move") == false && anim.GetBool("Idle") == true)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Idle]);
+                }
+                break;
+            case HitStateEnemyGolem:
+                if (dist >= attackRange && MoveAble && anim.GetBool("Hit") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
+                }
+                else if (dist <= attackRange && anim.GetBool("Hit") == false)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
+                }
+                if (anim.GetBool("Hit") == false && anim.GetBool("Attack") == false && anim.GetBool("Move") == false && anim.GetBool("Idle") == true)
+                {
+                    stateMachineGolem.SetState(dicState[enemyGolemState.Idle]);
+                }
+                break;
+        }
         stateMachineGolem.DoOperateUpdate();
     }
 

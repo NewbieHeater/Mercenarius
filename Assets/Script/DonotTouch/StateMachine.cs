@@ -30,7 +30,7 @@ public class StateMachine<T>
 
         if (CurState == state)
         {
-            Debug.LogWarningFormat("Same state : ", state);
+            //Debug.LogWarningFormat("Same state : ", state);
             return;
         }
 
@@ -45,7 +45,6 @@ public class StateMachine<T>
             CurState.OperateEnter(m_sender);
 
         Debug.Log("SetNextState : " + state);
-        Debug.Log(CurState + "dlrjdke");
     }
 
     //State¿ë Update ÇÔ¼ö.
