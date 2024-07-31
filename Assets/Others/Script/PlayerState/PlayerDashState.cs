@@ -16,6 +16,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         _playerController.anim.SetBool("Dash", true);
         _playerController.agent.isStopped = true;
         _playerController.agent.velocity = Vector3.zero;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
         {

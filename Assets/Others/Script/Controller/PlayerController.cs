@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         MoveAble = true;
 
     }
-
+    
     public void SetIdle()
     {
         stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
