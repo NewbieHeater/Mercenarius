@@ -8,10 +8,11 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
     private PlayerController _playerController;
     private NavMeshAgent agent;
     private Animator anim;
+    
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        
+        _playerController.isAttack = true;
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
@@ -20,6 +21,11 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
         //_playerController.comboCount = 0;
+        _playerController.comboCount++;
+        _playerController.CheckAttackReInput(1.5f);
+        StartAttack();
+
+        anim.SetInteger("AttackCombo", _playerController.comboCount);
     }
     public void StartAttack()
     {
@@ -49,16 +55,13 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            _playerController.comboCount++;
-            _playerController.CheckAttackReInput(1f);
-            StartAttack();
             
-            anim.SetInteger("AttackCombo", _playerController.comboCount);
         }
     }
 
     public void OperateExit(PlayerController sender)
     {
         anim.SetBool("Attack", false);
+        
     }
 }

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
-    
+    public bool isAttack = false;
     void Update()
     {
         //Debug.Log(transform.position.x - curPosition.x);
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && (!anim.GetBool("Attack")) && (comboCount == 0))
+                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A))
+                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -158,6 +158,10 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
+                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+                }
                 else if (anim.GetBool("Attack") == false)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
@@ -168,7 +172,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false)
+                else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -188,6 +192,8 @@ public class PlayerController : MonoBehaviour
     public void AnimeEnded() //애니메이션 이벤트로 유닛의 애니메이션이 끝나면 발동
     {
         anim.SetBool("Attack", false);
+        isAttack = false;
+        stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
     }
     
     public void SetIdle()

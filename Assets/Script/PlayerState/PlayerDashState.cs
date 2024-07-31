@@ -20,7 +20,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-
+        _playerController.isAttack = false;
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
 
