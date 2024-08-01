@@ -17,15 +17,14 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
         if (!anim) anim = GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
 
-        StartAttack();
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero;
-        //_playerController.comboCount = 0;
-        _playerController.comboCount++;
-        _playerController.CheckAttackReInput(1.5f);
-        StartAttack();
+        //StartAttack();
+        //agent.isStopped = true;
+        //agent.velocity = Vector3.zero;
+        ////_playerController.comboCount = 0;
+        //_playerController.comboCount++;
+        //_playerController.CheckAttackReInput(1.5f);
 
-        anim.SetInteger("AttackCombo", _playerController.comboCount);
+        //anim.SetInteger("AttackCombo", _playerController.comboCount);
     }
     public void StartAttack()
     {
@@ -55,7 +54,8 @@ public class PlayerAttackState : MonoBehaviour, IState<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            
+            StartAttack();
+            anim.SetTrigger("isAttack");
         }
     }
 

@@ -158,14 +158,11 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
-                {
-                    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
-                }
-                else if (anim.GetBool("Attack") == false)
-                {
-                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
-                }
+                //else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
+                //{
+                //    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
+                //}
+
                 break;
             case PlayerDashState:
                 if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
@@ -180,7 +177,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
-                else if (anim.GetBool("Attack") == false && anim.GetBool("Dash") == false)
+                else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
@@ -193,7 +190,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool("Attack", false);
         isAttack = false;
-        stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+        //stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
     }
     
     public void SetIdle()
