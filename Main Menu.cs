@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject Panel;
+    public GameObject OptionPanel;
 
     void Start()
     {
-        if (Panel != null)
+        if (OptionPanel != null)
         {
-            Panel.SetActive(false); 
+            OptionPanel.SetActive(false); 
         }
     }
 
@@ -29,17 +29,17 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("옵션");
 
-        if (Panel != null)
+        if (OptionPanel != null)
         {
-            Panel.SetActive(true); 
+            OptionPanel.SetActive(true); 
         }
     }
 
     public void ClosePanel()
     {
-        if (Panel != null)
+        if (OptionPanel != null)
         {
-            Panel.SetActive(false); 
+            OptionPanel.SetActive(false); 
         }
     }
 
