@@ -563,10 +563,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 34}
+      scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 88f7ffffc2f7ffff06fbffff745f000044600000
+      m_ExpandedIDs: 721dffff00f7ffff30f7ffff90f7ffff26f8ffffc8f8ffff28f9ffff90f9ffffe6f9ffff26faffff8afaffff04fbffff06fbfffff05e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -999,9 +999,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 57.902325, y: 97.10619, z: 641.27875}
+    m_Target: {x: 14.000652, y: -390.95746, z: 249.23329}
     speed: 2
-    m_Value: {x: 57.902325, y: 97.10619, z: 641.27875}
+    m_Value: {x: 14.000652, y: -390.95746, z: 249.23329}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1047,20 +1047,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 1
   m_Rotation:
-    m_Target: {x: 0.63987124, y: 0.010758895, z: -0.008957789, w: 0.76837546}
+    m_Target: {x: 0.5999736, y: 0.0023978446, z: -0.0018031619, w: 0.8001354}
     speed: 2
-    m_Value: {x: 0.640629, y: 0.01074976, z: -0.008968401, w: 0.7677229}
+    m_Value: {x: 0.6007152, y: 0.0023958073, z: -0.0018053848, w: 0.7994575}
   m_Size:
-    m_Target: 244.7847
+    m_Target: 424.02145
     speed: 2
-    m_Value: 244.7847
+    m_Value: 424.02145
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1.5802104
-    m_SpeedNormalized: 0.7900002
+    m_Speed: 1.6401803
+    m_SpeedNormalized: 0.8200002
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1124,7 +1124,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Material
+    - Assets/Scene/Stage/Room
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1132,16 +1132,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Material
+  - Assets/Scene/Stage/Room
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\xorjs\\OneDrive\\\uBB38\uC11C\\git\\Mercenarius"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5c640000
-    m_LastClickedID: 25692
-    m_ExpandedIDs: 00000000d2620000d4620000d6620000d8620000da62000000ca9a3b
+    m_SelectedIDs: 30650000
+    m_LastClickedID: 25904
+    m_ExpandedIDs: 000000009e630000a0630000a263000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1169,7 +1169,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d2620000d4620000d6620000d8620000da620000
+    m_ExpandedIDs: 000000009e630000a0630000a2630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
