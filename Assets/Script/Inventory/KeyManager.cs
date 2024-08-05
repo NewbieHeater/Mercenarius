@@ -39,7 +39,6 @@ public class KeyManager : Singleton<KeyManager>
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
         LoadOptionData();
-        ResetOptionData();
     }
 
     private void LoadOptionData()

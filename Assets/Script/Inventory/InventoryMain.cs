@@ -110,4 +110,5 @@ public class InventoryMain : InventoryBase
         mInventoryBase.SetActive(false);
         IsInventoryActive = false;
     }
+
 }

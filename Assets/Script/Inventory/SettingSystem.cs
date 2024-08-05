@@ -34,12 +34,12 @@ public class SettingSystem : MonoBehaviour
     {
         Settings.SetActive(true);
         isPause = true;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
     void Resume()
     {
         Settings.SetActive(false);
         isPause = false;
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 }

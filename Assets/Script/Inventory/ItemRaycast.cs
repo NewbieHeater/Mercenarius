@@ -31,6 +31,11 @@ public class ItemRaycast : MonoBehaviour
     private void Update()
     {
         CheckItem();
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+            
+        //}
+        
 
         if (mIsPickupActive) { TryPickItem(); }
     }
@@ -46,7 +51,7 @@ public class ItemRaycast : MonoBehaviour
             if (mCurrentItem.Item.Type > ItemType.NONE)
             {
                 //현재 인벤토리 아이템 가져오기
-                InventorySlot[] allitems = mInventory.GetAllItems();
+                InventorySlot[] allitems = mInventory.mSlots;
 
                 int count = 0;
                 for (; count < allitems.Length; ++count)
@@ -62,7 +67,7 @@ public class ItemRaycast : MonoBehaviour
                 if (count == allitems.Length) { return; }
 
                 //아이템 줍는 효과음 재생
-                SoundManager.Instance.PlaySound2D("GrabItem " + SoundManager.Range(1, 3));
+                //SoundManager.Instance.PlaySound2D("GrabItem " + SoundManager.Range(1, 3));
             }
 
             TryPickUp();
@@ -75,7 +80,9 @@ public class ItemRaycast : MonoBehaviour
     /// </summary>
     private void CheckItem()
     {
-        if (Physics.Raycast(mRayCamera.transform.position, mRayCamera.transform.forward, out mHit, mRayDistance))
+        //if (Physics.Raycast(mRayCamera.transform.position, mRayCamera.transform.forward, out mHit, mRayDistance))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit mHit, mRayDistance))
         {
             //레이캐스트 결과의 태그가 아이템이라면?
             if (mHit.transform.tag == "Item" || mHit.transform.tag == "NPC")

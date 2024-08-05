@@ -63,6 +63,7 @@ public class KeySettingController : MonoBehaviour
 
                             // 빨간색으로 설정 완료됨을 연출
                             mKeyButtonColorCor = StartCoroutine(CorChangeButtonColor(Color.red));
+                            
                         }
                     }
                 }
@@ -83,7 +84,6 @@ public class KeySettingController : MonoBehaviour
         {
             mKeyButtonImage.color = Color.Lerp(mKeyButtonImage.color, targetColor, progress);
             progress += colorSpeed * Time.deltaTime;
-
             //progress가 1이면 > 보간 완료
             if (progress > 1)
             {
@@ -94,7 +94,6 @@ public class KeySettingController : MonoBehaviour
                 {
                     mKeyButtonImage.color = Color.Lerp(mKeyButtonImage.color, Color.white, progress);
                     progress += colorSpeed * Time.deltaTime;
-
                     //색상 전환 완료
                     if (progress > 1)
                     {

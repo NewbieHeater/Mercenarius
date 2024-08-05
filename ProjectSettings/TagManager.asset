@@ -9,6 +9,8 @@ TagManager:
   - EnemyAttack
   - Void
   - PlayerAttack
+  - Item
+  - Ground
   layers:
   - Default
   - TransparentFX
