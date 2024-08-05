@@ -39,6 +39,7 @@ public class KeyManager : Singleton<KeyManager>
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
         LoadOptionData();
+        ResetOptionData();
     }
 
     private void LoadOptionData()
@@ -78,7 +79,7 @@ public class KeyManager : Singleton<KeyManager>
         mKeyDictionary.Add("Equipment", KeyCode.O); //장비 인벤토리
         mKeyDictionary.Add("Stat", KeyCode.P); //스탯
         mKeyDictionary.Add("Skill", KeyCode.K); //스킬
-        mKeyDictionary.Add("Quest", KeyCode.Q); //퀘스트
+        mKeyDictionary.Add("Settings", KeyCode.Escape); //설정창
 
         mKeyDictionary.Add("ItemQuickSlot0", KeyCode.Alpha1); //아이템 퀵슬롯 1번
         mKeyDictionary.Add("ItemQuickSlot1", KeyCode.Alpha2); //아이템 퀵슬롯 2번
@@ -86,11 +87,11 @@ public class KeyManager : Singleton<KeyManager>
         mKeyDictionary.Add("ItemQuickSlot3", KeyCode.Alpha4); //아이템 퀵슬롯 4번
         mKeyDictionary.Add("ItemQuickSlot4", KeyCode.Alpha5); //아이템 퀵슬롯 5번
 
-        mKeyDictionary.Add("SkillQuickSlot0", KeyCode.Z); //스킬 퀵슬롯 1번
-        mKeyDictionary.Add("SkillQuickSlot1", KeyCode.X); //스킬 퀵슬롯 2번
-        mKeyDictionary.Add("SkillQuickSlot2", KeyCode.C); //스킬 퀵슬롯 3번
-        mKeyDictionary.Add("SkillQuickSlot3", KeyCode.V); //스킬 퀵슬롯 4번
-        mKeyDictionary.Add("SkillQuickSlot4", KeyCode.B); //스킬 퀵슬롯 5번  
+        mKeyDictionary.Add("Dash", KeyCode.Z); //스킬 퀵슬롯 1번 기본 대쉬
+        mKeyDictionary.Add("BasicAttack", KeyCode.A); //스킬 퀵슬롯 2번 기본 기본공격
+        mKeyDictionary.Add("SkillQuickSlot0", KeyCode.C); //스킬 퀵슬롯 3번
+        mKeyDictionary.Add("SkillQuickSlot1", KeyCode.V); //스킬 퀵슬롯 4번
+        mKeyDictionary.Add("SkillQuickSlot2", KeyCode.B); //스킬 퀵슬롯 5번  
 
         Debug.Log(GetType() + " 초기화");
 

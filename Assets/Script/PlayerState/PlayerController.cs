@@ -12,29 +12,31 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject[] BasicAttackPrefab;
     public SOSkill Soskill;
-    public bool dashUpGrade = false;
-    public bool isFacingRight = true;
-    public float coolDownDash = 0;
-    public float dashPowerOrigin = 0f;
-    public float dashPower = 0f;
-    public float dashSpeedOrigin = 0f;
-    public float dashSpeed = 0f;
 
-    public int maxHealth = 0;
-    public int curHealth = 0;
-    public int atkDamage = 0;
-    public float attackSpeed = 0;
-    public float orginSpeed = 0;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
-    public float curSpeed;
     
+    public bool isFacingRight = true;
+
+    private bool dashUpGrade = false;
+    public float coolDownDash;
+    public float dashPowerOrigin;
+    public float dashPower;
+    public float dashSpeedOrigin;
+    public float dashSpeed;
+
+    public int maxHealth;
+    public int curHealth;
+    public int atkDamage;
+    public float attackSpeed;
+    public float orginSpeed;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
+    public float curSpeed;
+
     public GameObject weaponHitBox;
     private SpriteRenderer spriteRender;
     private NavMeshAgent agent;          //네비매쉬
     private Animator anim;
     private Transform spot;              //마우스 클릭시 클릭 위치 표시를 위해 과녁모양가져오기
-    [SerializeField]
-    private Rigidbody rg = null;
-    public bool MoveAble;  
+    public bool isInvincible;
+
     public Image imgIcon;               // 스킬 이미지
     public Image imgCool;               // Cooldown 이미지
 
@@ -68,7 +70,8 @@ public class PlayerController : MonoBehaviour
     public string weaponType = "Null";
     void Start()
     {
-        
+        isInvincible = false;
+
         weaponType = pStat.weaponName;              //무기타입
         maxHealth = pStat.maxHp;                    //최대체력 설정
         curHealth = maxHealth;                      //현재체력 초기화       
@@ -98,6 +101,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttack = false;
     void Update()
     {
+        if (SettingSystem.isPause)
+            return;
         //Debug.Log(transform.position.x - curPosition.x);
         //if (Input.GetKeyDown(KeyCode.A))
         //{
@@ -117,11 +122,11 @@ public class PlayerController : MonoBehaviour
         switch (stateMachinePlayer.CurState)
         {
             case PlayerIdleState:
-                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
+                if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Dash")) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -133,13 +138,14 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
+                //else if (!isInvincible)
                 break;
             case PlayerMoveState:
-                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
+                if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Dash")) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -150,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerAttackState:
-                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
+                if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Dash")) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
@@ -158,18 +164,17 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
-                //else if (Input.GetKeyDown(KeyCode.A) && !isAttack && (comboCount < 3))
-                //{
-                //    stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
-                //}
-
+                else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
                 break;
             case PlayerDashState:
-                if (Input.GetKeyDown(KeyCode.Z) && imgCool.fillAmount == 0)
+                if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Dash")) && imgCool.fillAmount == 0)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && anim.GetBool("Dash") == false && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && anim.GetBool("Dash") == false && !isAttack && (comboCount < 3))
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }

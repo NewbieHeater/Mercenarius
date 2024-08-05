@@ -11,25 +11,28 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     private PlayerController _playerController;
     private NavMeshAgent agent;
     private Animator anim;
+
     private Vector3 dashDest;
     private Vector3 curPosition;
     private RaycastHit dashHit;
-
+    
     private float time = 0;
     
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        _playerController.isAttack = false;
+        
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
 
         StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
 
+        _playerController.isAttack = false;
         time = 0;
         anim.SetBool("Dash", true);
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
+        _playerController.isInvincible = true;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
@@ -96,6 +99,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
 
     public void OperateExit(PlayerController sender)
     {
-        
+        _playerController.isInvincible = false;
+        _playerController.dashPower = _playerController.dashPowerOrigin;
     }
 }
