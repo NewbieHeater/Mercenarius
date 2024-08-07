@@ -28,36 +28,18 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
 
         _playerController.isAttack = false;
-        time = 0;
-        anim.SetBool("Dash", true);
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero;
         _playerController.isInvincible = true;
+        agent.enabled = false;
+        time = 0;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            //마우스 클릭 위치
-            Vector3 dashDestPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            //마우스 클릭 위치 - 현재 위치 (각도계산)
-            Vector3 dashDestDir = (dashDestPos - transform.position).normalized;
-            //플레이어에서 마우스로 Ray발사
-            if (Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower))
-                if (dashHit.collider.CompareTag("Wall"))                      //Ray가 벽에 닿으면
-                {
-                    _playerController.dashPower = dashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
-                    _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
-                }
+        anim.SetBool("Idle", false);
+        anim.SetBool("Dash", true);
+        anim.SetBool("Run", false);
+        anim.SetBool("Attack", false);
+        anim.ResetTrigger("isAttack");
 
-            //최종목표 위치
-            dashDest = transform.position + dashDestDir * _playerController.dashPower;
-            curPosition = transform.position;
-        }
-        else
-        {
-            anim.SetBool("Dash", false);
-        }
-
+        SetDashDestination();
+        
         if (dashDest.x < curPosition.x)
         {
             _playerController.isFacingRight = false;
@@ -66,6 +48,26 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         {
             _playerController.isFacingRight = true;
         }
+    }
+    
+    public void OperateUpdate(PlayerController sender)
+    {
+        if(time >= (1f / _playerController.dashSpeed))
+        {
+            anim.SetBool("Dash", false);
+            return;
+        }
+            
+        transform.position = Vector3.Lerp(curPosition, dashDest, time * _playerController.dashSpeed);
+        time += Time.deltaTime;
+    }
+
+    public void OperateExit(PlayerController sender)
+    {
+        agent.enabled = true;
+        _playerController.isInvincible = false;
+        _playerController.dashPower = _playerController.dashPowerOrigin;
+        _playerController.dashSpeed = _playerController.dashSpeedOrigin;
     }
 
     IEnumerator CoolDown(float cool, Image coolDownSkill)
@@ -85,21 +87,24 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             yield return null;
         }
     }
-    public void OperateUpdate(PlayerController sender)
-    {
-        if(time >= (1f / _playerController.dashSpeed))
-        {
-            anim.SetBool("Dash", false);
-            return;
-        }
-            
-        transform.position = Vector3.Lerp(curPosition, dashDest, time * _playerController.dashSpeed);
-        time += Time.deltaTime;
-    }
 
-    public void OperateExit(PlayerController sender)
+    private void SetDashDestination()
     {
-        _playerController.isInvincible = false;
-        _playerController.dashPower = _playerController.dashPowerOrigin;
+        Vector3 mousePosition = _playerController.CheckGround(Input.mousePosition);
+        Vector3 dashDestDir = (mousePosition - transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower, 1 << LayerMask.NameToLayer("Wall")))
+        {
+            _playerController.dashPower = dashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
+            _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
+        }
+        else
+        {
+            _playerController.dashPower = _playerController.dashPowerOrigin;
+            _playerController.dashSpeed = _playerController.dashSpeedOrigin;
+        }
+
+        dashDest = transform.position + dashDestDir * _playerController.dashPower;
+        curPosition = transform.position;
     }
 }

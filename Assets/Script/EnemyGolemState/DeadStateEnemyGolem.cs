@@ -9,7 +9,7 @@ public class DeadStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
     public void OperateEnter(EnemyGolemController sender)
     {
         _monsterController = sender;
-        transform.parent.gameObject.SetActive(false);
+        this.transform.gameObject.SetActive(false);
     }
 
 

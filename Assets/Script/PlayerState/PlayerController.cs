@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject[] BasicAttackPrefab;
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour
         spriteRender = GetComponentInChildren<SpriteRenderer>();
         agent = this.GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-        agent.speed = orginSpeed;
         agent.updateRotation = false;   //회전막기
     }
     public string weaponType = "Null";
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
         dashPower = dashPowerOrigin;                //현재 대쉬거리
         dashSpeedOrigin = pStat.originalDashSpeed;  //원래 대쉬속도
         dashSpeed = dashSpeedOrigin;                //현재 대쉬속도
+        agent.speed = orginSpeed;
 
         IState<PlayerController> idle = gameObject.AddComponent<PlayerIdleState>();
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
@@ -103,11 +104,6 @@ public class PlayerController : MonoBehaviour
     {
         if (SettingSystem.isPause)
             return;
-        //Debug.Log(transform.position.x - curPosition.x);
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    bool isAbleToAttack = (!anim.GetBool("Attack")) && (comboCount == 0);
-        //}
 
         if (isFacingRight == true)
         {
@@ -126,7 +122,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -145,7 +141,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -174,7 +170,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
-                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && anim.GetBool("Dash") == false && !isAttack && (comboCount < 3))
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && anim.GetBool("Dash") == false && !isAttack)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
@@ -195,36 +191,37 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool("Attack", false);
         isAttack = false;
-        //stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
-    }
-    
-    public void SetIdle()
-    {
-        stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
-    }
-    private Coroutine checkAttackReInputCor;
-    public int comboCount;
-    public void CheckAttackReInput(float reInputTime)
-    {
-        if (checkAttackReInputCor != null)
-            StopCoroutine(checkAttackReInputCor);
-        checkAttackReInputCor = StartCoroutine(CheckAttackReInputCoroutine(reInputTime));
     }
 
-    private IEnumerator CheckAttackReInputCoroutine(float reInputTime)
+    public Vector3 CheckGround(Vector3 position)
     {
-        float currentTime = 0f;
-        while (true)
-        {
-            currentTime += Time.deltaTime;
-            if (currentTime >= reInputTime)
-                break;
-            yield return null;
-        }
-
-        comboCount = 0;
-        anim.SetInteger("AttackCombo", 0);
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
+            return hit.point;
+        else
+            return transform.position;
     }
-    
-    
+
+    //private Coroutine checkAttackReInputCor;
+    //public int comboCount;
+    //public void CheckAttackReInput(float reInputTime)
+    //{
+    //    if (checkAttackReInputCor != null)
+    //        StopCoroutine(checkAttackReInputCor);
+    //    checkAttackReInputCor = StartCoroutine(CheckAttackReInputCoroutine(reInputTime));
+    //}
+    //private IEnumerator CheckAttackReInputCoroutine(float reInputTime)
+    //{
+    //    float currentTime = 0f;
+    //    while (true)
+    //    {
+    //        currentTime += Time.deltaTime;
+    //        if (currentTime >= reInputTime)
+    //            break;
+    //        yield return null;
+    //    }
+
+    //    comboCount = 0;
+    //    anim.SetInteger("AttackCombo", 0);
+    //}
 }

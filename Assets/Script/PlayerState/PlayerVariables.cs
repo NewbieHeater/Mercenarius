@@ -41,7 +41,7 @@ public class PlayerStat
         switch (weaponTypeCode)
         {
             case WeaponTypeCode.Spear: //이름, 최대체력, 공격력, 속도, 공격속도, 대쉬속도, 대쉬파워, 대쉬쿨타임 _순서
-                playerStat = new PlayerStat(weaponTypeCode, "Spear", 150, 20, 3f, 4f, 6f, 4f, 2f);
+                playerStat = new PlayerStat(weaponTypeCode, "Spear", 150, 20, 5f, 4f, 6f, 4f, 2f);
                 break;
             case WeaponTypeCode.Double_Dager:
                 playerStat = new PlayerStat(weaponTypeCode, "Double_Dager", 100, 5, 4f, 1f, 6f, 5f, 2f);
