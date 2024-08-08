@@ -95,7 +95,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
 
         if (Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower, 1 << LayerMask.NameToLayer("Wall")))
         {
-            _playerController.dashPower = dashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
+            _playerController.dashPower = dashHit.distance - 0.35f;    //벽 거리만큼 대쉬 거리 줄임
             _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
         }
         else

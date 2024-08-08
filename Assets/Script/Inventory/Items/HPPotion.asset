@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: HPPotion
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  mItemID: 1
+  mItemID: 0
   mCanOverlap: 0
   mIsInteractivity: 1
   mIsConsumable: 1
-  mItemCooltime: -1
+  mItemCooltime: 5
   mItemType: 128
   mItemImage: {fileID: 21300030, guid: a960d45a01b175649839aa6c4d61341c, type: 3}

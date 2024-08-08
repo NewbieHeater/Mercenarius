@@ -17,13 +17,17 @@ public class PlayerController : MonoBehaviour
     
     public bool isFacingRight = true;
 
-    private bool dashUpGrade = false;
+
+    [Header("플레이어 대쉬관련 능력치")]
+    private bool dashUpGrade;
     public float coolDownDash;
     public float dashPowerOrigin;
     public float dashPower;
     public float dashSpeedOrigin;
     public float dashSpeed;
 
+
+    [Header("플레이어 능력치")]
     public int maxHealth;
     public int curHealth;
     public int atkDamage;
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public float orginSpeed;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
     public float curSpeed;
 
+    [Header("미구현")]
     public GameObject weaponHitBox;
     private SpriteRenderer spriteRender;
     private NavMeshAgent agent;          //네비매쉬
