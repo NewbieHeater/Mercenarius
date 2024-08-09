@@ -185,9 +185,9 @@ GameObject:
   - component: {fileID: 1973208239158809672}
   - component: {fileID: 6611350490373583349}
   - component: {fileID: 1353715628214322740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,9 +410,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5580608227813880187}
   - component: {fileID: 3079127294945038394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +536,7 @@ Transform:
   m_GameObject: {fileID: 2647143725754791163}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.17, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -611,8 +611,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.96, y: 1, z: 0.9}
-  m_Center: {x: -0.04, y: 0.2, z: 0}
+  m_Size: {x: 1.5, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &2659672119710998813
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,9 +741,9 @@ GameObject:
   - component: {fileID: 3406576217625113319}
   - component: {fileID: 6341594311561679976}
   - component: {fileID: 4692995565056888275}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1389,9 +1389,9 @@ GameObject:
   - component: {fileID: 3362951042478339710}
   - component: {fileID: 3353057081429373342}
   - component: {fileID: 629490601178214834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1494,9 +1494,9 @@ GameObject:
   - component: {fileID: 3992258782031770941}
   - component: {fileID: 3815280547321729682}
   - component: {fileID: 48000175029443794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
