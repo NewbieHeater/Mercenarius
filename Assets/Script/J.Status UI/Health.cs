@@ -5,25 +5,18 @@ using UnityEngine.UI;
 
 public class Statusinformation : MonoBehaviour
 {
-    float curHealth;  //현재 체력
-    float maxHealth; //최대 체력
-
-    public Slider HpBarSlider;
+    [SerializeField] private Image barImage;
 
     public void Awake()
     {
-        maxHealth = 100;
-        curHealth = maxHealth;
+        barImage.fillAmount = 1;
     }
 
     private void Update()
     {
-        HpBarSlider.value = (float)curHealth / maxHealth;
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            curHealth = curHealth - 1;
+            barImage.fillAmount = barImage.fillAmount - 0.01f; //체력 감소
         }
     }
 }
-
