@@ -1013,6 +1013,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1. Spawn
       objectReference: {fileID: 0}
+    - target: {fileID: 5045931372225360973, guid: d022b743a13e3ad4488d66bf49ce1e62,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9217242507007611818, guid: d022b743a13e3ad4488d66bf49ce1e62,
         type: 3}
       propertyPath: m_LocalPosition.x
