@@ -37,7 +37,8 @@ public class ItemCooltimeManager : Singleton<ItemCooltimeManager>
     public void AddCooltimeQueue(int itemID, float originCooltime)
     {
         mCooltimes.TryAdd(itemID, originCooltime);
-
+        Debug.Log(mCooltimes == null);
+        //if (mCooltimes == null) new Dictionary<int, float>();
         mCooltimes[itemID] = originCooltime;
         mCooltimeList.Add(itemID);
     }
@@ -50,7 +51,8 @@ public class ItemCooltimeManager : Singleton<ItemCooltimeManager>
     public float GetCurrentCooltime(int itemID)
     {
         float cooltime;
-        bool isSuccess = mCooltimes.TryGetValue(itemID, out cooltime);
+        
+        bool isSuccess = mCooltimes.TryGetValue(itemID, out cooltime); 
 
         if (isSuccess) { return cooltime; }
         else { return 0; }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using static UnityEditor.Progress;
 
 /// <summary>
 /// 인벤토리 슬롯 하나를 담당
@@ -71,8 +72,9 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
                 mTextCount.text = "";
             }
         }
-
+        //ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime);
         SetColor(1);
+
     }
 
     // 해당 슬롯의 아이템 개수 업데이트

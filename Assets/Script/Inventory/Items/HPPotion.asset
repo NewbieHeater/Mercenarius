@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: HPPotion
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  mItemID: 0
+  mItemID: 1
   mCanOverlap: 0
   mIsInteractivity: 1
   mIsConsumable: 1

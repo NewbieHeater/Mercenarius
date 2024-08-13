@@ -7344,7 +7344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1493390714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9318,6 +9318,7 @@ GameObject:
   - component: {fileID: 1895388026}
   - component: {fileID: 1895388025}
   - component: {fileID: 1895388027}
+  - component: {fileID: 1895388028}
   m_Layer: 0
   m_Name: InventorySystem
   m_TagString: Untagged
@@ -9386,6 +9387,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mPlayerController: {fileID: 371761086}
   mObjects: []
+--- !u!114 &1895388028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895388023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbb12068daf1ed4a830e64dd0741246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1925226811
 GameObject:
   m_ObjectHideFlags: 0
