@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 6186216}
   - component: {fileID: 6186218}
   - component: {fileID: 6186217}
+  - component: {fileID: 6186219}
   m_Layer: 5
   m_Name: Gold Text (Legacy)
   m_TagString: Untagged
@@ -201,6 +202,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6186215}
   m_CullTransparentMesh: 1
+--- !u!114 &6186219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6186215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &74843760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1082,7 @@ GameObject:
   - component: {fileID: 1564195902}
   - component: {fileID: 1564195904}
   - component: {fileID: 1564195903}
+  - component: {fileID: 1564195905}
   m_Layer: 5
   m_Name: HP Text (Legacy)
   m_TagString: Untagged
@@ -1134,6 +1151,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564195901}
   m_CullTransparentMesh: 1
+--- !u!114 &1564195905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564195901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1569143290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1177,7 @@ GameObject:
   - component: {fileID: 1569143291}
   - component: {fileID: 1569143293}
   - component: {fileID: 1569143292}
+  - component: {fileID: 1569143294}
   m_Layer: 5
   m_Name: Mana Text (Legacy)
   m_TagString: Untagged
@@ -1213,6 +1246,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569143290}
   m_CullTransparentMesh: 1
+--- !u!114 &1569143294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569143290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1716100256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,6 +1574,7 @@ GameObject:
   - component: {fileID: 2037536493}
   - component: {fileID: 2037536495}
   - component: {fileID: 2037536494}
+  - component: {fileID: 2037536496}
   m_Layer: 5
   m_Name: Kill Text (Legacy)
   m_TagString: Untagged
@@ -1594,6 +1643,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037536492}
   m_CullTransparentMesh: 1
+--- !u!114 &2037536496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037536492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2141861754
 GameObject:
   m_ObjectHideFlags: 0
