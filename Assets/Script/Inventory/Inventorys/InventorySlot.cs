@@ -8,7 +8,7 @@ using static UnityEditor.Progress;
 /// <summary>
 /// 인벤토리 슬롯 하나를 담당
 /// </summary>
-public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler//, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private ItemActionManager mItemActionManager;
     private Item mItem; //현재 아이템 인스턴스
@@ -109,6 +109,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     {
         if (mItem != null)
         {
+            //Debug.Log(mItem + "dfas");
             //쉬프트 (반으로 나누기 모드 활성화)
             if (Input.GetKey(KeyCode.LeftShift)) { DragSlot.Instance.IsShiftMode = true; }
             else { DragSlot.Instance.IsShiftMode = false; }
@@ -130,25 +131,35 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     // 마우스 드래그 종료 오버라이드
     public void OnEndDrag(PointerEventData eventData)
     {
-        DragSlot.Instance.SetColor(0);
-        DragSlot.Instance.CurrentSlot = null;
+        if (mItem != null)
+        {
+            DragSlot.Instance.SetColor(0);
+            DragSlot.Instance.CurrentSlot = null;
+        }
+            
     }
 
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("드랍");
+        //if (mItem == null)
+        //    return;
         //쉬프트 모드인 상황에서 해당 위치에 아이템이 있는경우, 반으로 나눌 수 없기에 리턴한다.
         if (DragSlot.Instance.IsShiftMode && mItem != null) { return; }
-
+        //Debug.Log(DragSlot.Instance.CurrentSlot.Item);
         //드래그 슬롯에 놓여진 아이템과, 바꿔질 아이템의 마스크가 모두 통과되면 바꾼다.
-        if (!IsMask(DragSlot.Instance.CurrentSlot.Item)) { return; }
-
+        if(DragSlot.Instance.CurrentSlot != null)
+        {
+            if (!IsMask(DragSlot.Instance.CurrentSlot.Item)) { return; }
+        }
+  
         //타겟 드래그 슬롯에 이미 아이템이 있는경우, 해당 아이템이 직전의 아이템 슬롯에서 마스크를 체크한다.
         if (mItem != null && !DragSlot.Instance.CurrentSlot.IsMask(mItem)) { return; }
 
         ChangeSlot();
 
-        //mItemActionManager.SlotOnDropEvent(this); 드롭 이벤트 호출
+        mItemActionManager.SlotOnDropEvent(this); //드롭 이벤트 호출
     }
 
     private void ChangeSlot()
@@ -230,7 +241,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             if (mItem != null && mItem.IsConsumable) { UpdateSlotCount(-1); }
 
             //아이템을 다쓴경우, UpdateSlotCount로 인해 mItem이 null이 되는 경우에 UI를 끈다.
-            //if (mItem == null) { mItemDescription.CloseUI(); }
+            if (mItem == null) { mItemDescription.CloseUI(); }
         }
     }
 
@@ -244,9 +255,40 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             UseItem();
         }
     }
-
+    public bool isit;
+    public bool mIsTooltipActive = false;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (mItem != null)
+        {
+            Debug.Log(mItem.ItemID);
+            mItemDescription.OpenUI(mItem.ItemID);
+            mIsTooltipActive = true;
+        }
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (mItem != null)
+        {
+            mItemDescription.CloseUI();
+            mIsTooltipActive = false;
+        }
+    }
+    public ItemDescription mItemDescription;
     private void Update()
     {
+        //if (mIsTooltipActive)
+        //{
+
+        //    //mIsTooltipActive = false;
+        //}
+        //else
+        //{
+
+        //}
+        //Debug.Log(mItem.Type);
+        //Debug.Log(mSlotMask);
+
         //아이템 쿨타임 스프라이트를 쿨타임 기반으로 계산하여 채운다.
         if (mItem != null) 
         { 

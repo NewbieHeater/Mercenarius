@@ -41,13 +41,13 @@ public class ItemActionManager : MonoBehaviour
                     {
                         case (int)ItemCode.SMALL_HEALTH_POTION:
                             {
-                                GameManager._instance.player.maxHealth += 1;
+                                GameManager._instance.player.curHealth += 1;
                                 //SoundManager.Instance.PlaySound2D("Food Drink " + SoundManager.Range(1, 4, true));
                                 break;
                             }
                         case (int)ItemCode.SMALL_MANA_POTION:
                             {
-                                GameManager._instance.player.maxHealth -= 1;
+                                GameManager._instance.player.curHealth -= 1;
                                 //SoundManager.Instance.PlaySound2D("Food Drink " + SoundManager.Range(1, 4, true));
                                 break;
                             }

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: MPPotion
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  mItemID: 2
+  mItemID: 1
   mCanOverlap: 1
   mIsInteractivity: 1
   mIsConsumable: 1
   mItemCooltime: 2
   mItemType: 128
   mItemImage: {fileID: 21300066, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
+  mItemDescription: Decrease Hp by 1
