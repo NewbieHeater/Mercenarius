@@ -255,9 +255,9 @@ GameObject:
   - component: {fileID: 8585940367477390963}
   - component: {fileID: 4018958600753571996}
   - component: {fileID: 1737153692396611522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gruond
-  m_TagString: Gruond
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8

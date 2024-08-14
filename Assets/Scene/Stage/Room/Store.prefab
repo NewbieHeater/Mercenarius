@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321483049826629721}
-  m_Layer: 0
+  - component: {fileID: 7779733203379364585}
+  m_Layer: 8
   m_Name: Gruond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,6 +38,25 @@ Transform:
   - {fileID: 1130315109437947410}
   m_Father: {fileID: 7072039120263432924}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7779733203379364585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76462043295080735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &416744042408898283
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +174,7 @@ GameObject:
   - component: {fileID: 7597934573149452982}
   - component: {fileID: 8968257227644240975}
   - component: {fileID: 2831362637917664708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -296,7 +316,7 @@ GameObject:
   - component: {fileID: 6102701890601453108}
   - component: {fileID: 5815663608423704206}
   - component: {fileID: 7211960378510240592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -401,6 +421,7 @@ GameObject:
   - component: {fileID: 4276843963577278920}
   - component: {fileID: 6517929598988963384}
   - component: {fileID: 4195313633049385835}
+  - component: {fileID: 8175585234847348975}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -494,6 +515,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &8175585234847348975
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218188777166398842}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1242125543490142359
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +753,7 @@ GameObject:
   - component: {fileID: 5597852794273204670}
   - component: {fileID: 3089173435759900155}
   - component: {fileID: 6422033798418173906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -821,6 +858,7 @@ GameObject:
   - component: {fileID: 9129206518501797733}
   - component: {fileID: 687367590122317551}
   - component: {fileID: 1889437258548667592}
+  - component: {fileID: 6543414643719423687}
   m_Layer: 0
   m_Name: box (2)
   m_TagString: Untagged
@@ -914,6 +952,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &6543414643719423687
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2232162333490989367}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2386355642807499350
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +1016,7 @@ GameObject:
   - component: {fileID: 3631438811059248289}
   - component: {fileID: 1180793085650504319}
   - component: {fileID: 4513160327588086214}
+  - component: {fileID: 679421335091374934}
   m_Layer: 0
   m_Name: npc
   m_TagString: Untagged
@@ -1055,6 +1110,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &679421335091374934
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841122072047499081}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2940618407848733824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1172,7 @@ GameObject:
   - component: {fileID: 6689170516899371765}
   - component: {fileID: 6920968780800500337}
   - component: {fileID: 624404843303894327}
+  - component: {fileID: 5118497835508052721}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1194,6 +1266,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5118497835508052721
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348026380340587743}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3782341100293552568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1294,7 @@ GameObject:
   - component: {fileID: 3382986138399141159}
   - component: {fileID: 7023438015884250938}
   - component: {fileID: 6824247687393081145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1311,7 +1399,7 @@ GameObject:
   - component: {fileID: 7243551031785441597}
   - component: {fileID: 7782433428894802879}
   - component: {fileID: 2858935642600696504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1521,7 +1609,7 @@ GameObject:
   - component: {fileID: 9081785913205022082}
   - component: {fileID: 7934156410192982159}
   - component: {fileID: 7827440586933121253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1941,6 +2029,7 @@ GameObject:
   - component: {fileID: 3506266369852715332}
   - component: {fileID: 1750167203423564201}
   - component: {fileID: 1140177683684510496}
+  - component: {fileID: 7841059444613722751}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2034,6 +2123,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &7841059444613722751
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076678843359091533}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6461873516187819822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,6 +2151,7 @@ GameObject:
   - component: {fileID: 6492242633710270533}
   - component: {fileID: 3810795278777858377}
   - component: {fileID: 424390371031239778}
+  - component: {fileID: 3183495070775803630}
   m_Layer: 0
   m_Name: box (1)
   m_TagString: Untagged
@@ -2139,6 +2245,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &3183495070775803630
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461873516187819822}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7775764096510699292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2273,7 @@ GameObject:
   - component: {fileID: 6013379610039444688}
   - component: {fileID: 1980125656687672807}
   - component: {fileID: 7257679210785034345}
+  - component: {fileID: 1190629306547844504}
   m_Layer: 0
   m_Name: box
   m_TagString: Untagged
@@ -2244,6 +2367,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &1190629306547844504
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775764096510699292}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8396152493110878376
 GameObject:
   m_ObjectHideFlags: 0

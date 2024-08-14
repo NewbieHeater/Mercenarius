@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8520165365563602346}
-  m_Layer: 0
+  - component: {fileID: 428979993449202545}
+  m_Layer: 8
   m_Name: Gruond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +47,25 @@ Transform:
   - {fileID: 4350322357620944720}
   m_Father: {fileID: 3276416561809933921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &428979993449202545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736917793176664503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &826029667098072571
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +183,7 @@ GameObject:
   - component: {fileID: 1007347032566192229}
   - component: {fileID: 3504874006770412426}
   - component: {fileID: 3975291275862708522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (15)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -268,7 +288,7 @@ GameObject:
   - component: {fileID: 8912091278818695424}
   - component: {fileID: 4289965984464651279}
   - component: {fileID: 7060873355465852814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -654,7 +674,7 @@ GameObject:
   - component: {fileID: 238971915149915175}
   - component: {fileID: 4701718954323822454}
   - component: {fileID: 7969287765078046215}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (17)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -759,7 +779,7 @@ GameObject:
   - component: {fileID: 137048954090525073}
   - component: {fileID: 8894754145594456354}
   - component: {fileID: 7668903911801717948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (16)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -969,7 +989,7 @@ GameObject:
   - component: {fileID: 7397672602472263918}
   - component: {fileID: 4189044473259107145}
   - component: {fileID: 2949174707011334134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (13)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1074,7 +1094,7 @@ GameObject:
   - component: {fileID: 8089072321523928902}
   - component: {fileID: 7214398063541822050}
   - component: {fileID: 6074588216965409532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (8)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1179,7 +1199,7 @@ GameObject:
   - component: {fileID: 6621716221951149747}
   - component: {fileID: 930118359523740067}
   - component: {fileID: 2419356184156127166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (9)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1284,7 +1304,7 @@ GameObject:
   - component: {fileID: 4069160843601257571}
   - component: {fileID: 4567076418107638595}
   - component: {fileID: 8600533140771566310}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (10)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1389,7 +1409,7 @@ GameObject:
   - component: {fileID: 6027963869941541086}
   - component: {fileID: 551815045296424999}
   - component: {fileID: 4817895842374540771}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1494,7 +1514,7 @@ GameObject:
   - component: {fileID: 5691840426173613055}
   - component: {fileID: 8393821824257629609}
   - component: {fileID: 3117051748391126560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (14)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1704,7 +1724,7 @@ GameObject:
   - component: {fileID: 7296125584945583719}
   - component: {fileID: 5259184755196092664}
   - component: {fileID: 5218654167291307028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (11)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1809,7 +1829,7 @@ GameObject:
   - component: {fileID: 5699031082092178859}
   - component: {fileID: 5404892854051547765}
   - component: {fileID: 6998195393735496412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (6)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -1914,7 +1934,7 @@ GameObject:
   - component: {fileID: 1919914565261158779}
   - component: {fileID: 1819297351037011985}
   - component: {fileID: 2035975931276415}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -2019,7 +2039,7 @@ GameObject:
   - component: {fileID: 5053723537769101800}
   - component: {fileID: 5466106080619531469}
   - component: {fileID: 5976125894065638362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (12)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
@@ -2124,7 +2144,7 @@ GameObject:
   - component: {fileID: 6465502417006623092}
   - component: {fileID: 8794506536972984141}
   - component: {fileID: 1635522466232205567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Gruond
   m_Icon: {fileID: 0}
