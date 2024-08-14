@@ -26,10 +26,18 @@ public class Status : MonoBehaviour
         //스페이스바 누르면 변화
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            hp -= 1;
+            if (hp > 0) //체력 음수 방지
+            {
+                hp -= 1;
+            }
+
             gold += 1;
             kill += 1;
-            mana -= 1;
+
+            if (mana > 0) // 마나 음수 방지
+            {
+                mana -= 1;
+            }
         }
     }
 }
