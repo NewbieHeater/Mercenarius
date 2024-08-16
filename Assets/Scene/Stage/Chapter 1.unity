@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 245415170}
   - component: {fileID: 245415173}
   - component: {fileID: 245415172}
-  - component: {fileID: 245415174}
   m_Layer: 5
   m_Name: health bar
   m_TagString: Untagged
@@ -447,19 +446,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245415169}
   m_CullTransparentMesh: 1
---- !u!114 &245415174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245415169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4763aa44de13236409a37948d2cc2924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barImage: {fileID: 245415172}
 --- !u!1 &246142744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1863671359}
   - component: {fileID: 1863671360}
+  - component: {fileID: 1863671361}
   m_Layer: 5
   m_Name: Status manager
   m_TagString: Untagged
@@ -1525,6 +1512,22 @@ MonoBehaviour:
   GoldText: {fileID: 6186217}
   KillText: {fileID: 2037536494}
   ManaText: {fileID: 1569143292}
+  enemyDamage: 10
+  SkillMana: 10
+--- !u!114 &1863671361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863671358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4763aa44de13236409a37948d2cc2924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamage: 10
+  barImage: {fileID: 245415172}
 --- !u!1 &1997530469
 GameObject:
   m_ObjectHideFlags: 0

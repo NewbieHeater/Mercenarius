@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Statusinformation : MonoBehaviour
 {
+    public int enemyDamage = 1;
+
     [SerializeField] private Image barImage;
 
     public void Awake()
@@ -16,7 +18,7 @@ public class Statusinformation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            barImage.fillAmount = barImage.fillAmount - 0.01f; //체력 감소
+            barImage.fillAmount = barImage.fillAmount - enemyDamage / 100f; //체력바 감소
         }
     }
 }
