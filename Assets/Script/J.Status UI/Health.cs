@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Statusinformation : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    public int enemyDamage = 1;
+    public int Damage = 1;
 
+    public static Health instance;
     [SerializeField] private Image barImage;
 
-    public void Awake()
+    private void Awake()
     {
         barImage.fillAmount = 1;
+
+        if (Health.instance == null)
+        {
+            Health.instance = this;
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            barImage.fillAmount = barImage.fillAmount - enemyDamage / 100f; //체력바 감소
+            barImage.fillAmount = barImage.fillAmount - Damage / 100f; //체력바 감소
         }
     }
 }

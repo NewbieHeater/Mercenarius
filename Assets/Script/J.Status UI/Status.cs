@@ -27,6 +27,12 @@ public class Status : MonoBehaviour
             Status.instance = this;
         }
     }
+
+    public void Start()
+    {
+        Health.instance.Damage = enemyDamage;
+    }
+
     void Update()
     {
         //텍스트로 표시

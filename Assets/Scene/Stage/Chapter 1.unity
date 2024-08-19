@@ -1523,10 +1523,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1863671358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4763aa44de13236409a37948d2cc2924, type: 3}
+  m_Script: {fileID: 11500000, guid: bbeb9edd49bf057478ef8e7c2cb62020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 10
+  Damage: 1
   barImage: {fileID: 245415172}
 --- !u!1 &1997530469
 GameObject:
