@@ -1512,8 +1512,8 @@ MonoBehaviour:
   GoldText: {fileID: 6186217}
   KillText: {fileID: 2037536494}
   ManaText: {fileID: 1569143292}
-  enemyDamage: 10
-  SkillMana: 10
+  enemyDamage: 5
+  SkillMana: 5
 --- !u!114 &1863671361
 MonoBehaviour:
   m_ObjectHideFlags: 0
