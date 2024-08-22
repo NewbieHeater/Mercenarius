@@ -111,4 +111,22 @@ public class InventoryMain : InventoryBase
         IsInventoryActive = false;
     }
 
+    /// <summary>
+    /// 해당 아이템을 획득할 수 있는가?
+    /// </summary>
+    /// <param name="item">획득하고자 하는 아이템</param>
+    /// <returns>획득이 가능한 해당 슬롯의 위치</returns>
+    public InventorySlot IsCanAquireItem(Item item)
+    {
+        foreach (InventorySlot slot in base.mSlots)
+        {
+            //비어있는 슬롯을 발견한경우
+            if (slot.Item == null) { return slot; }
+
+            //중첩이 가능한 아이템이 같은 아이템의 슬롯을 발견한경우
+            if (item.CanOverlap && slot.Item.Type == item.Type) { return slot; }
+        }
+
+        return null;
+    }
 }

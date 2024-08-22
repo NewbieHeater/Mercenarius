@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDataManager : InventoryBase
+public class ItemDataManager : MonoBehaviour
 {
-
-    void Start()
-    {
-        
-    }
-    
+    private string Name;
+    private string Description;
     public string GetName(int id)
     {
-        return mSlots[id].Item.name;
+        return Name;
     }
 
     public string GetDescription(int id)
     {
-        return mSlots[id].Item.Description;
+        return Description;
     }
 }

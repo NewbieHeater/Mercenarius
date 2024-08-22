@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -132,5 +133,13 @@ public class Item : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
         {
             return mItemDescription;
         }
+    }
+
+    public bool CheckEquipmentType(ItemType enums)
+    {
+        if (enums == ItemType.Equipment_HELMET || enums == ItemType.Equipment_ARMORPLATE || enums == ItemType.Equipment_GLOVE || enums == ItemType.Equipment_PANTS || enums == ItemType.Equipment_SHOES)
+            return true;
+        else
+            return false;
     }
 }

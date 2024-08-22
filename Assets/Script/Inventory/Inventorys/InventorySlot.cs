@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 
 /// <summary>
 /// 인벤토리 슬롯 하나를 담당
@@ -21,7 +20,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     }
 
     [Header("해당 슬롯에 어떠한 타입만 들어올 수 있는지 타입 마스크")]
-    [SerializeField] private ItemType mSlotMask;
+    [SerializeField] public ItemType mSlotMask;
     [SerializeField]
     private int mItemCount = 0; //획득한 아이템의 개수
 
@@ -262,7 +261,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         if (mItem != null)
         {
             Debug.Log(mItem.ItemID);
-            mItemDescription.OpenUI(mItem.ItemID);
+            mItemDescription.OpenUI(mItem.name, mItem.Description);
             mIsTooltipActive = true;
         }
     }
@@ -274,6 +273,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             mIsTooltipActive = false;
         }
     }
+    [SerializeField] private ItemDataManager mItemDataManager;
     public ItemDescription mItemDescription;
     private void Update()
     {

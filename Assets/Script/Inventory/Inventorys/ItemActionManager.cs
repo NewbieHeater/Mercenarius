@@ -1,4 +1,5 @@
 using UnityEngine;
+using static System.Net.WebRequestMethods;
 
 
 /// <summary>
@@ -17,13 +18,18 @@ public class ItemActionManager : MonoBehaviour
     [Header("Preloaded objects into the scene")]
     [SerializeField] private GameObject[] mObjects;
 
+    [Space(30)]
+    [Header("인벤토리")]
+    [SerializeField] private EquipmentInventory mEquipmentInventory;
+    [SerializeField] private InventoryMain mMainInventory;
+
     /// <summary>
     /// 아이템 사용 이벤트 호출
     /// 각 아이템마다 실행되는 기능을 수행
     /// </summary>
     /// <param name="item"></param>
     /// <returns>실행이 정상적으로 이루어 졌는가?</returns>
-    public bool UseItem(Item item)
+    public bool UseItem(Item item, InventorySlot calledSlot = null)
     {
         Debug.Log("UseItemEvent");
 
@@ -53,6 +59,50 @@ public class ItemActionManager : MonoBehaviour
                             }
                     }
 
+                    break;
+                }
+            case ItemType.Equipment_HELMET:
+            case ItemType.Equipment_ARMORPLATE:
+            case ItemType.Equipment_GLOVE:
+            case ItemType.Equipment_PANTS:
+            case ItemType.Equipment_SHOES:
+                {
+                    //case 1: 아이템 사용을 호출한 슬롯이 장비창이라면?
+                    //장비를 장착 해제해야한다
+                    if (item.CheckEquipmentType(calledSlot.mSlotMask))
+                    {
+                        //인벤토리 슬롯에서 아이템을 획득할 수 있는지 확인
+                        InventorySlot mainSlot = mMainInventory.IsCanAquireItem(item);
+
+                        if (mainSlot != null)
+                        {
+                            calledSlot.ClearSlot(); //장비 아이템을 장착 해제
+                            mMainInventory.AcquireItem(item, mainSlot); //현재 장비 아이템을 인벤토리에 획득
+                        }
+                    }
+                    //case 2: 아이템 사용을 호출한 슬롯이 인벤토리라면?
+                    //장비를 장착해야한다.
+                    else
+                    {
+                        //장비 인벤토리에서 현재 유형에 맞는 인벤토리 가져오기
+                        InventorySlot equipmentSlot = mEquipmentInventory.GetEquipmentSlot(item.Type);
+
+                        //이미 장착중인 아이템을 스왑을 위해 임시 저장
+                        Item tempItem = equipmentSlot.Item;
+
+                        //호출한 아이템으로 장비 아이템을 변경
+                        equipmentSlot.AddItem(item);
+
+                        //호출한 슬롯에 아이템을 추가(착용하던 기존 아이템)하거나 지움
+                        if (tempItem != null) { calledSlot.AddItem(tempItem); }
+                        else { calledSlot.ClearSlot(); }
+                    }
+
+                    //장비 착용 효과음 재생
+                    //SoundManager.Instance.PlaySound2D("Equipment " + SoundManager.Range(1, 2));
+
+                    //장비 효과 계산
+                    mEquipmentInventory.CalculateEffect();
                     break;
                 }
         }

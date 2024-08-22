@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b18e2874b084212448eea52a12ede42e, type: 3}
   m_Name: MPPotion
   m_EditorClassIdentifier: Assembly-CSharp::Item
   mItemID: 1
   mCanOverlap: 1
   mIsInteractivity: 1
   mIsConsumable: 1
-  mItemCooltime: 2
+  mItemCooltime: -1
   mItemType: 128
-  mItemImage: {fileID: 21300066, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
-  mItemDescription: Decrease Hp by 1
+  mItemImage: {fileID: 0}
+  mItemDescription: errq
