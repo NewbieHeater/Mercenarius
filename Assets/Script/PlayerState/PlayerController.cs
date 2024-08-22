@@ -11,6 +11,10 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("∞¥√º¿« Ω∫≈» ¡§∫∏")]
+    [SerializeField] 
+    public StatData StatData;
+
     public GameObject[] BasicAttackPrefab;
     public SOSkill Soskill;
 
