@@ -60,20 +60,24 @@ public class EquipmentInventory : InventoryBase
         {
             case ItemType.Equipment_HELMET:
                 {
+                    //장갑 슬롯은 두개이기때문에, 빈 슬롯을 우선으로 리턴하도록 한다.
+                    if (mSlots[0].Item == null) { return mSlots[0]; }
+                    if (mSlots[1].Item == null) { return mSlots[1]; }
+                    if (mSlots[2].Item == null) { return mSlots[2]; }
+                    if (mSlots[3].Item == null) { return mSlots[3]; }
+                    if (mSlots[4].Item == null) { return mSlots[4]; }
+                    if (mSlots[5].Item == null) { return mSlots[5]; }
+
+                    //둘다 빈 슬롯이 아닌경우 mSlot[2]를 리턴한다.
                     return mSlots[0];
                 }
             case ItemType.Equipment_ARMORPLATE:
                 {
-                    return mSlots[1];
+                    return mSlots[2];
                 }
             case ItemType.Equipment_GLOVE:
                 {
-                    //장갑 슬롯은 두개이기때문에, 빈 슬롯을 우선으로 리턴하도록 한다.
-                    if (mSlots[2].Item == null) { return mSlots[2]; }
-                    if (mSlots[3].Item == null) { return mSlots[3]; }
-
-                    //둘다 빈 슬롯이 아닌경우 mSlot[2]를 리턴한다.
-                    return mSlots[2];
+                    return mSlots[3];
                 }
             case ItemType.Equipment_PANTS:
                 {
@@ -94,7 +98,7 @@ public class EquipmentInventory : InventoryBase
         //옵션이 켜져있는경우 비활성화
         //if (GameMenuManager.IsOptionActive) { return; }
 
-        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Equipment")))
+        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Settings")))
         {
             if (mInventoryBase.activeInHierarchy)
             {

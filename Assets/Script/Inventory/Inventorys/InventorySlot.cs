@@ -59,6 +59,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         if (mItem.Type <= ItemType.Equipment_SHOES)
         {
             mTextCount.text = "";
+            
         }
         else
         {
@@ -228,10 +229,10 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
             //아이템 사용 함수 호출
             //만약 아이템 함수 호출인 상태에서 false가 리턴되면, 현재 사용 불가능 상태이기에 리턴한다.
-            if (!mItemActionManager.UseItem(mItem)) { return; }
+            if (!mItemActionManager.UseItem(mItem, this)) { return; }
 
             //아이템의 쿨타임이 설정되어있으면 쿨타임 적용
-            if (mItem.Cooltime > 0f) { ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime); }
+            if (mItem != null && mItem.Cooltime > 0f) { ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime); }
 
             //상호작용이 가능한(착용 가능한) 장비 아이템을 사용한경우?
             //if (mItem.Type >= ItemType.Equipment_HELMET && mItem.Type <= ItemType.Equipment_SHOES) { ChangeEquipmentSlot(); }

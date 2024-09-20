@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using UnityEngine.Events;
+
 
 
 
@@ -13,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("객체의 스탯 정보")]
     [SerializeField] 
-    public StatData StatData;
+    public StatData statData;
 
     public GameObject[] BasicAttackPrefab;
     public SOSkill Soskill;
@@ -32,9 +30,9 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("플레이어 능력치")]
-    public int maxHealth;
-    public int curHealth;
-    public int atkDamage;
+    public float maxHealth;
+    public float curHealth;
+    public float atkDamage;
     public float attackSpeed;
     public float orginSpeed;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
     public float curSpeed;
@@ -66,31 +64,30 @@ public class PlayerController : MonoBehaviour
     private StateMachine<PlayerController> stateMachinePlayer;
 
     public WeaponTypeCode weaponTypeCode;
-    public PlayerStat pStat;
     private void Awake()
     {
-        pStat = new PlayerStat();
-        pStat = pStat.SetUnitStat(weaponTypeCode);
+        statData.SetUnitStat(weaponTypeCode);
         spriteRender = GetComponentInChildren<SpriteRenderer>();
         agent = this.GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         agent.updateRotation = false;   //회전막기
     }
+    
     public string weaponType = "Null";
     void Start()
     {
         isInvincible = false;
 
-        weaponType = pStat.weaponName;              //무기타입
-        maxHealth = pStat.maxHp;                    //최대체력 설정
+        weaponType = statData.weaponName;              //무기타입
+        maxHealth = statData.maxHp;                    //최대체력 설정
         curHealth = maxHealth;                      //현재체력 초기화       
-        attackSpeed = pStat.AttackSpeed;            //공격속도        
-        orginSpeed = pStat.originalSpeed;           //이동속도
+        attackSpeed = statData.baseAttackSpeed;            //공격속도        
+        orginSpeed = statData.baseMovementSpeed;           //이동속도
         curSpeed = orginSpeed;                      //현재속도 설정
-        coolDownDash = pStat.originalDashCoolDown;  //대쉬 쿨타임        
-        dashPowerOrigin = pStat.originalDashPower;  //원래 대쉬거리
+        coolDownDash = statData.baseDashCoolDown;  //대쉬 쿨타임        
+        dashPowerOrigin = statData.baseDashPower;  //원래 대쉬거리
         dashPower = dashPowerOrigin;                //현재 대쉬거리
-        dashSpeedOrigin = pStat.originalDashSpeed;  //원래 대쉬속도
+        dashSpeedOrigin = statData.baseDashSpeed;  //원래 대쉬속도
         dashSpeed = dashSpeedOrigin;                //현재 대쉬속도
         agent.speed = orginSpeed;
 
@@ -109,8 +106,28 @@ public class PlayerController : MonoBehaviour
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
     public bool isAttack = false;
+    public Character character;
+    public BuffManager buffManager;
+    private void ApplyBuff(BuffType buffType)
+    {
+        BuffData buffData = buffManager.GetBuffData(buffType);
+        Debug.Log(buffType);
+        if (buffData != null)
+        {
+            Debug.Log("apllyedBuff");
+            character.ApplyBuff(buffData);
+        }
+    }
     void Update()
     {
+        atkDamage = statData.AttackCurrent;
+        curHealth = statData.HpCurrent;
+        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot2")))
+        {
+            ApplyBuff(BuffType.AttackIncrease);
+            ApplyBuff(BuffType.Bleed);
+            Debug.Log(character.AttackBuff);
+        }
         if (SettingSystem.isPause)
             return;
 

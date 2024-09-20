@@ -1,27 +1,59 @@
 using UnityEngine;
 
 [System.Serializable]
-public class StatData
+public class StatData 
 {
+    public WeaponTypeCode weaponTypeCode { get; set; }
+    public string weaponName { get; set; }
+    public float baseDashSpeed { get; set; }
+    public float baseDashPower { get; set; }
+    public float baseDashCoolDown { get; set; }
+    public void PlayerStatData(WeaponTypeCode weaponTypeCode, string weaponName, int maxHp, int baseAttack, float baseMovementSpeed, float baseAttackSpeed, float baseDashSpeed, float baseDashPower, float baseDashCoolDown)
+    {
+        this.weaponTypeCode = weaponTypeCode;
+        this.weaponName = weaponName;
+        this.maxHp = maxHp;
+        mHpCurrent = maxHp;
+        this.baseAttack = baseAttack;
+        this.baseMovementSpeed = baseMovementSpeed;
+        this.baseAttackSpeed = baseAttackSpeed;
+        this.baseDashSpeed = baseDashSpeed;
+        this.baseDashPower = baseDashPower;
+        this.baseDashCoolDown = baseDashCoolDown;
+    }
+    
+    public void SetUnitStat(WeaponTypeCode weaponTypeCode)
+    {
+        switch (weaponTypeCode)
+        {
+            case WeaponTypeCode.Spear: //이름, 최대체력, 공격력, 속도, 공격속도, 대쉬속도, 대쉬파워, 대쉬쿨타임 _순서
+                PlayerStatData(weaponTypeCode, "Spear", 150, 20, 5f, 4f, 6f, 4f, 2f);
+                break;
+            case WeaponTypeCode.Double_Dager:
+                PlayerStatData(weaponTypeCode, "Double_Dager", 100, 5, 4f, 1f, 6f, 5f, 2f);
+                break;
+            case WeaponTypeCode.Lance:
+                PlayerStatData(weaponTypeCode, "Lance", 100, 30, 4f, 8f, 5f, 5f, 2f);
+                break;
+        }
+    }
+
     [field: Header("초기화 시 레벨")]
     [field: SerializeField] public int level { private set; get; } = 1;
 
-
     [field: Header("초기화 시 최대 체력")]
-    [field: SerializeField] public float hpMax { private set; get; }
+    [field: SerializeField] public float maxHp { private set; get; }
     [SerializeField][HideInInspector] private float mHpCurrent;
     public float HpCurrent
     {
         get
         {
-            return mHpCurrent;
+            return mHpCurrent + buffController.HpBuff;
         }
     }
 
-
-
     [field: Header("초기화 시 최대 마나")]
-    [field: SerializeField] public float mpMax { private set; get; }
+    [field: SerializeField] public float maxMp { private set; get; }
     [SerializeField][HideInInspector] private float mMpCurrent;
     public float MpCurrent
     {
@@ -31,11 +63,8 @@ public class StatData
         }
     }
 
-
-
     [field: Header("초기화 시 기본 공격력")]
     [field: SerializeField] public float baseAttack { private set; get; }
-
     /// <summary>
     /// 현재 공격력
     /// </summary>
@@ -43,16 +72,25 @@ public class StatData
     {
         get
         {
-            return baseAttack + buffController.BuffStat.damage +
-            (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f);
+            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) * buffController.AttackBuff);
         }
     }
 
-
+    [field: Header("초기화 시 기본 공격속도")]
+    [field: SerializeField] public float baseAttackSpeed { private set; get; }
+    /// <summary>
+    /// 현재 공격속도
+    /// </summary>
+    public float AttackSpeedCurrent
+    {
+        get
+        {
+            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) * buffController.AttackBuff);
+        }
+    }
 
     [field: Header("초기화 시 기본 이동속도")]
     [field: SerializeField] public float baseMovementSpeed { private set; get; }
-
     /// <summary>
     /// 현재 이동속도
     /// </summary>
@@ -60,7 +98,7 @@ public class StatData
     {
         get
         {
-            return baseMovementSpeed + buffController.BuffStat.movementSpeed +
+            return baseMovementSpeed + buffController.MovementSpeedBuff +
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
@@ -69,7 +107,6 @@ public class StatData
 
     [field: Header("초기화 시 기본 방어력")]
     [field: SerializeField] public float baseDefense { private set; get; }
-
     /// <summary>
     /// 현재 방어력
     /// </summary>
@@ -77,7 +114,7 @@ public class StatData
     {
         get
         {
-            return baseDefense + buffController.BuffStat.defense +
+            return baseDefense + buffController.DefenseBuff +
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
@@ -86,7 +123,7 @@ public class StatData
 
     #region 외부 클래스
 
-    [HideInInspector] public BuffController buffController = new BuffController(); // 버프 컨트롤러 (모두에게 고유)
+    public Character buffController; // 버프 컨트롤러 (모두에게 고유)
 
     [Space(30)]
     [Header("외부 클래스를 참조하여 스탯에 추가 효과")]
@@ -102,8 +139,8 @@ public class StatData
     /// </summary>
     public void InitStatData()
     {
-        mHpCurrent = mHpCurrent == 0 ? hpMax : mHpCurrent;
-        mMpCurrent = mMpCurrent == 0 ? mpMax : mMpCurrent;
+        mHpCurrent = mHpCurrent == 0 ? maxMp : mHpCurrent;
+        mMpCurrent = mMpCurrent == 0 ? maxHp : mMpCurrent;
     }
 
     /// <summary>
@@ -114,7 +151,7 @@ public class StatData
     public bool ModifyCurrentHp(float amount)
     {
         mHpCurrent += amount;
-        mHpCurrent = Mathf.Clamp(mHpCurrent, float.MinValue, hpMax);
+        mHpCurrent = Mathf.Clamp(mHpCurrent, float.MinValue, maxHp);
 
         return mHpCurrent < 0f;
     }
@@ -126,7 +163,7 @@ public class StatData
     public void ModifyCurrentMp(float amount)
     {
         mMpCurrent += amount;
-        mMpCurrent = Mathf.Clamp(mMpCurrent, float.MinValue, mpMax);
+        mMpCurrent = Mathf.Clamp(mMpCurrent, float.MinValue, maxMp);
     }
 
     /// <summary>

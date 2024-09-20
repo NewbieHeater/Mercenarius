@@ -135,11 +135,8 @@ public class Item : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
         }
     }
 
-    public bool CheckEquipmentType(ItemType enums)
+    public static bool CheckEquipmentType(ItemType type)
     {
-        if (enums == ItemType.Equipment_HELMET || enums == ItemType.Equipment_ARMORPLATE || enums == ItemType.Equipment_GLOVE || enums == ItemType.Equipment_PANTS || enums == ItemType.Equipment_SHOES)
-            return true;
-        else
-            return false;
+        return type >= ItemType.Equipment_HELMET && type <= ItemType.Equipment_SHOES;
     }
 }

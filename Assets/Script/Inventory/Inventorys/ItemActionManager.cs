@@ -69,7 +69,7 @@ public class ItemActionManager : MonoBehaviour
                 {
                     //case 1: 아이템 사용을 호출한 슬롯이 장비창이라면?
                     //장비를 장착 해제해야한다
-                    if (item.CheckEquipmentType(calledSlot.mSlotMask))
+                    if (Item.CheckEquipmentType(calledSlot.mSlotMask))
                     {
                         //인벤토리 슬롯에서 아이템을 획득할 수 있는지 확인
                         InventorySlot mainSlot = mMainInventory.IsCanAquireItem(item);
@@ -77,13 +77,15 @@ public class ItemActionManager : MonoBehaviour
                         if (mainSlot != null)
                         {
                             calledSlot.ClearSlot(); //장비 아이템을 장착 해제
-                            mMainInventory.AcquireItem(item, mainSlot); //현재 장비 아이템을 인벤토리에 획득
+                            //mMainInventory.AcquireItem(item, mainSlot); //현재 장비 아이템을 인벤토리에 획득
                         }
                     }
                     //case 2: 아이템 사용을 호출한 슬롯이 인벤토리라면?
                     //장비를 장착해야한다.
                     else
                     {
+                        Debug.Log("give");
+                        Debug.Log(item);
                         //장비 인벤토리에서 현재 유형에 맞는 인벤토리 가져오기
                         InventorySlot equipmentSlot = mEquipmentInventory.GetEquipmentSlot(item.Type);
 

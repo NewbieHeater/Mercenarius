@@ -71,6 +71,7 @@ public class InventoryMain : InventoryBase
             if (mSlots[i].Item == null && mSlots[i].IsMask(item))
             {
                 mSlots[i].AddItem(item, count);
+                mSlots[i].UseItem();
                 return;
             }
         }

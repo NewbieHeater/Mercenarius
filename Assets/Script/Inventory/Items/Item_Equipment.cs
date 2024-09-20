@@ -20,6 +20,16 @@ public struct EquipmentEffect
         }
     }
 
+    [Header("추가 체력")]
+    [SerializeField] private float mHp;
+    public float Hp
+    {
+        get
+        {
+            return mHp;
+        }
+    }
+
     [Header("추가 방어력")]
     [SerializeField] private float mDefense;
     public float Defense
@@ -30,12 +40,24 @@ public struct EquipmentEffect
         }
     }
 
+    [Header("추가 이동속도")]
+    [SerializeField] private float mSpeed;
+    public float Speed
+    {
+        get
+        {
+            return mSpeed;
+        }
+    }
+
     public static EquipmentEffect operator +(EquipmentEffect param1, EquipmentEffect param2)
     {
         EquipmentEffect calcedEffect;
 
         calcedEffect.mDamage = param1.mDamage + param2.mDamage;
+        calcedEffect.mHp = param1.mHp + param2.mHp;
         calcedEffect.mDefense = param1.mDefense + param2.mDefense;
+        calcedEffect.mSpeed = param1.mSpeed + param2.mSpeed;
 
         return calcedEffect;
     }
