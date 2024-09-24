@@ -20,23 +20,19 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight = true;
 
 
-    [Header("플레이어 대쉬관련 능력치")]
     private bool dashUpGrade;
     public float coolDownDash;
     public float dashPowerOrigin;
     public float dashPower;
     public float dashSpeedOrigin;
     public float dashSpeed;
-
-
-    [Header("플레이어 능력치")]
-    public float maxHealth;
-    public float curHealth;
-    public float atkDamage;
-    public float attackSpeed;
-    public float orginSpeed;        //나중에 플레이어가 느려지는 상황 대비해서 원래 속도와 현재속도 구별
-    public float curSpeed;
-
+    
+    public float maxHealth { get { return statData.maxHp; } }
+    public float curHealth { get { return statData.HpCurrent; } }
+    public float atkDamage { get { return statData.AttackCurrent; } }
+    public float attackSpeed { get { return statData.AttackSpeedCurrent; } }
+    public float curSpeed { get { return statData.MovementSpeedCurrent; } }
+    public float atkDamages;
     [Header("미구현")]
     public GameObject weaponHitBox;
     private SpriteRenderer spriteRender;
@@ -76,20 +72,15 @@ public class PlayerController : MonoBehaviour
     public string weaponType = "Null";
     void Start()
     {
+        character = GetComponent<Character>();
         isInvincible = false;
-
-        weaponType = statData.weaponName;              //무기타입
-        maxHealth = statData.maxHp;                    //최대체력 설정
-        curHealth = maxHealth;                      //현재체력 초기화       
-        attackSpeed = statData.baseAttackSpeed;            //공격속도        
-        orginSpeed = statData.baseMovementSpeed;           //이동속도
-        curSpeed = orginSpeed;                      //현재속도 설정
+                 //현재속도 설정
         coolDownDash = statData.baseDashCoolDown;  //대쉬 쿨타임        
         dashPowerOrigin = statData.baseDashPower;  //원래 대쉬거리
         dashPower = dashPowerOrigin;                //현재 대쉬거리
         dashSpeedOrigin = statData.baseDashSpeed;  //원래 대쉬속도
         dashSpeed = dashSpeedOrigin;                //현재 대쉬속도
-        agent.speed = orginSpeed;
+        agent.speed = curSpeed;
 
         IState<PlayerController> idle = gameObject.AddComponent<PlayerIdleState>();
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
@@ -106,26 +97,14 @@ public class PlayerController : MonoBehaviour
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
     public bool isAttack = false;
-    public Character character;
-    public BuffManager buffManager;
-    private void ApplyBuff(BuffType buffType)
-    {
-        BuffData buffData = buffManager.GetBuffData(buffType);
-        Debug.Log(buffType);
-        if (buffData != null)
-        {
-            Debug.Log("apllyedBuff");
-            character.ApplyBuff(buffData);
-        }
-    }
+    Character character;
+
     void Update()
     {
-        atkDamage = statData.AttackCurrent;
-        curHealth = statData.HpCurrent;
+        atkDamages = atkDamage;
         if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot2")))
         {
-            ApplyBuff(BuffType.AttackIncrease);
-            ApplyBuff(BuffType.Bleed);
+            character.ApplyBuff(new AttackBuff(10f, 20f)); // 10초 동안 공격력 +20
             Debug.Log(character.AttackBuff);
         }
         if (SettingSystem.isPause)

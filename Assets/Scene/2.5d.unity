@@ -2888,11 +2888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statData:
-    <level>k__BackingField: 0
-    <maxHp>k__BackingField: 0
+    <mMaxHp>k__BackingField: 0
     mHpCurrent: 0
-    <maxMp>k__BackingField: 0
-    mMpCurrent: 0
     <baseAttack>k__BackingField: 0
     <baseAttackSpeed>k__BackingField: 0
     <baseMovementSpeed>k__BackingField: 0
@@ -2908,12 +2905,7 @@ MonoBehaviour:
   dashPower: 4
   dashSpeedOrigin: 0
   dashSpeed: 5
-  maxHealth: 100
-  curHealth: 0
-  atkDamage: 1
-  attackSpeed: 0
-  orginSpeed: 5
-  curSpeed: 0
+  atkDamages: 0
   weaponHitBox: {fileID: 1335768248}
   isInvincible: 0
   imgIcon: {fileID: 350184141}
@@ -2921,8 +2913,6 @@ MonoBehaviour:
   weaponTypeCode: 0
   weaponType: Null
   isAttack: 0
-  character: {fileID: 371761090}
-  buffManager: {fileID: 624916565}
 --- !u!65 &371761088
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2971,9 +2961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba76939e9ecdcd40a4f5a6bce408944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffIconParent: {fileID: 1353973518}
-  buffIconPrefab: {fileID: 1847281676284817969, guid: 58b764027ea0dce4bafe7cabc1b2237f,
-    type: 3}
+  MovementSpeedBuff: 0
+  DefenseBuff: 0
 --- !u!1 &374394933
 GameObject:
   m_ObjectHideFlags: 0

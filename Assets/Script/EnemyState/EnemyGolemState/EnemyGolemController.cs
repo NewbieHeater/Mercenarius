@@ -55,6 +55,7 @@ public class EnemyGolemController : MonoBehaviour
     }
     void Start()
     {
+        character = GetComponent<Character>();
         //GetComponentInParent
         //AttackPoint = transform.GetChild(0);
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -103,9 +104,14 @@ public class EnemyGolemController : MonoBehaviour
         curHealth = maxHealth;
         isLive = true;
     }
-
+    Character character;
     void Update()
     {
+        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot2")))
+        {
+            character.ApplyBuff(new BleedBuff(10f, 5f, 5f)); // 10초 동안 공격력 +20
+            Debug.Log(character.AttackBuff);
+        }
         if (curHealth <= 0)
         {
             //onPlayerDead.Invoke();

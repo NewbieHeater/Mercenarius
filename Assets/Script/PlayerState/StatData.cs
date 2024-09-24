@@ -12,7 +12,7 @@ public class StatData
     {
         this.weaponTypeCode = weaponTypeCode;
         this.weaponName = weaponName;
-        this.maxHp = maxHp;
+        this.mMaxHp = maxHp;
         mHpCurrent = maxHp;
         this.baseAttack = baseAttack;
         this.baseMovementSpeed = baseMovementSpeed;
@@ -38,30 +38,24 @@ public class StatData
         }
     }
 
-    [field: Header("초기화 시 레벨")]
-    [field: SerializeField] public int level { private set; get; } = 1;
-
     [field: Header("초기화 시 최대 체력")]
-    [field: SerializeField] public float maxHp { private set; get; }
-    [SerializeField][HideInInspector] private float mHpCurrent;
-    public float HpCurrent
+    [field: SerializeField] public float mMaxHp { private set; get; }
+    public float maxHp
     {
         get
         {
-            return mHpCurrent + buffController.HpBuff;
+            return ((mMaxHp + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Hp : 0f)) + buffController.HpBuff);
         }
+    }
+    [SerializeField][HideInInspector] private float mHpCurrent;
+    public float HpCurrent 
+    { 
+        get 
+        { 
+            return mHpCurrent; 
+        } 
     }
 
-    [field: Header("초기화 시 최대 마나")]
-    [field: SerializeField] public float maxMp { private set; get; }
-    [SerializeField][HideInInspector] private float mMpCurrent;
-    public float MpCurrent
-    {
-        get
-        {
-            return mMpCurrent;
-        }
-    }
 
     [field: Header("초기화 시 기본 공격력")]
     [field: SerializeField] public float baseAttack { private set; get; }
@@ -72,7 +66,7 @@ public class StatData
     {
         get
         {
-            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) * buffController.AttackBuff);
+            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) + buffController.AttackBuff);
         }
     }
 
@@ -85,7 +79,7 @@ public class StatData
     {
         get
         {
-            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) * buffController.AttackBuff);
+            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) + buffController.AttackBuff);
         }
     }
 
@@ -139,8 +133,7 @@ public class StatData
     /// </summary>
     public void InitStatData()
     {
-        mHpCurrent = mHpCurrent == 0 ? maxMp : mHpCurrent;
-        mMpCurrent = mMpCurrent == 0 ? maxHp : mMpCurrent;
+        mHpCurrent = mHpCurrent == 0 ? maxHp : mHpCurrent;
     }
 
     /// <summary>
@@ -154,16 +147,6 @@ public class StatData
         mHpCurrent = Mathf.Clamp(mHpCurrent, float.MinValue, maxHp);
 
         return mHpCurrent < 0f;
-    }
-
-    /// <summary>
-    /// 현재 마나를 조정
-    /// </summary>
-    /// <param name="amount">조정할 값 (양수일경우 현재 마나 증가)</param>
-    public void ModifyCurrentMp(float amount)
-    {
-        mMpCurrent += amount;
-        mMpCurrent = Mathf.Clamp(mMpCurrent, float.MinValue, maxMp);
     }
 
     /// <summary>

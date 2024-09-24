@@ -51,6 +51,8 @@ public class BuffData : ScriptableObject
 }
 public enum BuffType
 {
+    HpRegen,
+    Slow,
     AttackIncrease,
     Bleed,
     // 여기에 추가적인 버프 타입들을 정의합니다.
