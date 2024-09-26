@@ -12,6 +12,7 @@ TagManager:
   - Item
   - NPC
   - Ground
+  - Gruond Spawn
   layers:
   - Default
   - TransparentFX
