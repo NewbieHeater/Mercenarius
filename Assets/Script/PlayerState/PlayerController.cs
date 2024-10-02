@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         Attack,
         Dash,
         Roll,
-        SkillAttack1
+        SpearThrow
     }
 
     //public string[] strings = ;
@@ -87,12 +87,14 @@ public class PlayerController : MonoBehaviour
         IState<PlayerController> attack = gameObject.AddComponent<PlayerAttackState>();
         IState<PlayerController> dash = gameObject.AddComponent<PlayerDashState>();
         IState<PlayerController> roll = gameObject.AddComponent<PlayerRollState>();
+        IState<PlayerController> spearThrow = gameObject.AddComponent<PlayerSpearThrowState>();
 
         dicState.Add(PlayerState.Idle, idle);
         dicState.Add(PlayerState.Move, move);
         dicState.Add(PlayerState.Attack, attack);
         dicState.Add(PlayerState.Dash, dash);
         dicState.Add(PlayerState.Roll, roll);
+        dicState.Add(PlayerState.SpearThrow, spearThrow);
 
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
@@ -127,6 +129,10 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Dash]);
                 }
+                else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot1")))
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.SpearThrow]);
+                }
                 else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !isAttack)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
@@ -139,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
+                
                 //else if (!isInvincible)
                 break;
             case PlayerMoveState:
@@ -188,6 +195,17 @@ public class PlayerController : MonoBehaviour
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
                 break;
+            case PlayerSpearThrowState:
+                if(Input.GetMouseButtonDown(0) && anim.GetBool("Dash") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Move]);
+                }
+                else if (anim.GetBool("Run") == false && anim.GetBool("Dash") == false && anim.GetBool("Attack") == false)
+                {
+                    stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
+                }
+                break;
+
         }
         stateMachinePlayer.DoOperateUpdate();
     }
