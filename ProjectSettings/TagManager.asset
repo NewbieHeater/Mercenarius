@@ -13,6 +13,7 @@ TagManager:
   - NPC
   - Ground
   - Gruond Spawn
+  - Rooms
   layers:
   - Default
   - TransparentFX
