@@ -92,10 +92,12 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     {
         Vector3 mousePosition = _playerController.CheckGround(Input.mousePosition);
         Vector3 dashDestDir = (mousePosition - transform.position).normalized;
-
-        if (Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower, 1 << LayerMask.NameToLayer("Wall")))
+        if (mousePosition == null)
+            return;
+        Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower, 1 << LayerMask.NameToLayer("Wall"));
+        if(dashHit.collider != null)
         {
-            _playerController.dashPower = dashHit.distance - 0.3f;    //벽 거리만큼 대쉬 거리 줄임
+            _playerController.dashPower = dashHit.distance - 0.35f;    //벽 거리만큼 대쉬 거리 줄임
             _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
         }
         else
@@ -103,7 +105,6 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
             _playerController.dashPower = _playerController.dashPowerOrigin;
             _playerController.dashSpeed = _playerController.dashSpeedOrigin;
         }
-
         dashDest = transform.position + dashDestDir * _playerController.dashPower;
         curPosition = transform.position;
     }

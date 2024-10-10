@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 5371005607784840162}
   - component: {fileID: 5070235987053252998}
   - component: {fileID: 942677648532263242}
+  - component: {fileID: 4344134075139428802}
   - component: {fileID: 5407671749364541576}
   - component: {fileID: 539613084523375591}
   m_Layer: 7
@@ -644,6 +645,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &4344134075139428802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937843225039185342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba76939e9ecdcd40a4f5a6bce408944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeedBuff: 0
+  DefenseBuff: 0
+  buffIconParent: {fileID: 2812080982795429227}
+  buffIconPrefab: {fileID: 5586784338769557547}
 --- !u!114 &5407671749364541576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,15 +679,10 @@ MonoBehaviour:
   enemytype: Null
   Hpbar: {fileID: 2594051545989174653}
   AttackPoint: {fileID: 8658709359887203292}
-  sprite: {fileID: 0}
   onPlayerDead:
     m_PersistentCalls:
       m_Calls: []
-  enemyRb: {fileID: 0}
   target: {fileID: 0}
-  nav: {fileID: 0}
-  navObs: {fileID: 0}
-  anim: {fileID: 8993636834367881995}
   unitCode: 0
 --- !u!136 &539613084523375591
 CapsuleCollider:
