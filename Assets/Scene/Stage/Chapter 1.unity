@@ -985,9 +985,13 @@ MonoBehaviour:
   - {fileID: 2189814581114167332, guid: 976fa07eac023b54e8cb2c8418e5e2fb, type: 3}
   leftRooms:
   - {fileID: 3640094005734458977, guid: 35d526767f75d4b4db213ac016356fcb, type: 3}
-  - {fileID: 6740823397258301632, guid: f29b36e45ee9d5142af1796871049636, type: 3}
   - {fileID: 8745224193714061377, guid: 76f560cecac6998408ccd89689157b8e, type: 3}
   - {fileID: 114863481437303977, guid: 8f8e1f1d182c48e4b8b3fa949943e947, type: 3}
+  - {fileID: 6740823397258301632, guid: f29b36e45ee9d5142af1796871049636, type: 3}
+  horizontalRoad:
+  - {fileID: 697683369526309983, guid: 9fd1660136b21584dab532f2a365c44f, type: 3}
+  verticalRoad:
+  - {fileID: 6607502946163434777, guid: 7872d0c4e96594641b2fb1f17b0be1bd, type: 3}
 --- !u!4 &936428187
 Transform:
   m_ObjectHideFlags: 0

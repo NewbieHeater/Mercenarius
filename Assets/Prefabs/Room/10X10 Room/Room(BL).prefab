@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8097126788071214150}
   - component: {fileID: 571788522671979460}
   m_Layer: 0
-  m_Name: Gruond Spawn 3
-  m_TagString: Gruond Spawn
+  m_Name: Road Spawn 3
+  m_TagString: Road Spawn
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 6384970402709181038}
   - component: {fileID: 3923677197283603314}
   m_Layer: 0
-  m_Name: Gruond Spawn 4
-  m_TagString: Gruond Spawn
+  m_Name: Road Spawn 4
+  m_TagString: Road Spawn
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

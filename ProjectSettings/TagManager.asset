@@ -12,8 +12,8 @@ TagManager:
   - Item
   - NPC
   - Ground
-  - Gruond Spawn
   - Rooms
+  - Road Spawn
   layers:
   - Default
   - TransparentFX
