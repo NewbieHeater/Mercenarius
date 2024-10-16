@@ -8,13 +8,15 @@ public class PlayerSpearThrowState : MonoBehaviour, IState<PlayerController>
     private PlayerController _playerController;
 
     Queue<object> queue = new Queue<object>();
-
+    float spearExistTime = 3f;
     public void OperateEnter(PlayerController sender)
     {
         _playerController = sender;
-        Vector3 SpearStartPosition = new Vector3(transform.position.x, 0.5f, transform.position.z);
         Vector3 mousePosition = _playerController.CheckGround(Input.mousePosition);
-        StartCoroutine(MovePrefab(SpearStartPosition, SpearStartPosition + (mousePosition - transform.position).normalized * 5));
+        Vector3 SpearStartPosition = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        Vector3 SpearEndPosition = new Vector3(SpearStartPosition.x + (mousePosition-SpearStartPosition).normalized.x * 5, 0.5f, SpearStartPosition.z + (mousePosition-SpearStartPosition).normalized.z * 5);
+
+        StartCoroutine(MovePrefab(SpearStartPosition, SpearEndPosition));
     }
 
     public void OperateUpdate(PlayerController sender)
@@ -42,12 +44,12 @@ public class PlayerSpearThrowState : MonoBehaviour, IState<PlayerController>
             float t = elapsedTime / 0.2f;
             // 프리팹을 목적지로 이동
             spear.transform.position = Vector3.Lerp(startPos, endPos, t);
-
+            
             // 경과 시간 업데이트
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(spearExistTime);
         queue.Dequeue();
         spear.SetActive(false);
     }

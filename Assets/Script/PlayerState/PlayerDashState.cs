@@ -15,7 +15,9 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     private Vector3 dashDest;
     private Vector3 curPosition;
     private RaycastHit dashHit;
-    
+
+    float dashPower = 0;
+    float dashSpeed = 0;
     private float time = 0;
     
     public void OperateEnter(PlayerController sender)
@@ -25,7 +27,7 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
 
-        StartCoroutine(CoolDown(_playerController.coolDownDash, _playerController.imgCool));
+        StartCoroutine(CoolDown(_playerController.statData.curDashCoolDown, _playerController.imgCool));
 
         _playerController.isAttack = false;
         _playerController.isInvincible = true;
@@ -52,13 +54,13 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     
     public void OperateUpdate(PlayerController sender)
     {
-        if(time >= (1f / _playerController.dashSpeed))
+        if(time >= (1f / _playerController.statData.curDashSpeed))
         {
             anim.SetBool("Dash", false);
             return;
         }
             
-        transform.position = Vector3.Lerp(curPosition, dashDest, time * _playerController.dashSpeed);
+        transform.position = Vector3.Lerp(curPosition, dashDest, time * dashSpeed);
         time += Time.deltaTime;
     }
 
@@ -66,8 +68,6 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
     {
         agent.enabled = true;
         _playerController.isInvincible = false;
-        _playerController.dashPower = _playerController.dashPowerOrigin;
-        _playerController.dashSpeed = _playerController.dashSpeedOrigin;
     }
 
     IEnumerator CoolDown(float cool, Image coolDownSkill)
@@ -94,18 +94,18 @@ public class PlayerDashState : MonoBehaviour, IState<PlayerController>
         Vector3 dashDestDir = (mousePosition - transform.position).normalized;
         if (mousePosition == null)
             return;
-        Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.dashPower, 1 << LayerMask.NameToLayer("Wall"));
+        Physics.Raycast(transform.position, dashDestDir, out dashHit, _playerController.statData.curDashPower, 1 << LayerMask.NameToLayer("Wall"));
         if(dashHit.collider != null)
         {
-            _playerController.dashPower = dashHit.distance - 0.35f;    //벽 거리만큼 대쉬 거리 줄임
-            _playerController.dashSpeed = dashHit.distance + _playerController.dashSpeed;
+            dashPower = dashHit.distance - 0.35f;    //벽 거리만큼 대쉬 거리 줄임
+            dashSpeed = dashHit.distance + _playerController.statData.curDashSpeed;
         }
         else
         {
-            _playerController.dashPower = _playerController.dashPowerOrigin;
-            _playerController.dashSpeed = _playerController.dashSpeedOrigin;
+            dashPower = _playerController.statData.curDashPower;
+            dashSpeed = _playerController.statData.curDashSpeed;
         }
-        dashDest = transform.position + dashDestDir * _playerController.dashPower;
+        dashDest = transform.position + dashDestDir * dashPower;
         curPosition = transform.position;
     }
 }

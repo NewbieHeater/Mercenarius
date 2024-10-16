@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,7 @@ public class PlayerMoveState : MonoBehaviour, IState<PlayerController>
         if (!anim) anim = GetComponentInChildren<Animator>();
         if (!spot) spot = GameObject.Find("Spot");
 
+        agent.speed = _playerController.statData.baseMovementSpeed;
         prevPosition = transform.position;
         Move();
     }

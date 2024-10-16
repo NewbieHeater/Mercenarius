@@ -6,33 +6,27 @@ using UnityEngine.AI;
 public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 {
     private EnemyGolemController _golemController;
-    private NavMeshAgent nav;
+    private NavMeshAgent agent;
     private Animator anim;
-    private Transform Rotation;
-    private Rigidbody enemyRb;
     private SpriteRenderer sprite;
 
     public void OperateEnter(EnemyGolemController sender)
     {
         _golemController = sender;
         
-        if (!nav) nav = GetComponent<NavMeshAgent>();
+        if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
-        if (!enemyRb) enemyRb = GetComponent<Rigidbody>();
         if (!sprite) sprite = GetComponentInChildren<SpriteRenderer>();
 
-        sprite.flipX = _golemController.target.transform.position.x < enemyRb.position.x;
+        sprite.flipX = _golemController.target.transform.position.x < transform.position.x;
 
         _golemController.MoveAble = false;
-        nav.avoidancePriority = 96;
-        //_monsterController.navObs.enabled = true;
-        //_monsterController.navObs.carving = true;
-        //Debug.Log("근접 공격");
+        agent.avoidancePriority = 96;
         StartCoroutine(Fire());
     }
     IEnumerator Fire()
     {
-        sprite.flipX = _golemController.target.transform.position.x < enemyRb.position.x;
+        sprite.flipX = _golemController.target.transform.position.x < transform.position.x;
         _golemController.AttackPoint.LookAt(_golemController.target.transform);
 
         yield return new WaitForSeconds(_golemController.beforCastDelay);
@@ -49,6 +43,6 @@ public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
     public void OperateExit(EnemyGolemController sender)
     {
         StopAllCoroutines();
-        nav.avoidancePriority = 98;
+        agent.avoidancePriority = 98;
     }
 }

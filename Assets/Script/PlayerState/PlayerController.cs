@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 
@@ -10,31 +11,20 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header("객체의 스탯 정보")]
-    [SerializeField] 
-    public StatData statData;
-
+    [SerializeField]
+    //public StatData statData;
     public GameObject[] BasicAttackPrefab;
     public SOSkill Soskill;
+    public bool isAttack = false;
+    private BuffController buffController;
+    public StatData statData;
 
-    
     public bool isFacingRight = true;
 
 
-    private bool dashUpGrade;
-    public float coolDownDash;
-    public float dashPowerOrigin;
-    public float dashPower;
-    public float dashSpeedOrigin;
-    public float dashSpeed;
-    
-    public float maxHealth { get { return statData.maxHp; } }
-    public float curHealth { get { return statData.HpCurrent; } }
-    public float atkDamage { get { return statData.AttackCurrent; } }
-    public float attackSpeed { get { return statData.AttackSpeedCurrent; } }
-    public float curSpeed { get { return statData.MovementSpeedCurrent; } }
-    public float atkDamages;
     [Header("미구현")]
     public GameObject weaponHitBox;
+    public Rigidbody rigid;
     private SpriteRenderer spriteRender;
     private NavMeshAgent agent;          //네비매쉬
     private Animator anim;
@@ -62,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public WeaponTypeCode weaponTypeCode;
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
+        statData = new StatData();
         statData.SetUnitStat(weaponTypeCode);
         spriteRender = GetComponentInChildren<SpriteRenderer>();
         agent = this.GetComponent<NavMeshAgent>();
@@ -72,15 +64,9 @@ public class PlayerController : MonoBehaviour
     public string weaponType = "Null";
     void Start()
     {
-        character = GetComponent<Character>();
+        buffController = gameObject.AddComponent<BuffController>();
+        buffController.Initialize(statData);
         isInvincible = false;
-                 //현재속도 설정
-        coolDownDash = statData.baseDashCoolDown;  //대쉬 쿨타임        
-        dashPowerOrigin = statData.baseDashPower;  //원래 대쉬거리
-        dashPower = dashPowerOrigin;                //현재 대쉬거리
-        dashSpeedOrigin = statData.baseDashSpeed;  //원래 대쉬속도
-        dashSpeed = dashSpeedOrigin;                //현재 대쉬속도
-        agent.speed = curSpeed;
 
         IState<PlayerController> idle = gameObject.AddComponent<PlayerIdleState>();
         IState<PlayerController> move = gameObject.AddComponent<PlayerMoveState>();
@@ -98,17 +84,19 @@ public class PlayerController : MonoBehaviour
 
         stateMachinePlayer = new StateMachine<PlayerController>(this, dicState[PlayerState.Idle]);
     }
-    public bool isAttack = false;
-    Character character;
+    
 
     void Update()
     {
-        atkDamages = atkDamage;
         if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot2")))
         {
-            character.ApplyBuff(new AttackBuff(10f, 20f)); // 10초 동안 공격력 +20
-            Debug.Log(character.AttackBuff);
+            Buff attackBuff = new Buff(BuffType.AttackBuff, 10.0f, 10.0f);
+            buffController.AddBuff(attackBuff);
+            Buff bleedDebuff = new Buff(BuffType.Bleed, -2.0f, 5.0f, false, 1.0f);
+            buffController.AddBuff(bleedDebuff);
         }
+        //Debug.Log(statData.AttackCurrent);
+        //Debug.Log(statData.HpCurrent);
         if (SettingSystem.isPause)
             return;
 
@@ -224,27 +212,4 @@ public class PlayerController : MonoBehaviour
         else
             return transform.position;
     }
-
-    //private Coroutine checkAttackReInputCor;
-    //public int comboCount;
-    //public void CheckAttackReInput(float reInputTime)
-    //{
-    //    if (checkAttackReInputCor != null)
-    //        StopCoroutine(checkAttackReInputCor);
-    //    checkAttackReInputCor = StartCoroutine(CheckAttackReInputCoroutine(reInputTime));
-    //}
-    //private IEnumerator CheckAttackReInputCoroutine(float reInputTime)
-    //{
-    //    float currentTime = 0f;
-    //    while (true)
-    //    {
-    //        currentTime += Time.deltaTime;
-    //        if (currentTime >= reInputTime)
-    //            break;
-    //        yield return null;
-    //    }
-
-    //    comboCount = 0;
-    //    anim.SetInteger("AttackCombo", 0);
-    //}
 }

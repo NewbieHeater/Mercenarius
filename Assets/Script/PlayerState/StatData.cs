@@ -5,9 +5,6 @@ public class StatData
 {
     public WeaponTypeCode weaponTypeCode { get; set; }
     public string weaponName { get; set; }
-    public float baseDashSpeed { get; set; }
-    public float baseDashPower { get; set; }
-    public float baseDashCoolDown { get; set; }
     public void PlayerStatData(WeaponTypeCode weaponTypeCode, string weaponName, int maxHp, int baseAttack, float baseMovementSpeed, float baseAttackSpeed, float baseDashSpeed, float baseDashPower, float baseDashCoolDown)
     {
         this.weaponTypeCode = weaponTypeCode;
@@ -44,7 +41,7 @@ public class StatData
     {
         get
         {
-            return ((mMaxHp + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Hp : 0f)) + buffController.HpBuff);
+            return ((mMaxHp + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Hp : 0f)) );
         }
     }
     [SerializeField][HideInInspector] private float mHpCurrent;
@@ -58,41 +55,32 @@ public class StatData
 
 
     [field: Header("초기화 시 기본 공격력")]
-    [field: SerializeField] public float baseAttack { private set; get; }
-    /// <summary>
-    /// 현재 공격력
-    /// </summary>
+    [field: SerializeField] public float baseAttack = 10;
     public float AttackCurrent
     {
         get
         {
-            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) + buffController.AttackBuff);
+            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
         }
     }
 
     [field: Header("초기화 시 기본 공격속도")]
     [field: SerializeField] public float baseAttackSpeed { private set; get; }
-    /// <summary>
-    /// 현재 공격속도
-    /// </summary>
     public float AttackSpeedCurrent
     {
         get
         {
-            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)) + buffController.AttackBuff);
+            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
         }
     }
 
     [field: Header("초기화 시 기본 이동속도")]
     [field: SerializeField] public float baseMovementSpeed { private set; get; }
-    /// <summary>
-    /// 현재 이동속도
-    /// </summary>
     public float MovementSpeedCurrent
     {
         get
         {
-            return baseMovementSpeed + buffController.MovementSpeedBuff +
+            return baseMovementSpeed +
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
@@ -101,23 +89,45 @@ public class StatData
 
     [field: Header("초기화 시 기본 방어력")]
     [field: SerializeField] public float baseDefense { private set; get; }
-    /// <summary>
-    /// 현재 방어력
-    /// </summary>
     public float DefenseCurrent
     {
         get
         {
-            return baseDefense + buffController.DefenseBuff +
+            return baseDefense + 
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
 
+    public bool dashUpGrade;
 
+    public float baseDashCoolDown = 3;
+    public float curDashCoolDown
+    {
+        get
+        {
+            return (baseDashCoolDown);
+        }
+    }
+    public float baseDashPower = 5;
+    public float curDashPower
+    {
+        get
+        {
+            return (baseDashPower);
+        }
+    }
+    public float baseDashSpeed = 5;
+    public float curDashSpeed
+    {
+        get
+        {
+            return (baseDashSpeed);
+        }
+    }
 
     #region 외부 클래스
 
-    public Character buffController; // 버프 컨트롤러 (모두에게 고유)
+    //public Character buffController; // 버프 컨트롤러 (모두에게 고유)
 
     [Space(30)]
     [Header("외부 클래스를 참조하여 스탯에 추가 효과")]
@@ -149,43 +159,5 @@ public class StatData
         return mHpCurrent < 0f;
     }
 
-    /// <summary>
-    /// BaseStat을 영구적으로 증가
-    /// </summary>
-    /// <param name="statIndex"></param>
-    //public void UpgradeBaseStat(StatType statType)
-    //{
-    //    switch (statType)
-    //    {
-    //        case StatType.LEVEL: // 레벨
-    //            ++level;
-    //            break;
-
-    //        case StatType.HP: // 체력
-    //            hpMax += 50;
-    //            ModifyCurrentHp(50);
-    //            break;
-
-    //        case StatType.MP: // 마나
-    //            mpMax += 50;
-    //            ModifyCurrentMp(50);
-    //            break;
-
-    //        case StatType.ATTACK: // 공격력
-    //            baseAttack += 5;
-    //            break;
-
-    //        case StatType.MOVEMENT_SPEED: // 속도
-    //            baseMovementSpeed += 1;
-    //            break;
-
-    //        case StatType.DEFENSE: // 방어
-    //            baseDefense += 2.5f;
-    //            break;
-
-    //        default:
-    //            Debug.LogError($"인덱스 {statType}은 없음!");
-    //            break;
-    //    }
-    //}
+    
 }

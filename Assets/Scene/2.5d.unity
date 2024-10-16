@@ -2850,6 +2850,7 @@ GameObject:
   - component: {fileID: 371761080}
   - component: {fileID: 371761085}
   - component: {fileID: 371761089}
+  - component: {fileID: 371761090}
   - component: {fileID: 371761086}
   - component: {fileID: 371761083}
   - component: {fileID: 371761084}
@@ -2960,32 +2961,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dd3a467b2d5fe4bb100be92b529257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statData:
-    <mMaxHp>k__BackingField: 0
-    mHpCurrent: 0
-    <baseAttack>k__BackingField: 0
-    <baseAttackSpeed>k__BackingField: 0
-    <baseMovementSpeed>k__BackingField: 0
-    <baseDefense>k__BackingField: 0
-    buffController: {fileID: 1743928862}
-    equipmentInventory: {fileID: 1895388026}
   BasicAttackPrefab:
   - {fileID: 734623702340163021, guid: 62cbd39eb7e85aa4d95a5cffa5a0d197, type: 3}
   Soskill: {fileID: 11400000, guid: dd6fd4c27fde1db4f93de15f7176adf6, type: 2}
+  isAttack: 0
+  statData:
+    <mMaxHp>k__BackingField: 100
+    mHpCurrent: 0
+    baseAttack: 10
+    <baseAttackSpeed>k__BackingField: 1
+    <baseMovementSpeed>k__BackingField: 4
+    <baseDefense>k__BackingField: 0
+    dashUpGrade: 0
+    baseDashCoolDown: 3
+    baseDashPower: 5
+    baseDashSpeed: 5
+    equipmentInventory: {fileID: 1895388026}
   isFacingRight: 1
-  coolDownDash: 0
-  dashPowerOrigin: 5
-  dashPower: 4
-  dashSpeedOrigin: 0
-  dashSpeed: 5
-  atkDamages: 0
   weaponHitBox: {fileID: 1335768248}
+  rigid: {fileID: 0}
   isInvincible: 0
   imgIcon: {fileID: 350184141}
   imgCool: {fileID: 1755924627}
   weaponTypeCode: 0
   weaponType: Null
-  isAttack: 0
 --- !u!65 &371761088
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3022,6 +3021,18 @@ MonoBehaviour:
   mRayDistance: 100
   mRayCamera: {fileID: 38436509}
   mInventory: {fileID: 1895388025}
+--- !u!114 &371761090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371761076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea14894da9948d4fb3a9e45378e9593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &374394933
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,53 +4165,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &624916564
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 624916566}
-  - component: {fileID: 624916565}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &624916565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624916564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef21aed101cac1848827ca3fbd4ea9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buffDataList:
-  - {fileID: 11400000, guid: 2f62d980650843a4ca2e9b274a49cf27, type: 2}
-  - {fileID: 11400000, guid: 3baa94c1208297e4d8bf9aa369d16d1b, type: 2}
---- !u!4 &624916566
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624916564}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2793422, y: 0.70709085, z: 3.7391295}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &628067971
 GameObject:
   m_ObjectHideFlags: 0
@@ -4443,6 +4407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameTIme: 0
   maxGameTIme: 20
+  playerRigid: {fileID: 371761084}
   player: {fileID: 371761086}
   pool: {fileID: 1661022536}
 --- !u!1 &733420011
@@ -6481,12 +6446,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: []
   spawnData:
-  - spriteType: EnemySquare
+  - spriteType: EnemyRanger
     type: 1
-    num: 0
+    num: 3
   - spriteType: EnemyGolem
     type: 2
-    num: 0
+    num: 5
   - spriteType: EnemySlime
     type: 3
     num: 0
@@ -10742,7 +10707,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   pools:
-  - tag: EnemySquare
+  - tag: EnemyRanger
     prefab: {fileID: 7630655988997322142, guid: f225ae6c5052c7844a70e9c5959fddbd,
       type: 3}
     size: 5
@@ -10752,10 +10717,6 @@ MonoBehaviour:
     size: 10
   - tag: EnemyGolem
     prefab: {fileID: 7937843225039185342, guid: c1f3d2b7e7fc5c44394f4d3343a361ea,
-      type: 3}
-    size: 5
-  - tag: EnemySlime
-    prefab: {fileID: 3503930691403252068, guid: a08a9da5573be174ebf142eef4536d08,
       type: 3}
     size: 5
   - tag: SpearThrow
@@ -11375,7 +11336,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743928861}
-  - component: {fileID: 1743928862}
   m_Layer: 0
   m_Name: BuffManager
   m_TagString: Untagged
@@ -11398,20 +11358,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 57548609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1743928862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743928860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba76939e9ecdcd40a4f5a6bce408944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeedBuff: 0
-  DefenseBuff: 0
 --- !u!1 &1745197614
 GameObject:
   m_ObjectHideFlags: 0
@@ -13089,7 +13035,6 @@ SceneRoots:
   - {fileID: 420537518}
   - {fileID: 992494297}
   - {fileID: 290572408}
-  - {fileID: 624916566}
   - {fileID: 929306523}
   - {fileID: 255506594}
   - {fileID: 57548609}
