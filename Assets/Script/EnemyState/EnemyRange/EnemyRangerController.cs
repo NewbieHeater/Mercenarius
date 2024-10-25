@@ -16,6 +16,7 @@ public class EnemyRangerController : MonoBehaviour
         RangeAttack,
         Hit,
         Dead,
+        RunAway
     }
 
     public bool isLive = false;
@@ -61,14 +62,14 @@ public class EnemyRangerController : MonoBehaviour
         IState<EnemyRangerController> enemyRangerIdle = gameObject.AddComponent<IdleStateEnemyRanger>();
         IState<EnemyRangerController> enemyRangerMove = gameObject.AddComponent<MoveStateEnemyRanger>();
         IState<EnemyRangerController> enemyRangerAttack = gameObject.AddComponent<AttackStateEnemyRanger>();
-        //IState<EnemyRangerController> enemyRangerHit = gameObject.AddComponent<HitStateEnemyRanger>();
+        IState<EnemyRangerController> enemyRangerRunAway = gameObject.AddComponent<RunAwayStateEnemyRanger>();
         //IState<EnemyRangerController> enemyRangerDead = gameObject.AddComponent<DeadStateEnemyRanger>();
         //IState<EnemyGolemController> enemyGolemSpecialAttack = gameObject.AddComponent<SpecialAttackStateEnemyGolem>();
 
         dicState.Add(enemyRangerState.Idle, enemyRangerIdle);
         dicState.Add(enemyRangerState.Move, enemyRangerMove);
         dicState.Add(enemyRangerState.RangeAttack, enemyRangerAttack);
-        //dicState.Add(enemyRangerState.Hit, enemyRangerHit);
+        dicState.Add(enemyRangerState.RunAway, enemyRangerRunAway);
         //dicState.Add(enemyRangerState.Dead, enemyRangerDead);
         //dicState.Add(enemyGolemState.SpecialAttack, enemyGolemSpecialAttack);
 
@@ -114,23 +115,41 @@ public class EnemyRangerController : MonoBehaviour
                 }
                 else if (dist <= runAwayRange)
                 {
-                    stateMachineRanger.SetState(dicState[enemyRangerState.RangeAttack]);
+                    stateMachineRanger.SetState(dicState[enemyRangerState.RunAway]);
                 }
                 break;
             case MoveStateEnemyRanger:
-                if (dist >= attackRange)
+                if (dist <= runAwayRange)
                 {
-                    stateMachineRanger.SetState(dicState[enemyRangerState.Move]);
+                    stateMachineRanger.SetState(dicState[enemyRangerState.RunAway]);
                 }
-                if (dist <= attackRange)
+                else if(dist <= attackRange)
                 {
                     stateMachineRanger.SetState(dicState[enemyRangerState.RangeAttack]);
                 }
                 break;
             case AttackStateEnemyRanger:
+                if(dist <= runAwayRange)
+                {
+                    stateMachineRanger.SetState(dicState[enemyRangerState.RunAway]);
+                }
+                else if (dist >= attackRange)
+                {
+                    stateMachineRanger.SetState(dicState[enemyRangerState.Move]);
+                }
+                break;
+            case RunAwayStateEnemyRanger:
                 if (dist >= attackRange)
                 {
                     stateMachineRanger.SetState(dicState[enemyRangerState.Move]);
+                }
+                else if (dist > runAwayRange && dist <= attackRange)
+                {
+                    stateMachineRanger.SetState(dicState[enemyRangerState.RangeAttack]);
+                }
+                else if(dist <= runAwayRange)
+                {
+                    stateMachineRanger.SetState(dicState[enemyRangerState.RunAway]);
                 }
                 break;
         }

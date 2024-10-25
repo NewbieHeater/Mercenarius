@@ -74,7 +74,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         }
         //ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime);
         SetColor(1);
-
+        Debug.Log(mItem.ItemID);
     }
 
     // 해당 슬롯의 아이템 개수 업데이트
@@ -261,8 +261,9 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     {
         if (mItem != null)
         {
-            Debug.Log(mItem.ItemID);
-            mItemDescription.OpenUI(mItem.name, mItem.Description);
+            
+
+            GameManager.Instance.mItemDescription.OpenUI(mItem.name, mItem.Description);
             mIsTooltipActive = true;
         }
     }
@@ -270,7 +271,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     {
         if (mItem != null)
         {
-            mItemDescription.CloseUI();
+            GameManager.Instance.mItemDescription.CloseUI();
             mIsTooltipActive = false;
         }
     }

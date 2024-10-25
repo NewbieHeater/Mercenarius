@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class SpinningWeapon : MonoBehaviour
 {
     public GameObject prefab; // 생성할 프리팹을 설정하는 변수
-    public SOSkill SOSkill; // 스킬에 관련된 정보를 가지고 있는 ScriptableObject
     public Image imgIcon;
 
     // Cooldown 이미지
@@ -23,7 +22,7 @@ public class SpinningWeapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && !isCoolingDown)
         {
             // 쿨다운 시작
-            StartCoroutine(CoolDown());
+            //StartCoroutine(CoolDown());
             // 레이를 쏘아 목표 방향을 설정
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
@@ -36,7 +35,7 @@ public class SpinningWeapon : MonoBehaviour
                 // 플레이어 위치의 오른쪽으로 farDistance 거리만큼 떨어진 위치 계산
                 Vector3 sidePos1 = transform.position;
                 // 오른쪽의 프리팹을 생성하고 이동시키는 코루틴 실행
-                StartCoroutine(MovePrefab(prefab, sidePos1, sidePos1 + (hit.point - transform.position).normalized * SOSkill.SkillDistance));
+                //StartCoroutine(MovePrefab(prefab, sidePos1, sidePos1 + (hit.point - transform.position).normalized * SOSkill.SkillDistance));
 
                 // movementDuration초 후에 실행되는 함수 호출
                 //StartCoroutine(DelayedPrefabCreation(hit, transform.position));
@@ -106,20 +105,20 @@ public class SpinningWeapon : MonoBehaviour
         instantiatedPrefabs.Clear();
 
         // 쿨다운 시작
-        StartCoroutine(CoolDown());
+        //StartCoroutine(CoolDown());
         yield return null;
     }
 
     // 쿨다운을 처리하는 코루틴 함수
-    IEnumerator CoolDown()
-    {
-        // 쿨다운 중 플래그 설정
-        isCoolingDown = true;
+    //IEnumerator CoolDown()
+    //{
+    //    // 쿨다운 중 플래그 설정
+    //    isCoolingDown = true;
 
-        // 쿨다운 기간만큼 대기
-        yield return new WaitForSeconds(SOSkill.Cooltime);
+    //    // 쿨다운 기간만큼 대기
+    //    //yield return new WaitForSeconds(SOSkill.Cooltime);
 
-        // 쿨다운 종료 후 플래그 해제
-        isCoolingDown = false;
-    }
+    //    // 쿨다운 종료 후 플래그 해제
+    //    isCoolingDown = false;
+    //}
 }

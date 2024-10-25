@@ -5,8 +5,24 @@ using UnityEngine;
 /// </summary>
 public class InventoryMain : InventoryBase
 {
+    public static InventoryMain _instance;
     public static bool IsInventoryActive = false;  // 인벤토리 활성화 되었는가?
+    public int CurrentCoin = 1000;
+    public static InventoryMain Instance
+    {
+        get
+        {
+            // 인스턴스가 없는 경우에 접근하려 하면 인스턴스를 할당해준다.
+            if (!_instance)
+            {
+                _instance = FindObjectOfType(typeof(InventoryMain)) as InventoryMain;
 
+                if (_instance == null)
+                    Debug.Log("no Singleton obj");
+            }
+            return _instance;
+        }
+    }
     new void Awake()
     {
         base.Awake();
@@ -129,5 +145,10 @@ public class InventoryMain : InventoryBase
         }
 
         return null;
+    }
+
+    public void RefreshLabels()
+    {
+        //targetSlot.
     }
 }

@@ -7,9 +7,6 @@ public class SkillButton : MonoBehaviour
 {
     public string SkillType;
 
-    // ScriptableObject 로 생성한 스킬
-    public SOSkill SOSkill;
-
     // Player 객체 연결
     public PlayerController player;
 
@@ -22,7 +19,7 @@ public class SkillButton : MonoBehaviour
     void Start()
     {
         // SO Skill 에 등록한 스킬 아이콘 연결
-        imgIcon.sprite = SOSkill.icon;
+        //imgIcon.sprite = SOSkill.icon;
 
         // Cool 이미지 초기 설정
         imgCool.fillAmount = 0;
@@ -52,7 +49,7 @@ public class SkillButton : MonoBehaviour
         // skill.cool 값에 따라 달라짐
         // 예: skill.cool 이 10초 라면
         // tick = 0.1
-        float tick = 1f / SOSkill.Cooltime;
+        //float tick = 1f / SOSkill.Cooltime;
         float t = 0;
 
         imgCool.fillAmount = 1;
@@ -62,7 +59,7 @@ public class SkillButton : MonoBehaviour
         while (imgCool.fillAmount > 0)
         {
             imgCool.fillAmount = Mathf.Lerp(1, 0, t);
-            t += (Time.deltaTime * tick);
+            //t += (Time.deltaTime * tick);
 
             yield return null;
         }

@@ -464,7 +464,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034659384696059738}
-  - component: {fileID: 2017069862748862589}
+  - component: {fileID: 2334610375246627957}
+  - component: {fileID: 6284511078511611309}
   m_Layer: 0
   m_Name: Store
   m_TagString: Untagged
@@ -489,7 +490,7 @@ Transform:
   - {fileID: 4618605231541719636}
   m_Father: {fileID: 1108008040779606417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2017069862748862589
+--- !u!114 &2334610375246627957
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,16 +499,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 2457260508133856958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a646c43ae53084cac6794f8c469400, type: 3}
+  m_Script: {fileID: 11500000, guid: 7de890796238f00429687954cf88855f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Abcd: {fileID: 0}
-  Item1: {fileID: 5917211230035440334}
-  Item2: {fileID: 677576915282697577}
-  Item3: {fileID: 5344244598495946848}
-  num1: 0
-  num2: 0
-  num3: 0
+  <ShopId>k__BackingField: 1
+  mSellItemInfos:
+  - SellItem: {fileID: 11400000, guid: be35a5873d8c954419b2dc037be65e78, type: 2}
+    Cost: 200
+    ItemAmount: 20
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 1
+  - SellItem: {fileID: 11400000, guid: 313f653b82756a54b94326ba7aa9e1da, type: 2}
+    Cost: 100
+    ItemAmount: 2
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 1
+  ShopLevel: 0
+--- !u!114 &6284511078511611309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457260508133856958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8290c6f01c6b8ac4ea8002058da24939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mItemShop: {fileID: 2334610375246627957}
 --- !u!1 &2647143725754791163
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     //public StatData statData;
     public GameObject[] BasicAttackPrefab;
-    public SOSkill Soskill;
     public bool isAttack = false;
     private BuffController buffController;
     public StatData statData;

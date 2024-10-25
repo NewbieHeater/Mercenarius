@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            other.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 
