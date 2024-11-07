@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField]
     public NavMeshSurface nms;
-
+    public NavMeshSurface nms_pit;
     public void Init()
     {
     }
@@ -21,6 +21,7 @@ public class MapManager : MonoBehaviour
     private void GenerateNavmesh()
     {
         nms.BuildNavMesh();
+        nms_pit.BuildNavMesh();
     }
 
     // Update is called once per frame

@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 /// <summary>
 /// 여러 아이템을 담을 가장 기본적인 인벤토리
 /// </summary>
@@ -7,6 +8,7 @@ public class InventoryMain : InventoryBase
 {
     public static InventoryMain _instance;
     public static bool IsInventoryActive = false;  // 인벤토리 활성화 되었는가?
+    public TextMeshProUGUI gold;
     public int CurrentCoin = 1000;
     public static InventoryMain Instance
     {
@@ -30,6 +32,7 @@ public class InventoryMain : InventoryBase
 
     void Update()
     {
+        gold.text = $"{CurrentCoin}골드)";
         TryOpenInventory();
     }
 

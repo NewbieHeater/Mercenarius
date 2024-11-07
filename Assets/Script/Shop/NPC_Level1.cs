@@ -12,6 +12,10 @@ public class NPC_Level1 : MonoBehaviour
         {
             ItemShopManager.Instance.OpenItemShop(mItemShop.mSellItemInfos, mItemShop.ShopLevel);
         }
-        
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ItemShopManager.Instance.CloseItemShop();
+        }
+
     }
 }
