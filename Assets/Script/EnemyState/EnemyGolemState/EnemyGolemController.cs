@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static PlayerController;
 
 public class EnemyGolemController : MonoBehaviour
 {
@@ -55,8 +52,6 @@ public class EnemyGolemController : MonoBehaviour
     }
     void Start()
     {
-        //GetComponentInParent
-        //AttackPoint = transform.GetChild(0);
         sprite = GetComponentInChildren<SpriteRenderer>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();

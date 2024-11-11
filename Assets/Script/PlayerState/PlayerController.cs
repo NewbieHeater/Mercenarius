@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("객체의 스탯 정보")]
     [SerializeField]
-    //public StatData statData;
     public GameObject[] BasicAttackPrefab;
     public bool isAttack = false;
     private BuffController buffController;
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight = true;
 
 
-    [Header("미구현")]
+    [Header("아직 미구현")]
     public GameObject weaponHitBox;
     public Rigidbody rigid;
     private SpriteRenderer spriteRender;
@@ -87,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //버프 시스템 테스트중
         if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("SkillQuickSlot2")))
         {
             Buff attackBuff = new Buff(BuffType.AttackBuff, 10.0f, 10.0f);
@@ -94,8 +94,7 @@ public class PlayerController : MonoBehaviour
             Buff bleedDebuff = new Buff(BuffType.Bleed, -2.0f, 5.0f, false, 1.0f);
             buffController.AddBuff(bleedDebuff);
         }
-        //Debug.Log(statData.AttackCurrent);
-        //Debug.Log(statData.HpCurrent);
+
         if (SettingSystem.isPause)
             return;
 
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Attack]);
                 }
-                else if (Input.GetMouseButtonDown(0))
+                else if (Input.GetMouseButtonDown(0) && CheckGround(Input.mousePosition) != transform.position)
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Move]);
                 }
@@ -148,7 +147,6 @@ public class PlayerController : MonoBehaviour
                 {
                     stateMachinePlayer.SetState(dicState[PlayerState.Idle]);
                 }
-
                 break;
             case PlayerAttackState:
                 if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Dash")) && imgCool.fillAmount == 0)
