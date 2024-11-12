@@ -35,17 +35,15 @@ public class ItemShopManager : Singleton<ItemShopManager>
     /// </summary>
     /// <param name="sellItems">상점에서 판매하는 아이템들</param>
     /// <param name="shopLevel">상점의 진척도 레벨</param>
-    public void OpenItemShop(ItemShopSlotInfo[] sellItems, int shopLevel)
+    public void OpenItemShop(ItemShopSlotInfo[] sellItems, int shopLevel,int itemNumber, Transform parent)
     {
         Debug.Log(mSlotInstantiateTransform);
-        foreach (ItemShopSlotInfo sellItem in sellItems)
-        {
-            ItemShopSlot slot = Instantiate(mShopSlotPrefab, Vector3.zero, Quaternion.identity, mSlotInstantiateTransform).GetComponent<ItemShopSlot>();
-            slot.InitSlot(sellItem, shopLevel);
+        ItemShopSlot slot = Instantiate(mShopSlotPrefab, Vector3.zero, Quaternion.identity, mSlotInstantiateTransform).GetComponent<ItemShopSlot>();
+        slot.InitSlot(sellItems[itemNumber], shopLevel);
 
-            mCurrentSlots.Add(slot);
-        }
-
+        mCurrentSlots.Add(slot);
+        mShopRootGo.transform.SetParent(parent, false);
+        mShopRootGo.transform.LookAt(Camera.main.transform.position, Vector3.up);
         mShopRootGo.SetActive(true);
 
         // 모든 슬롯을 갱신

@@ -10,7 +10,7 @@ public class SettingSystem : MonoBehaviour
     protected void Awake()
     {
         isPause = false;
-        if (Settings.activeSelf)
+        if (Settings.activeInHierarchy)
         {
             Settings.SetActive(false);
         }
@@ -19,13 +19,13 @@ public class SettingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Settings")))
         {
-            if (isPause == false)
+            if (Settings.activeInHierarchy)
             {
-                Pause();
+                Resume();
             }
             else
             {
-                Resume();
+                Pause();
             }
         }
     }

@@ -84,7 +84,7 @@ public class EnemyBannermanController : MonoBehaviour
 
         dicState.Add(enemyBannermanState.Idle, BannermanIdle);
         dicState.Add(enemyBannermanState.Move, BannermanMove);
-        dicState.Add(enemyBannermanState.Attack, BannermanAttack);
+        dicState.Add(enemyBannermanState.Attack, BannermanCast);
         dicState.Add(enemyBannermanState.Hit, BannermanHit);
         dicState.Add(enemyBannermanState.Dead, BannermanDead);
         //dicState.Add(enemyBannermanState.SpecialAttack, BannermanSpecialAttack);
@@ -144,7 +144,7 @@ public class EnemyBannermanController : MonoBehaviour
                     stateMachineBannerman.SetState(dicState[enemyBannermanState.Idle]);
                 }
                 break;
-            case AttackStateBannerman:
+            case CastingStateBannerman:
                 if (dist >= attackRange && MoveAble && anim.GetBool("Hit") == false && anim.GetBool("Attack") == false)
                 {
                     stateMachineBannerman.SetState(dicState[enemyBannermanState.Move]);

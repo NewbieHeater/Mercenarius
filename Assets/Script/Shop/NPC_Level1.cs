@@ -1,20 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class NPC_Level1 : MonoBehaviour
 {
-    [SerializeField] private ItemShop mItemShop;
-    void Update()
+    public Store[] ItemRandomNumber;
+
+
+    List<int> itemList = new List<int>();
+
+    int min = 0;
+    int max = 5;
+
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        CreateUnDuplicateRandom(min, max);
+        
+        for (int i = 0; i < itemList.Count; i++)
         {
-            ItemShopManager.Instance.OpenItemShop(mItemShop.mSellItemInfos, mItemShop.ShopLevel);
+        
+            ItemRandomNumber[i].num = itemList[i];
+            
         }
-        if (Input.GetKeyDown(KeyCode.J))
+
+    }
+
+    // 랜덤 생성 (중복 배제)
+    void CreateUnDuplicateRandom(int min, int max)
+    {
+        int currentNumber = Random.Range(min, max);
+
+        for (int i = 0; i < 3;)
         {
-            ItemShopManager.Instance.CloseItemShop();
+            if (itemList.Contains(currentNumber))
+            {
+                currentNumber = Random.Range(min, max);
+            }
+            else
+            {
+                itemList.Add(currentNumber);
+                i++;
+            }
         }
 
     }
