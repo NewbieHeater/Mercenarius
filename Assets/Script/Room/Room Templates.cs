@@ -13,13 +13,19 @@ public class RoomTemplates : MonoBehaviour
 
     public List<GameObject> rooms;
 
-    public float waitTime;
+    public float BossWaitTime;
+    public float TrialWaitTime;
+    public float StoreWaitTime;
     private bool spawnedBoss;
+    private bool spawnedTrial;
+    private bool spawnedStore;
     public GameObject boss;
+    public GameObject trial;
+    public GameObject store;
 
     private void Update()
     {
-        if(waitTime <= 0 && spawnedBoss == false)
+        if(BossWaitTime <= 0 && spawnedBoss == false)
         {
             for(int i = 0; i<rooms.Count;i++)
             {
@@ -32,7 +38,48 @@ public class RoomTemplates : MonoBehaviour
         }
         else
         {
-            waitTime -= Time.deltaTime;
+            if (BossWaitTime >= 0)
+            {
+                BossWaitTime -= Time.deltaTime;
+            }
+        }
+
+        if (TrialWaitTime <= 0 && spawnedTrial == false)
+        {
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                if (i == rooms.Count - 1)
+                {
+                    Instantiate(trial, rooms[i].transform.position, Quaternion.identity);
+                    spawnedTrial = true;
+                }
+            }
+        }
+        else
+        {
+            if (TrialWaitTime >= 0)
+            {
+                TrialWaitTime -= Time.deltaTime;
+            }
+        }
+
+        if (StoreWaitTime <= 0 && spawnedStore == false)
+        {
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                if (i == rooms.Count - 1)
+                {
+                    Instantiate(store, rooms[i].transform.position, Quaternion.identity);
+                    spawnedStore = true;
+                }
+            }
+        }
+        else
+        {
+            if (StoreWaitTime >= 0)
+            {
+                StoreWaitTime -= Time.deltaTime;
+            }
         }
     }
 }

@@ -614,30 +614,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topRooms:
-  - {fileID: 6318487257192665184, guid: 1d68906ac86088b4aa643a8c7fc6c76e, type: 3}
   - {fileID: 2189814581114167332, guid: 976fa07eac023b54e8cb2c8418e5e2fb, type: 3}
   - {fileID: 114863481437303977, guid: 8f8e1f1d182c48e4b8b3fa949943e947, type: 3}
   - {fileID: 2078921745543206981, guid: 979d77f267e68604ba39796c1622e640, type: 3}
+  - {fileID: 2189814581114167332, guid: b45a299b8cbfc62498dcd49b3ae9ba97, type: 3}
   rightRooms:
-  - {fileID: 9071075285513513693, guid: 27ea24680feb65042850747ef9286cbf, type: 3}
   - {fileID: 8037862609041027680, guid: 5db4f5f8eb6fa1449a7e56bfb0d5fed5, type: 3}
   - {fileID: 8745224193714061377, guid: 76f560cecac6998408ccd89689157b8e, type: 3}
   - {fileID: 2078921745543206981, guid: 979d77f267e68604ba39796c1622e640, type: 3}
+  - {fileID: 8745224193714061377, guid: 791f207d43c6a8b4f8608ac357225fae, type: 3}
   bottomRooms:
-  - {fileID: 7055778477884335342, guid: 71959ccb918ad8b4daa6607baa8b5d24, type: 3}
   - {fileID: 6740823397258301632, guid: f29b36e45ee9d5142af1796871049636, type: 3}
   - {fileID: 8037862609041027680, guid: 5db4f5f8eb6fa1449a7e56bfb0d5fed5, type: 3}
   - {fileID: 2189814581114167332, guid: 976fa07eac023b54e8cb2c8418e5e2fb, type: 3}
+  - {fileID: 2189814581114167332, guid: b45a299b8cbfc62498dcd49b3ae9ba97, type: 3}
   leftRooms:
-  - {fileID: 3640094005734458977, guid: 35d526767f75d4b4db213ac016356fcb, type: 3}
   - {fileID: 8745224193714061377, guid: 76f560cecac6998408ccd89689157b8e, type: 3}
   - {fileID: 114863481437303977, guid: 8f8e1f1d182c48e4b8b3fa949943e947, type: 3}
   - {fileID: 6740823397258301632, guid: f29b36e45ee9d5142af1796871049636, type: 3}
+  - {fileID: 8745224193714061377, guid: 791f207d43c6a8b4f8608ac357225fae, type: 3}
   closedRoom: {fileID: 7766914934532554810, guid: 2eac81d1264e1854a9655d21ee1d6150,
     type: 3}
   rooms: []
-  waitTime: 2
+  BossWaitTime: 5
+  TrialWaitTime: 0.5
+  StoreWaitTime: 0.3
   boss: {fileID: 5634572082239235217, guid: dbcbc26c108f4454884f96e7f83007da, type: 3}
+  trial: {fileID: 5634572082239235217, guid: 328c1ca3c75d6b248ae823989b80d904, type: 3}
+  store: {fileID: 5634572082239235217, guid: 1fc729601f569064297ded9a322c46be, type: 3}
 --- !u!4 &936428187
 Transform:
   m_ObjectHideFlags: 0
