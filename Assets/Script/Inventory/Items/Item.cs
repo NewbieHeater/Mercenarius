@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -122,5 +123,20 @@ public class Item : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
         {
             return mItemImage;
         }
+    }
+
+    [Header("인벤토리에서 보여질 아이템의 설명")]
+    [SerializeField] public string mItemDescription;
+    public string Description
+    {
+        get
+        {
+            return mItemDescription;
+        }
+    }
+
+    public static bool CheckEquipmentType(ItemType type)
+    {
+        return type >= ItemType.Equipment_HELMET && type <= ItemType.Equipment_SHOES;
     }
 }

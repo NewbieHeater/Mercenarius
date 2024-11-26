@@ -642,7 +642,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 1
 --- !u!114 &5407671749364541576
 MonoBehaviour:
@@ -662,15 +662,10 @@ MonoBehaviour:
   enemytype: Null
   Hpbar: {fileID: 2594051545989174653}
   AttackPoint: {fileID: 8658709359887203292}
-  sprite: {fileID: 0}
   onPlayerDead:
     m_PersistentCalls:
       m_Calls: []
-  enemyRb: {fileID: 0}
   target: {fileID: 0}
-  nav: {fileID: 0}
-  navObs: {fileID: 0}
-  anim: {fileID: 8993636834367881995}
   unitCode: 0
 --- !u!136 &539613084523375591
 CapsuleCollider:

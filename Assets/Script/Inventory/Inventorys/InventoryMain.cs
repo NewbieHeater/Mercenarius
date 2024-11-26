@@ -1,12 +1,30 @@
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 /// <summary>
 /// 여러 아이템을 담을 가장 기본적인 인벤토리
 /// </summary>
 public class InventoryMain : InventoryBase
 {
+    public static InventoryMain _instance;
     public static bool IsInventoryActive = false;  // 인벤토리 활성화 되었는가?
+    public TextMeshProUGUI gold;
+    public int CurrentCoin = 1000;
+    public static InventoryMain Instance
+    {
+        get
+        {
+            // 인스턴스가 없는 경우에 접근하려 하면 인스턴스를 할당해준다.
+            if (!_instance)
+            {
+                _instance = FindObjectOfType(typeof(InventoryMain)) as InventoryMain;
 
+                if (_instance == null)
+                    Debug.Log("no Singleton obj");
+            }
+            return _instance;
+        }
+    }
     new void Awake()
     {
         base.Awake();
@@ -14,6 +32,7 @@ public class InventoryMain : InventoryBase
 
     void Update()
     {
+        gold.text = $"{CurrentCoin}골드)";
         TryOpenInventory();
     }
 
@@ -71,6 +90,7 @@ public class InventoryMain : InventoryBase
             if (mSlots[i].Item == null && mSlots[i].IsMask(item))
             {
                 mSlots[i].AddItem(item, count);
+                mSlots[i].UseItem();
                 return;
             }
         }
@@ -111,4 +131,27 @@ public class InventoryMain : InventoryBase
         IsInventoryActive = false;
     }
 
+    /// <summary>
+    /// 해당 아이템을 획득할 수 있는가?
+    /// </summary>
+    /// <param name="item">획득하고자 하는 아이템</param>
+    /// <returns>획득이 가능한 해당 슬롯의 위치</returns>
+    public InventorySlot IsCanAquireItem(Item item)
+    {
+        foreach (InventorySlot slot in base.mSlots)
+        {
+            //비어있는 슬롯을 발견한경우
+            if (slot.Item == null) { return slot; }
+
+            //중첩이 가능한 아이템이 같은 아이템의 슬롯을 발견한경우
+            if (item.CanOverlap && slot.Item.Type == item.Type) { return slot; }
+        }
+
+        return null;
+    }
+
+    public void RefreshLabels()
+    {
+        //targetSlot.
+    }
 }

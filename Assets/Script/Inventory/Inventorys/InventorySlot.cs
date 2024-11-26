@@ -7,8 +7,9 @@ using System.Collections.Generic;
 /// <summary>
 /// 인벤토리 슬롯 하나를 담당
 /// </summary>
-public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private ItemActionManager mItemActionManager;
     private Item mItem; //현재 아이템 인스턴스
     public Item Item
     {
@@ -19,7 +20,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     [Header("해당 슬롯에 어떠한 타입만 들어올 수 있는지 타입 마스크")]
-    [SerializeField] private ItemType mSlotMask;
+    [SerializeField] public ItemType mSlotMask;
     [SerializeField]
     private int mItemCount = 0; //획득한 아이템의 개수
 
@@ -58,6 +59,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (mItem.Type <= ItemType.Equipment_SHOES)
         {
             mTextCount.text = "";
+            
         }
         else
         {
@@ -70,8 +72,9 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 mTextCount.text = "";
             }
         }
-
+        //ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime);
         SetColor(1);
+        Debug.Log(mItem.ItemID);
     }
 
     // 해당 슬롯의 아이템 개수 업데이트
@@ -106,6 +109,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (mItem != null)
         {
+            //Debug.Log(mItem + "dfas");
             //쉬프트 (반으로 나누기 모드 활성화)
             if (Input.GetKey(KeyCode.LeftShift)) { DragSlot.Instance.IsShiftMode = true; }
             else { DragSlot.Instance.IsShiftMode = false; }
@@ -127,26 +131,37 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     // 마우스 드래그 종료 오버라이드
     public void OnEndDrag(PointerEventData eventData)
     {
-        DragSlot.Instance.SetColor(0);
-        DragSlot.Instance.CurrentSlot = null;
+        if (mItem != null)
+        {
+            DragSlot.Instance.SetColor(0);
+            DragSlot.Instance.CurrentSlot = null;
+        }
+            
     }
 
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("드랍");
+        //if (mItem == null)
+        //    return;
         //쉬프트 모드인 상황에서 해당 위치에 아이템이 있는경우, 반으로 나눌 수 없기에 리턴한다.
         if (DragSlot.Instance.IsShiftMode && mItem != null) { return; }
-
+        //Debug.Log(DragSlot.Instance.CurrentSlot.Item);
         //드래그 슬롯에 놓여진 아이템과, 바꿔질 아이템의 마스크가 모두 통과되면 바꾼다.
-        if (!IsMask(DragSlot.Instance.CurrentSlot.Item)) { return; }
-
+        if(DragSlot.Instance.CurrentSlot != null)
+        {
+            if (!IsMask(DragSlot.Instance.CurrentSlot.Item)) { return; }
+        }
+  
         //타겟 드래그 슬롯에 이미 아이템이 있는경우, 해당 아이템이 직전의 아이템 슬롯에서 마스크를 체크한다.
         if (mItem != null && !DragSlot.Instance.CurrentSlot.IsMask(mItem)) { return; }
 
         ChangeSlot();
 
-        //mItemActionManager.SlotOnDropEvent(this); 드롭 이벤트 호출
+        mItemActionManager.SlotOnDropEvent(this); //드롭 이벤트 호출
     }
+
     private void ChangeSlot()
     {
         //if (DragSlot.Instance.CurrentSlot.Item.Type >= ItemType.Etc)
@@ -193,5 +208,97 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (tempItem != null) { DragSlot.Instance.CurrentSlot.AddItem(tempItem, tempItemCount); }
         else { DragSlot.Instance.CurrentSlot.ClearSlot(); }
+    }
+    //private void Start()
+    //{
+    //    ItemCooltimeManager.Instance.AddCooltimeQueue(0, 3);
+    //}
+
+    /// <summary>
+    /// 마우스 클릭 오버라이드나 외부에서 해당 슬롯을 대상으로 직접 사용하도록 호출
+    /// </summary>
+    public void UseItem()
+    {
+        if (mItem != null) //해당 슬롯의 아이템이 null이라면 return
+        {
+            //상호작용이 불가능한 (사용이 불가능한) 아이템이라면 리턴
+            if (!mItem.IsInteractivity) { return; }
+
+            //쿨타임이 0보다 큰경우 (현재 쿨타임이 돌고있는경우)라면 리턴한다.
+            if (ItemCooltimeManager.Instance.GetCurrentCooltime(mItem.ItemID) > 0) { return; }
+
+            //아이템 사용 함수 호출
+            //만약 아이템 함수 호출인 상태에서 false가 리턴되면, 현재 사용 불가능 상태이기에 리턴한다.
+            if (!mItemActionManager.UseItem(mItem, this)) { return; }
+
+            //아이템의 쿨타임이 설정되어있으면 쿨타임 적용
+            if (mItem != null && mItem.Cooltime > 0f) { ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime); }
+
+            //상호작용이 가능한(착용 가능한) 장비 아이템을 사용한경우?
+            //if (mItem.Type >= ItemType.Equipment_HELMET && mItem.Type <= ItemType.Equipment_SHOES) { ChangeEquipmentSlot(); }
+
+            //아이템이 소모성이면 한개씩 개수를 줄임
+            if (mItem != null && mItem.IsConsumable) { UpdateSlotCount(-1); }
+
+            //아이템을 다쓴경우, UpdateSlotCount로 인해 mItem이 null이 되는 경우에 UI를 끈다.
+            if (mItem == null) { mItemDescription.CloseUI(); }
+        }
+    }
+
+    //마우스 클릭 오버라이드
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)  //버튼 우클릭시
+        {
+            if (mSlotMask == ItemType.SKILL) { return; }
+
+            UseItem();
+        }
+    }
+    public bool isit;
+    public bool mIsTooltipActive = false;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (mItem != null)
+        {
+            
+
+            GameManager.Instance.mItemDescription.OpenUI(mItem.name, mItem.Description);
+            mIsTooltipActive = true;
+        }
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (mItem != null)
+        {
+            GameManager.Instance.mItemDescription.CloseUI();
+            mIsTooltipActive = false;
+        }
+    }
+    [SerializeField] private ItemDataManager mItemDataManager;
+    public ItemDescription mItemDescription;
+    private void Update()
+    {
+        //if (mIsTooltipActive)
+        //{
+
+        //    //mIsTooltipActive = false;
+        //}
+        //else
+        //{
+
+        //}
+        //Debug.Log(mItem.Type);
+        //Debug.Log(mSlotMask);
+
+        //아이템 쿨타임 스프라이트를 쿨타임 기반으로 계산하여 채운다.
+        if (mItem != null) 
+        { 
+            mCooltimeImage.fillAmount = ItemCooltimeManager.Instance.GetCurrentCooltime(mItem.ItemID) / mItem.Cooltime; 
+        }
+        else 
+        { 
+            mCooltimeImage.fillAmount = 0.0f; 
+        }
     }
 }
