@@ -144,7 +144,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -112, y: -123.33334}
+      snapOffset: {x: -112, y: -123.333374}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Orientation
@@ -436,9 +436,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -5.094529, y: 8.308337, z: 11.494684}
+    m_Target: {x: -2.3161767, y: -3.601551, z: 8.998921}
     speed: 2
-    m_Value: {x: -5.094529, y: 8.308337, z: 11.494684}
+    m_Value: {x: -2.3161767, y: -3.601551, z: 8.998921}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -486,11 +486,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.45403296, y: -0.004817103, z: 0.0024465718, w: -0.89092946}
     speed: 2
-    m_Value: {x: -0.45404875, y: -0.0048172707, z: 0.002446657, w: -0.89096045}
+    m_Value: {x: -0.45403296, y: -0.0048171035, z: 0.002446572, w: -0.89092946}
   m_Size:
-    m_Target: 120.203064
+    m_Target: 20.287249
     speed: 2
-    m_Value: 120.203064
+    m_Value: 20.287249
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -921,23 +921,23 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1a630000
-    m_LastClickedID: 25370
-    m_ExpandedIDs: 00000000886100008a6100008c6100008e6100009061000000ca9a3b
+    m_SelectedIDs: 12630000
+    m_LastClickedID: 25362
+    m_ExpandedIDs: 00000000806100008261000084610000866100008861000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Room
-      m_OriginalName: Room
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 24974
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 
@@ -951,7 +951,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000886100008a6100008c6100008e61000090610000
+    m_ExpandedIDs: 000000008061000082610000846100008661000088610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000ce670000dc610000f6610000b26300006e680000c46700006c7c0000ec7d0000d46b0000186d0000a27c0000fc6a00005c65000098960000065f0000fa640000f07e0000c2900000629c00003c82000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

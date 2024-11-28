@@ -32,6 +32,7 @@ public class RoomTemplates : MonoBehaviour
                 if(i==rooms.Count-1)
                 {
                     Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+                    Destroy(rooms[i]);
                     spawnedBoss = true;
                 }
             }
@@ -51,6 +52,7 @@ public class RoomTemplates : MonoBehaviour
                 if (i == rooms.Count - 1)
                 {
                     Instantiate(trial, rooms[i].transform.position, Quaternion.identity);
+                    Destroy(rooms[i]);
                     spawnedTrial = true;
                 }
             }
@@ -70,6 +72,7 @@ public class RoomTemplates : MonoBehaviour
                 if (i == rooms.Count - 1)
                 {
                     Instantiate(store, rooms[i].transform.position, Quaternion.identity);
+                    Destroy(rooms[i]);
                     spawnedStore = true;
                 }
             }
