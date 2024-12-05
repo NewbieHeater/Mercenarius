@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5fe9fa834997c419d16344cd74950d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingDirection: 4
+  openingDirection: 8
   waitTime: 4
 --- !u!54 &2402130244367128168
 Rigidbody:
@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5fe9fa834997c419d16344cd74950d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingDirection: 3
+  openingDirection: 7
   waitTime: 4
 --- !u!54 &3920214292541788551
 Rigidbody:
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5fe9fa834997c419d16344cd74950d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingDirection: 2
+  openingDirection: 6
   waitTime: 4
 --- !u!54 &4059139605742349406
 Rigidbody:
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5fe9fa834997c419d16344cd74950d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingDirection: 1
+  openingDirection: 5
   waitTime: 4
 --- !u!54 &5432352898744921635
 Rigidbody:

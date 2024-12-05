@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomTemplates : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] bottomRooms;
     public GameObject[] leftRooms;
 
+    public GameObject[] lengthRooms;
+    public GameObject[] widthRooms;
+
     public GameObject closedRoom;   // 중복 방지
 
     public List<GameObject> rooms;
@@ -16,9 +20,11 @@ public class RoomTemplates : MonoBehaviour
     public float BossWaitTime;
     public float TrialWaitTime;
     public float StoreWaitTime;
+
     private bool spawnedBoss;
     private bool spawnedTrial;
     private bool spawnedStore;
+
     public GameObject boss;
     public GameObject trial;
     public GameObject store;
@@ -56,6 +62,14 @@ public class RoomTemplates : MonoBehaviour
                     spawnedTrial = true;
                 }
             }
+            if (rooms.Count < 18)
+            {
+                // 현재 활성화된 씬 이름 가져오기
+                string currentSceneName = SceneManager.GetActiveScene().name;
+
+                // 현재 씬 다시 로드
+                SceneManager.LoadScene(currentSceneName);
+            }
         }
         else
         {
@@ -75,6 +89,14 @@ public class RoomTemplates : MonoBehaviour
                     Destroy(rooms[i]);
                     spawnedStore = true;
                 }
+            }
+            if (rooms.Count < 17)
+            {
+                // 현재 활성화된 씬 이름 가져오기
+                string currentSceneName = SceneManager.GetActiveScene().name;
+
+                // 현재 씬 다시 로드
+                SceneManager.LoadScene(currentSceneName);
             }
         }
         else

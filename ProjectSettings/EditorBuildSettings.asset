@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Prefabs/Room/Scene/2.5d.unity
+    path: Assets/Scene/2.5d.unity
     guid: 30f1873fa13ec02448f8048239fa905e
   - enabled: 1
-    path: Assets/Prefabs/Room/Scene/Level1_Stage1.unity
+    path: Assets/Scene/Level1_Stage1.unity
     guid: 6d9c529dbdb43884bb65ecda6e987a4c
   - enabled: 1
-    path: Assets/Prefabs/Room/Scene/Main_Screen.unity
+    path: Assets/Scene/Main_Screen.unity
     guid: f14c22505add3ad46a59f7eba1777ef0
   m_configObjects: {}

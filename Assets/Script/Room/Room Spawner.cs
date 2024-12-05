@@ -9,6 +9,7 @@ public class RoomSpawner : MonoBehaviour
     // 2 --> 왼쪽 입구 방 필요
     // 3 --> 위쪽 입구 방 필요
     // 4 --> 오른쪽 입구 방 필요
+    // 5 ~ 8 --> 맵 짧게 생성 방지
 
     private RoomTemplates templates;
     private int rand;
@@ -45,6 +46,26 @@ public class RoomSpawner : MonoBehaviour
             {
                 rand = Random.Range(0, templates.rightRooms.Length);
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+            }
+            if (openingDirection == 5)      // 아래쪽 입구 방 필요
+            {
+                rand = Random.Range(0, templates.lengthRooms.Length);
+                Instantiate(templates.lengthRooms[rand], transform.position, templates.lengthRooms[rand].transform.rotation);
+            }
+            else if (openingDirection == 6) // 왼쪽 입구 방 필요
+            {
+                rand = Random.Range(0, templates.widthRooms.Length);
+                Instantiate(templates.widthRooms[rand], transform.position, templates.widthRooms[rand].transform.rotation);
+            }
+            else if (openingDirection == 7) // 위쪽 입구 방 필요
+            {
+                rand = Random.Range(0, templates.lengthRooms.Length);
+                Instantiate(templates.lengthRooms[rand], transform.position, templates.lengthRooms[rand].transform.rotation);
+            }
+            else if (openingDirection == 8) // 오른쪽 입구 방 필요
+            {
+                rand = Random.Range(0, templates.widthRooms.Length);
+                Instantiate(templates.widthRooms[rand], transform.position, templates.widthRooms[rand].transform.rotation);
             }
             spawned = true;
         }
