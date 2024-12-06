@@ -75,7 +75,7 @@ public class PartsUI : MonoBehaviour
             return;
         }
 
-        if (player.GetComponent<Grib>() != null)
+        if (player.GetComponent<Grib>() == null)
         {
             Debug.Log("해당 캐릭터는 해당 파츠를 장착하고 있지 않습니다.");
             return;
