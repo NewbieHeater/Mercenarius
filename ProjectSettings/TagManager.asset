@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Wall
-  - Enemy
-  - EnemyAttack
-  - Void
-  - PlayerAttack
-  - Item
-  - NPC
-  - Ground
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - Ground
-  - Unwalkable
-  - PlayerAttack
-  - Wall
-  - Pit
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
