@@ -15,7 +15,7 @@ public enum ItemType  // 아이템 유형
 
     //장비 아이템 영역
     //장비 아이템 타입에서 추가되는경우, 증가하는 값으로 추가한다.
-    Equipment_HELMET = 0b10, //2
+    Equipment_NORMAL = 0b10, //2
     Equipment_ARMORPLATE = 0b100, //4
     Equipment_GLOVE = 0b1000, //8
     Equipment_PANTS = 0b10000, //16
@@ -137,6 +137,6 @@ public class Item : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
 
     public static bool CheckEquipmentType(ItemType type)
     {
-        return type >= ItemType.Equipment_HELMET && type <= ItemType.Equipment_SHOES;
+        return type >= ItemType.Equipment_NORMAL && type <= ItemType.Equipment_SHOES;
     }
 }

@@ -58,7 +58,7 @@ public class EquipmentInventory : InventoryBase
     {
         switch (type)
         {
-            case ItemType.Equipment_HELMET:
+            case ItemType.Equipment_NORMAL:
                 {
                     //장갑 슬롯은 두개이기때문에, 빈 슬롯을 우선으로 리턴하도록 한다.
                     if (mSlots[0].Item == null) { return mSlots[0]; }
@@ -104,14 +104,14 @@ public class EquipmentInventory : InventoryBase
             {
                 mInventoryBase.SetActive(false);
                 IsInventoryActive = false;
-
+                GameManager.Instance.isUIOpen = false;
                 //UtilityManager.TryLockCursor();
             }
             else
             {
                 mInventoryBase.SetActive(true);
                 IsInventoryActive = true;
-
+                GameManager.Instance.isUIOpen = true;
                 //UtilityManager.UnlockCursor();
             }
         }
