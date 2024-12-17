@@ -10,6 +10,7 @@ public class Store : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("dd");
             ItemShopManager.Instance.OpenItemShop(mItemShop.mSellItemInfos, mItemShop.ShopLevel, num, transform);
         }
     }

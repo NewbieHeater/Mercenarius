@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,17 +12,11 @@ public abstract class Character : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
     public Transform attackTransform;
-    private SpriteRenderer spriteRender;
+    protected SpriteRenderer spriteRender;
     public StatData statData;
 
-    protected int hp;
-    protected int maxHp;
-    protected int attackDamage;
-    protected int speed;
-    protected int range;
-    protected float curDashSpeed;
-    protected float curDashPower;
 
+    protected bool hit = false;
     private bool isFacingRight = true;
     private Vector3 curPosition;
     private Vector3 prevPosition;
@@ -44,34 +39,17 @@ public abstract class Character : MonoBehaviour
 
     public void Move()
     {
+        agent.speed = statData.curMovementSpeed;
         agent.SetDestination(MousePosition());
         animator.SetBool("Move", true);
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            animator.SetBool("Move", false);
-        }
     }
-    
-    //이동시 좌우전환
-    protected void FlipSprite()
+    public void Hit()
     {
-        // 현재 위치와 이전 위치를 비교
-        curPosition = transform.position;
-
-        // 캐릭터가 오른쪽으로 이동하면 flipX를 false로, 왼쪽으로 이동하면 true로 설정
-        if (curPosition.x > prevPosition.x && !isFacingRight)
+        if (alive)
         {
-            spriteRender.flipX = false; // 오른쪽을 보고 있도록 설정
-            isFacingRight = true;
+            statData.ModifyCurrentHp(4f);
+            hit = false;
         }
-        else if (curPosition.x < prevPosition.x && isFacingRight)
-        {
-            spriteRender.flipX = true; // 왼쪽을 보고 있도록 설정
-            isFacingRight = false;
-        }
-
-        // 이전 위치를 현재 위치로 업데이트
-        prevPosition = curPosition;
     }
 
     #region 대쉬관련
@@ -101,17 +79,17 @@ public abstract class Character : MonoBehaviour
         Vector3 dashDestDir = (mousePosition - curPosition).normalized;
 
         //대쉬가 벽에 막히게
-        if (Physics.Raycast(curPosition, dashDestDir, out RaycastHit dashHit, curDashPower, 1 << LayerMask.NameToLayer("Wall")))
+        if (Physics.Raycast(curPosition, dashDestDir, out RaycastHit dashHit, statData.curDashPower, 1 << LayerMask.NameToLayer("Wall")))
         {
             return curPosition + dashDestDir * (dashHit.distance - WALL_MARGIN);
         }
-        return curPosition + dashDestDir * curDashPower;
+        return curPosition + dashDestDir * statData.curDashPower;
     }
 
     private IEnumerator DashCoroutine(Vector3 curPosition, Vector3 dashDestination)
     {
         agent.enabled = false;
-        float duration = 1f/ curDashSpeed;
+        float duration = 1f/ statData.curDashSpeed;
         float time = 0;
         while (time <= duration)
         {
@@ -150,61 +128,27 @@ public abstract class Character : MonoBehaviour
     }
     #endregion
 
-    public void GetDamaged(int dmg)
+    //이동시 좌우전환
+    protected void FlipSprite()
     {
-        hp -= dmg;
+        // 현재 위치와 이전 위치를 비교
+        curPosition = transform.position;
 
-        if (hp <= 0)
-            SetDead();
+        // 캐릭터가 오른쪽으로 이동하면 flipX를 false로, 왼쪽으로 이동하면 true로 설정
+        if (curPosition.x > prevPosition.x && !isFacingRight)
+        {
+            spriteRender.flipX = false; // 오른쪽을 보고 있도록 설정
+            isFacingRight = true;
+        }
+        else if (curPosition.x < prevPosition.x && isFacingRight)
+        {
+            spriteRender.flipX = true; // 왼쪽을 보고 있도록 설정
+            isFacingRight = false;
+        }
+
+        // 이전 위치를 현재 위치로 업데이트
+        prevPosition = curPosition;
     }
 
-    void SetDead()
-    {
-        alive = false;
-    }
-
-    protected int GetDamage()
-    {
-        return attackDamage;
-    }
-
-    public int GetHP()
-    {
-        return hp;
-    }
-
-    public int GetAttackDamage()
-    {
-        return attackDamage;
-    }
-
-    public int GetSpeed()
-    {
-        return speed;
-    }
-
-    public int GetRange()
-    {
-        return range;
-    }
-
-    public void SetHP(int value)
-    {
-        maxHp = value;
-    }
-
-    public void SetAttackDamage(int value)
-    {
-        attackDamage = value;
-    }
-
-    public void SetSpeed(int value)
-    {
-        speed = value;
-    }
-
-    public void SetRange(int value)
-    {
-        range = value;
-    }
+    
 }
