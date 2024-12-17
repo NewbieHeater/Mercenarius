@@ -64,9 +64,7 @@ public class EnemyBannermanController : MonoBehaviour
         enemytype = stat.name;
         //체력
         maxHealth = stat.maxHp;
-        curHealth = stat.curHp;
-        maxHealth = 100f; 
-        curHealth = 100f;
+        curHealth = maxHealth;
         //이동속도
         originalSpeed = stat.originalSpeed;
         CurSpeed = originalSpeed;
@@ -99,7 +97,7 @@ public class EnemyBannermanController : MonoBehaviour
     {
         MoveAble = true;
         target = GameManager._instance.character.GetComponent<Rigidbody>();
-        curHealth = 100f;
+        curHealth = maxHealth;
         isLive = true;
     }
     void Update()

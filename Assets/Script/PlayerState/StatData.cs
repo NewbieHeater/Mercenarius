@@ -12,8 +12,8 @@ public class StatData
             return ((mMaxHp + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Hp : 0f)) );
         }
     }
-    [SerializeField][HideInInspector] private float mHpCurrent = 100f;
-    public float curHp
+    [SerializeField][HideInInspector] private float mHpCurrent;
+    public float HpCurrent 
     { 
         get 
         { 
@@ -24,18 +24,17 @@ public class StatData
 
     [field: Header("초기화 시 기본 공격력")]
     [field: SerializeField] public float baseAttack { set; get; }
-    public float curAttack
+    public float AttackCurrent
     {
         get
         {
             return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
         }
     }
-    [field: SerializeField] public float AttackRange { set; get; }
 
     [field: Header("초기화 시 기본 공격속도")]
     [field: SerializeField] public float baseAttackSpeed { private set; get; }
-    public float curAttackSpeed
+    public float AttackSpeedCurrent
     {
         get
         {
@@ -45,7 +44,7 @@ public class StatData
 
     [field: Header("초기화 시 기본 이동속도")]
     [field: SerializeField] public float baseMovementSpeed { private set; get; }
-    public float curMovementSpeed
+    public float MovementSpeedCurrent
     {
         get
         {

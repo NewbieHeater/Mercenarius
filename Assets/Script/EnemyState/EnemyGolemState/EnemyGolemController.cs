@@ -41,14 +41,14 @@ public class EnemyGolemController : MonoBehaviour
     private Animator anim;
     //public Transform MainBody;
     public UnitCode unitCode;
-    public StatData stat;
-
+    public Stat stat;
 
     private Dictionary<enemyGolemState, IState<EnemyGolemController>> dicState = new Dictionary<enemyGolemState, IState<EnemyGolemController>>();
     private StateMachine<EnemyGolemController> stateMachineGolem;
     private void Awake()
     {
-        
+        stat = new Stat();
+        stat = stat.SetUnitStat(unitCode);
     }
     void Start()
     {
@@ -58,18 +58,20 @@ public class EnemyGolemController : MonoBehaviour
         nav.updateRotation = false; 
         //MainBody = transform.parent;
         enemyRb = GetComponent<Rigidbody>();
+        //적종류
+        enemytype = stat.name;
         //체력
-        maxHealth = 100f;
-        curHealth = 100f;
+        maxHealth = stat.maxHp;
+        curHealth = maxHealth;
         //이동속도
-        originalSpeed = stat.baseMovementSpeed;
+        originalSpeed = stat.originalSpeed;
         CurSpeed = originalSpeed;
         //공격범위
         attackRange = stat.AttackRange;
         //공격속도
-        attackSpeed = stat.curAttackSpeed;
+        attackSpeed = stat.AttackSpeed;
         //공격 딜레이
-        beforCastDelay = 1f;
+        beforCastDelay = stat.beforeCastDelay;
 
         IState<EnemyGolemController> enemyGolemIdle = gameObject.AddComponent<IdleStateEnemyGolem>();
         IState<EnemyGolemController> enemyGolemMove = gameObject.AddComponent<MoveStateEnemyGolem>();
@@ -93,16 +95,7 @@ public class EnemyGolemController : MonoBehaviour
     {
         MoveAble = true;
         target = GameManager._instance.character.GetComponent<Rigidbody>();
-        curHealth = stat.curHp;
-        //이동속도
-        originalSpeed = stat.baseMovementSpeed;
-        CurSpeed = originalSpeed;
-        //공격범위
-        attackRange = stat.AttackRange;
-        //공격속도
-        attackSpeed = stat.curAttackSpeed;
-        //공격 딜레이
-        beforCastDelay = 1f;
+        curHealth = maxHealth;
         isLive = true;
     }
     void Update()
@@ -140,7 +133,7 @@ public class EnemyGolemController : MonoBehaviour
                 {
                     stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
                 }
-                if (dist*2 <= attackRange && anim.GetBool("Hit") == false)
+                if (dist <= attackRange && anim.GetBool("Hit") == false)
                 {
                     stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
                 }
