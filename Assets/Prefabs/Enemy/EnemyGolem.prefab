@@ -569,6 +569,7 @@ GameObject:
   - component: {fileID: 5070235987053252998}
   - component: {fileID: 942677648532263242}
   - component: {fileID: 5407671749364541576}
+  - component: {fileID: 1139648672171161324}
   - component: {fileID: 539613084523375591}
   m_Layer: 7
   m_Name: EnemyGolem
@@ -667,6 +668,31 @@ MonoBehaviour:
       m_Calls: []
   target: {fileID: 0}
   unitCode: 0
+  stat:
+    <mMaxHp>k__BackingField: 100
+    mHpCurrent: 0
+    <baseAttack>k__BackingField: 5
+    <AttackRange>k__BackingField: 2
+    <baseAttackSpeed>k__BackingField: 2
+    <baseMovementSpeed>k__BackingField: 2
+    <baseDefense>k__BackingField: 5
+    <baseDashCoolDown>k__BackingField: 5
+    <baseDashPower>k__BackingField: 5
+    <baseDashSpeed>k__BackingField: 5
+    equipmentInventory: {fileID: 0}
+--- !u!114 &1139648672171161324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937843225039185342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6456f8edc3077354085d6709d083cfbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gollem: {fileID: 5407671749364541576}
 --- !u!136 &539613084523375591
 CapsuleCollider:
   m_ObjectHideFlags: 0

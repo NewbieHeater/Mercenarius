@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     {
         bulletSpeed = 200f;
         rb = GetComponent<Rigidbody>();
-        target = GameManager._instance.player.GetComponent<Transform>();
+        target = GameManager._instance.character.GetComponent<Transform>();
         //float dirx = target.transform.position.x - transform.position.x;
         //float dirz = target.transform.position.z - transform.position.z;
         //Vector3 dir = target.position - transform.position;
