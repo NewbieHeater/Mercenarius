@@ -3,6 +3,38 @@ using UnityEngine;
 [System.Serializable]
 public class StatData 
 {
+    public WeaponTypeCode weaponTypeCode { get; set; }
+    public string weaponName { get; set; }
+    public void PlayerStatData(WeaponTypeCode weaponTypeCode, string weaponName, int maxHp, int baseAttack, float baseMovementSpeed, float baseAttackSpeed, float baseDashSpeed, float baseDashPower, float baseDashCoolDown)
+    {
+        this.weaponTypeCode = weaponTypeCode;
+        this.weaponName = weaponName;
+        this.mMaxHp = maxHp;
+        mHpCurrent = maxHp;
+        this.baseAttack = baseAttack;
+        this.baseMovementSpeed = baseMovementSpeed;
+        this.baseAttackSpeed = baseAttackSpeed;
+        this.baseDashSpeed = baseDashSpeed;
+        this.baseDashPower = baseDashPower;
+        this.baseDashCoolDown = baseDashCoolDown;
+    }
+    
+    public void SetUnitStat(WeaponTypeCode weaponTypeCode)
+    {
+        switch (weaponTypeCode)
+        {
+            case WeaponTypeCode.Spear: //이름, 최대체력, 공격력, 속도, 공격속도, 대쉬속도, 대쉬파워, 대쉬쿨타임 _순서
+                PlayerStatData(weaponTypeCode, "Spear", 150, 20, 5f, 4f, 6f, 4f, 2f);
+                break;
+            case WeaponTypeCode.Double_Dager:
+                PlayerStatData(weaponTypeCode, "Double_Dager", 100, 5, 4f, 1f, 6f, 5f, 2f);
+                break;
+            case WeaponTypeCode.Lance:
+                PlayerStatData(weaponTypeCode, "Lance", 100, 30, 4f, 8f, 5f, 5f, 2f);
+                break;
+        }
+    }
+
     [field: Header("초기화 시 최대 체력")]
     [field: SerializeField] public float mMaxHp { private set; get; }
     public float maxHp
@@ -23,7 +55,7 @@ public class StatData
 
 
     [field: Header("초기화 시 기본 공격력")]
-    [field: SerializeField] public float baseAttack { set; get; }
+    [field: SerializeField] public float baseAttack = 10;
     public float AttackCurrent
     {
         get
@@ -56,7 +88,7 @@ public class StatData
 
 
     [field: Header("초기화 시 기본 방어력")]
-    [field: SerializeField] public float baseDefense {  set; get; }
+    [field: SerializeField] public float baseDefense { private set; get; }
     public float DefenseCurrent
     {
         get
@@ -66,9 +98,9 @@ public class StatData
         }
     }
 
+    public bool dashUpGrade;
 
-    [field: Header("초기화 시 기본 대쉬쿨다운")]
-    [field: SerializeField] public float baseDashCoolDown {  set; get; }
+    public float baseDashCoolDown = 3;
     public float curDashCoolDown
     {
         get
@@ -76,8 +108,7 @@ public class StatData
             return (baseDashCoolDown);
         }
     }
-    [field: Header("초기화 시 기본 대쉬거리")]
-    [field: SerializeField] public float baseDashPower {  set; get; }
+    public float baseDashPower = 5;
     public float curDashPower
     {
         get
@@ -85,8 +116,7 @@ public class StatData
             return (baseDashPower);
         }
     }
-    [field: Header("초기화 시 기본 대쉬속도")]
-    [field: SerializeField] public float baseDashSpeed {  set; get; }
+    public float baseDashSpeed = 5;
     public float curDashSpeed
     {
         get
@@ -105,6 +135,8 @@ public class StatData
     [SerializeField] public EquipmentInventory? equipmentInventory = null; // 장비 인벤토리 (개별적으로 로드하여 사용 가능)
 
     #endregion
+
+
 
     /// <summary>
     /// 스탯 정보를 초기값으로 초기화

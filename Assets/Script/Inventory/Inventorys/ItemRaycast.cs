@@ -145,7 +145,7 @@ public class ItemRaycast : MonoBehaviour
                 mInventory.AcquireItem(mCurrentItem.Item);
                 Destroy(mCurrentItem.gameObject);
             }
-            else if (mCurrentItem.Item.Type != ItemType.Equipment_NORMAL)
+            else if (mCurrentItem.Item.Type != ItemType.Equipment_HELMET)
             {
                 mInventory.AcquireItem(mCurrentItem.Item);
                 Destroy(mCurrentItem.gameObject);

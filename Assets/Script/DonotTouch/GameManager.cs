@@ -10,11 +10,10 @@ public class GameManager : MonoBehaviour
 
     public float gameTIme;
     public float maxGameTIme = 2 * 10f;
-    public Character character;
+    public PlayerController player;
     public ObjectPooler pool;
     public ItemDescription mItemDescription;
     //public EnemyVariables variables;
-    public bool isUIOpen = false;
     public static GameManager Instance
     {
         get

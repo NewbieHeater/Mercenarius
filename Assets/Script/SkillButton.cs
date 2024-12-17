@@ -8,7 +8,7 @@ public class SkillButton : MonoBehaviour
     public string SkillType;
 
     // Player 객체 연결
-    public Character character;
+    public PlayerController player;
 
     // 스킬 이미지
     public Image imgIcon;
