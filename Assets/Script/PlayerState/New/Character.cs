@@ -9,15 +9,15 @@ using UnityEngine.AI;
 public abstract class Character : MonoBehaviour
 {
     protected CharacterManager cm = CharacterManager.Instance;
-    public NavMeshAgent agent;
-    public Animator animator;
+    protected NavMeshAgent agent;
+    protected Animator animator;
     public Transform attackTransform;
     protected SpriteRenderer spriteRender;
-    public StatData statData;
+    [SerializeField]
+    protected StatData statData;
 
 
     protected bool hit = false;
-    private bool isFacingRight = true;
     private Vector3 curPosition;
     private Vector3 prevPosition;
     //대쉬시 벽에 부딪히면 0.35만큼 거리를 두고 정지
@@ -62,7 +62,7 @@ public abstract class Character : MonoBehaviour
         //대쉬 목표지 정하기
         Vector3 dashDestination = CalculateDashDestination();
         if (dashDestination == Vector3.zero) return;            //대쉬목표가이상하면 정지
-
+        FlipSpriteByMousePosition();
         //대쉬 켜기
         animator.SetBool("Dash", true);
         Debug.Log(dashDestination);
@@ -115,10 +115,12 @@ public abstract class Character : MonoBehaviour
         else
             return transform.position;
     }
+
     protected void OnAttackAnimeEnd()
     {
         animator.SetBool("Attack", false);
     }
+
     //공격콜라이더 방향 전환
     protected void SetAttackDirection()
     {
@@ -126,7 +128,6 @@ public abstract class Character : MonoBehaviour
         dir.y = 0;
         attackTransform.rotation = Quaternion.LookRotation(dir);
     }
-    #endregion
 
     //이동시 좌우전환
     protected void FlipSprite()
@@ -135,20 +136,28 @@ public abstract class Character : MonoBehaviour
         curPosition = transform.position;
 
         // 캐릭터가 오른쪽으로 이동하면 flipX를 false로, 왼쪽으로 이동하면 true로 설정
-        if (curPosition.x > prevPosition.x && !isFacingRight)
+        if (curPosition.x > prevPosition.x)
         {
             spriteRender.flipX = false; // 오른쪽을 보고 있도록 설정
-            isFacingRight = true;
         }
-        else if (curPosition.x < prevPosition.x && isFacingRight)
+        else if (curPosition.x < prevPosition.x)
         {
             spriteRender.flipX = true; // 왼쪽을 보고 있도록 설정
-            isFacingRight = false;
         }
 
         // 이전 위치를 현재 위치로 업데이트
         prevPosition = curPosition;
     }
-
-    
+    protected void FlipSpriteByMousePosition()
+    {
+        if (MousePosition().x < transform.position.x)
+        {
+            spriteRender.flipX = true;
+        }
+        else
+        {
+            spriteRender.flipX = false;
+        }
+    }
+    #endregion
 }

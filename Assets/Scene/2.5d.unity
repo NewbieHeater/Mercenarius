@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3d9fe0ecd6ef4214a8a00c099d9786f3, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &12751005
 GameObject:
   m_ObjectHideFlags: 0
@@ -8553,7 +8553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_CollectObjects: 0
+  m_CollectObjects: 3
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -9287,7 +9287,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &674955396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11592,7 +11592,7 @@ MonoBehaviour:
     num: 0
   - spriteType: EnemyGolem
     type: 2
-    num: 0
+    num: 1
   - spriteType: EnemySlime
     type: 3
     num: 0
@@ -15946,7 +15946,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.6, y: 2, z: 3}
   m_Center: {x: 0, y: 1, z: 1.5}
@@ -16958,6 +16958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784313261291886690, guid: bdd787e92a7de41419e0497ee52f4142,
+        type: 3}
+      propertyPath: m_CarveOnlyStationary
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6119502295658935390, guid: bdd787e92a7de41419e0497ee52f4142,
         type: 3}

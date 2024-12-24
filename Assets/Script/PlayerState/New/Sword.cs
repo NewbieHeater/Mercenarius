@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Sword : Character
 {
-    
-    public TrailRenderer trailRenderer;
     protected override void Start()
     {
         base.Start();
@@ -15,7 +13,9 @@ public class Sword : Character
     
     private void Update()
     {
-        FlipSprite();
+        if(animator.GetBool("Move"))
+            FlipSprite();
+        //목표지점 도달시 Move애니메이션 끄기
         if (agent.enabled)
         {
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -40,20 +40,12 @@ public class Sword : Character
         {
             Attack();
         }
-        
     }
 
     #region 공격
     public override void Attack()
     {
-        if(MousePosition().x < transform.position.x)
-        {
-            spriteRender.flipX = true;
-        }
-        else
-        {
-            spriteRender.flipX = false;
-        }
+        FlipSpriteByMousePosition();
         agent.SetDestination(transform.position);
         SetAttackDirection();
         animator.SetTrigger("isAttack");

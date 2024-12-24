@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
         {
             GameObject target_Enemy = GameObject.Find(other.gameObject.name);
             enemy_AcceptDamage = target_Enemy.GetComponent<Enemy_AcceptDamage>();
-            enemy_AcceptDamage.Accept_Damage_Oneshot(character.statData.curAttack);
+            //enemy_AcceptDamage.Accept_Damage_Oneshot(character.statData.curAttack);
         }
     }
 }
