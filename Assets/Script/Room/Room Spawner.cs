@@ -14,7 +14,7 @@ public class RoomSpawner : MonoBehaviour
     private RoomTemplates templates;
     private int rand;
     private bool spawned = false;
-
+    public List<GameObject> rooms;
     public float waitTime = 4f;
     private void Start()
     {
@@ -47,28 +47,28 @@ public class RoomSpawner : MonoBehaviour
                 rand = Random.Range(0, templates.rightRooms.Length);
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
             }
-            if (openingDirection == 5)      // 아래쪽 입구 방 필요
+            if (openingDirection == 5)      
             {
                 rand = Random.Range(0, templates.lengthRooms.Length);
                 Instantiate(templates.lengthRooms[rand], transform.position, templates.lengthRooms[rand].transform.rotation);
             }
-            else if (openingDirection == 6) // 왼쪽 입구 방 필요
+            else if (openingDirection == 6) 
             {
                 rand = Random.Range(0, templates.widthRooms.Length);
                 Instantiate(templates.widthRooms[rand], transform.position, templates.widthRooms[rand].transform.rotation);
             }
-            else if (openingDirection == 7) // 위쪽 입구 방 필요
+            else if (openingDirection == 7) 
             {
                 rand = Random.Range(0, templates.lengthRooms.Length);
                 Instantiate(templates.lengthRooms[rand], transform.position, templates.lengthRooms[rand].transform.rotation);
             }
-            else if (openingDirection == 8) // 오른쪽 입구 방 필요
+            else if (openingDirection == 8) 
             {
                 rand = Random.Range(0, templates.widthRooms.Length);
                 Instantiate(templates.widthRooms[rand], transform.position, templates.widthRooms[rand].transform.rotation);
             }
             spawned = true;
-        }
+        } 
     }
     void OnTriggerEnter(Collider other)
     {
