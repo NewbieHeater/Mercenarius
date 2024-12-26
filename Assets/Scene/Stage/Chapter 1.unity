@@ -631,15 +631,12 @@ MonoBehaviour:
   - {fileID: 114863481437303977, guid: 8f8e1f1d182c48e4b8b3fa949943e947, type: 3}
   widthRooms:
   - {fileID: 7055778477884335342, guid: 71959ccb918ad8b4daa6607baa8b5d24, type: 3}
-  - {fileID: 8745224193714061377, guid: 791f207d43c6a8b4f8608ac357225fae, type: 3}
   - {fileID: 3640094005734458977, guid: 35d526767f75d4b4db213ac016356fcb, type: 3}
   lengthRooms:
-  - {fileID: 2189814581114167332, guid: b45a299b8cbfc62498dcd49b3ae9ba97, type: 3}
   - {fileID: 7055778477884335342, guid: bf2f57b6c2925c34da650e2b482fe10e, type: 3}
   - {fileID: 7055778477884335342, guid: 7eb169deec66b6f4b9cd5f1c3e13e3f4, type: 3}
   closedRoom: {fileID: 7766914934532554810, guid: 2eac81d1264e1854a9655d21ee1d6150,
     type: 3}
-  maxRoom: 20
   rooms: []
   BossWaitTime: 5
   TrialWaitTime: 0.5

@@ -29,21 +29,25 @@ public class RoomTemplates : MonoBehaviour
     public GameObject trial;
     public GameObject store;
 
+    private int i, j, k;
+
     private void Update()
     {
-        // 보스방 생성
-        if(BossWaitTime <= 0 && spawnedBoss == false)
+        // 상점방 생성
+        if (StoreWaitTime <= 0 && spawnedStore == false)
         {
-            for(int i = 0; i<rooms.Count;i++)
+            for (i = 0; i < rooms.Count; i++)
             {
-                if(i==rooms.Count-1)
+                if (i == rooms.Count - 1)
                 {
-                    Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
-                    Destroy(rooms[i]);
-                    spawnedBoss = true;
+                    Instantiate(store, rooms[i].transform.position, Quaternion.identity);
+                    //Destroy(rooms[i]);
+                    spawnedStore = true;
                 }
             }
-            if (rooms.Count < 19)
+            Debug.Log("i");
+            Debug.Log(i);
+            if (i < 17)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -54,25 +58,27 @@ public class RoomTemplates : MonoBehaviour
         }
         else
         {
-            if (BossWaitTime >= 0)
+            if (StoreWaitTime >= 0)
             {
-                BossWaitTime -= Time.deltaTime;
+                StoreWaitTime -= Time.deltaTime;
             }
         }
 
         // 시련방 생성
         if (TrialWaitTime <= 0 && spawnedTrial == false)
         {
-            for (int i = 0; i < rooms.Count; i++)
+            for (j = 0; j < rooms.Count; j++)
             {
-                if (i == rooms.Count - 1)
+                if (j == rooms.Count - 1)
                 {
-                    Instantiate(trial, rooms[i].transform.position, Quaternion.identity);
-                    Destroy(rooms[i]);
+                    Instantiate(trial, rooms[j].transform.position, Quaternion.identity);
+                    //Destroy(rooms[j]);
                     spawnedTrial = true;
                 }
             }
-            if (rooms.Count < 18)
+            Debug.Log("j");
+            Debug.Log(j);
+            if (j <= i)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -89,19 +95,23 @@ public class RoomTemplates : MonoBehaviour
             }
         }
 
-        // 상점방 생성
-        if (StoreWaitTime <= 0 && spawnedStore == false)
+        // 보스방 생성
+        if (BossWaitTime <= 0 && spawnedBoss == false)
         {
-            for (int i = 0; i < rooms.Count; i++)
+            for(k = 0; k < rooms.Count;k++)
             {
-                if (i == rooms.Count - 1)
+                if(k == rooms.Count - 1)
                 {
-                    Instantiate(store, rooms[i].transform.position, Quaternion.identity);
-                    Destroy(rooms[i]);
-                    spawnedStore = true;
+                    Instantiate(boss, rooms[k].transform.position, Quaternion.identity);
+                    spawnedBoss = true;
+                    Destroy(rooms[i-1]);
+                    Destroy(rooms[j-1]);
+                    Destroy(rooms[k]);
                 }
             }
-            if (rooms.Count < 17)
+            Debug.Log("k");
+            Debug.Log(k);
+            if (k <= j)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -112,9 +122,9 @@ public class RoomTemplates : MonoBehaviour
         }
         else
         {
-            if (StoreWaitTime >= 0)
+            if (BossWaitTime >= 0)
             {
-                StoreWaitTime -= Time.deltaTime;
+                BossWaitTime -= Time.deltaTime;
             }
         }
     }

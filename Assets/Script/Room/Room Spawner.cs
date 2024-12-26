@@ -47,7 +47,7 @@ public class RoomSpawner : MonoBehaviour
                 rand = Random.Range(0, templates.rightRooms.Length);
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
             }
-            if (openingDirection == 5)      
+            else if (openingDirection == 5)      
             {
                 rand = Random.Range(0, templates.lengthRooms.Length);
                 Instantiate(templates.lengthRooms[rand], transform.position, templates.lengthRooms[rand].transform.rotation);
