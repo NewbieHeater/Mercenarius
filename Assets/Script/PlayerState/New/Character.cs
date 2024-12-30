@@ -58,7 +58,6 @@ public abstract class Character : MonoBehaviour
         //네비메쉬 정지후 끄기
         agent.SetDestination(transform.position);
         
-
         //대쉬 목표지 정하기
         Vector3 dashDestination = CalculateDashDestination();
         if (dashDestination == Vector3.zero) return;            //대쉬목표가이상하면 정지
@@ -85,7 +84,7 @@ public abstract class Character : MonoBehaviour
         }
         return curPosition + dashDestDir * statData.curDashPower;
     }
-
+    //대쉬 실행
     private IEnumerator DashCoroutine(Vector3 curPosition, Vector3 dashDestination)
     {
         agent.enabled = false;
@@ -148,6 +147,7 @@ public abstract class Character : MonoBehaviour
         // 이전 위치를 현재 위치로 업데이트
         prevPosition = curPosition;
     }
+    //공격시 이동때와는 다른 방법으로 좌우변환해야함
     protected void FlipSpriteByMousePosition()
     {
         if (MousePosition().x < transform.position.x)
