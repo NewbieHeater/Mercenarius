@@ -12,7 +12,7 @@ public class NPC_Level1 : MonoBehaviour
     int min = 0;
     int max = 5;
 
-    void Start()
+    void Awake()
     {
         CreateUnDuplicateRandom(min, max);
         

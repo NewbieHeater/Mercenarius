@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 440152165988009168}
   - component: {fileID: 1950850556399630186}
   - component: {fileID: 7183917898773138662}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: GRIDLAYOUT_SlotsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8435045922910426188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7738077105315111019}
   - component: {fileID: 494430203766337275}
   - component: {fileID: 7478044975484771939}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PARENT_ShopDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}

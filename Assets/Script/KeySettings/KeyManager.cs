@@ -35,10 +35,12 @@ public class KeyManager : Singleton<KeyManager>
 
     void Awake()
     {
+        //ResetOptionData();
         mKeyDictionary = new Dictionary<string, KeyCode>();
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
         LoadOptionData();
+        ResetOptionData();
     }
 
     private void LoadOptionData()
@@ -76,6 +78,7 @@ public class KeyManager : Singleton<KeyManager>
         //씬 내에서 사용할 키 데이터들//
         mKeyDictionary.Add("Inventory", KeyCode.I); //아이템 인벤토리
         mKeyDictionary.Add("Equipment", KeyCode.O); //장비 인벤토리
+        mKeyDictionary.Add("Interact", KeyCode.F); //상호작용
         mKeyDictionary.Add("Stat", KeyCode.P); //스탯
         mKeyDictionary.Add("Skill", KeyCode.K); //스킬
         mKeyDictionary.Add("Settings", KeyCode.Escape); //설정창

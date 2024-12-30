@@ -32,8 +32,9 @@ public class Sword : Character
         {
             Hit();
         }
-        else if (Input.GetMouseButtonDown(0) && !animator.GetBool("Attack") && !animator.GetBool("Dash"))
+        else if ((Input.GetMouseButton(0) || Input.GetMouseButtonDown(0)) && !animator.GetBool("Attack") && !animator.GetBool("Dash"))
         {
+            Debug.Log("wkr");
             Move();
         }
         else if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")) && !animator.GetBool("Dash"))
