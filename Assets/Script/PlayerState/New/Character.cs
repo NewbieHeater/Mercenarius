@@ -5,51 +5,42 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 
 public abstract class Character : MonoBehaviour
 {
+    public string CharacterState = "";
+
     protected CharacterManager cm = CharacterManager.Instance;
-    protected NavMeshAgent agent;
-    protected Animator animator;
+    public NavMeshAgent agent;
+    public Animator animator;
     public Transform attackTransform;
     protected SpriteRenderer spriteRender;
-    [SerializeField]
     protected StatData statData;
 
 
     protected bool hit = false;
     private Vector3 curPosition;
     private Vector3 prevPosition;
-    //대쉬시 벽에 부딪히면 0.35만큼 거리를 두고 정지
-    private const float WALL_MARGIN = 0.35f;
-
+    private const float WALL_MARGIN = 0.35f;    //대쉬시 벽에 부딪히면 0.35만큼 거리를 두고 정지
     bool alive;
 
+    protected Dictionary<string, IState<Character>> dicState = new Dictionary<string, IState<Character>>();
+    protected StateMachine<Character> sm;
     protected virtual void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = statData.curMovementSpeed;
+        dicState.Add(CharacterState, new AttackState());
+        sm = new StateMachine<Character>(this, dicState[CharacterState]);
+
+
         alive = true;
         animator = GetComponentInChildren<Animator>();
         spriteRender = GetComponentInChildren<SpriteRenderer>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         prevPosition = transform.position;
-    }
-
-    public abstract void Attack();
-
-    public void Move()
-    {
-        agent.speed = statData.curMovementSpeed;
-        agent.SetDestination(MousePosition());
-        animator.SetBool("Move", true);
-    }
-    public void Hit()
-    {
-        if (alive)
-        {
-            statData.ModifyCurrentHp(4f);
-            hit = false;
-        }
     }
 
     #region 대쉬관련
@@ -121,7 +112,7 @@ public abstract class Character : MonoBehaviour
     }
 
     //공격콜라이더 방향 전환
-    protected void SetAttackDirection()
+    public void SetAttackDirection()
     {
         Vector3 dir = (MousePosition() - transform.position).normalized;
         dir.y = 0;
