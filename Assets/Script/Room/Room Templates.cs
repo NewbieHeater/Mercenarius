@@ -47,7 +47,7 @@ public class RoomTemplates : MonoBehaviour
             }
             Debug.Log("i");
             Debug.Log(i);
-            if (i < 17)
+            if (i < 11)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
