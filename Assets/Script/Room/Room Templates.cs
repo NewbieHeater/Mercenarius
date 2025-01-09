@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class RoomTemplates : MonoBehaviour
 {
@@ -45,8 +46,6 @@ public class RoomTemplates : MonoBehaviour
                     spawnedStore = true;
                 }
             }
-            Debug.Log("i");
-            Debug.Log(i);
             if (i < 11)
             {
                 // 현재 활성화된 씬 이름 가져오기
@@ -76,8 +75,6 @@ public class RoomTemplates : MonoBehaviour
                     spawnedTrial = true;
                 }
             }
-            Debug.Log("j");
-            Debug.Log(j);
             if (j <= i)
             {
                 // 현재 활성화된 씬 이름 가져오기
@@ -109,8 +106,6 @@ public class RoomTemplates : MonoBehaviour
                     Destroy(rooms[k]);
                 }
             }
-            Debug.Log("k");
-            Debug.Log(k);
             if (k <= j)
             {
                 // 현재 활성화된 씬 이름 가져오기
