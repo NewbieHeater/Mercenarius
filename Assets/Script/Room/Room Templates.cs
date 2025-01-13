@@ -21,32 +21,62 @@ public class RoomTemplates : MonoBehaviour
     public float BossWaitTime;
     public float TrialWaitTime;
     public float StoreWaitTime;
+    public float ItemWaitTime;
 
     private bool spawnedBoss;
     private bool spawnedTrial;
     private bool spawnedStore;
+    private bool spawnedItem;
 
     public GameObject boss;
     public GameObject trial;
     public GameObject store;
+    public GameObject item;
 
-    private int i, j, k;
-
+    private int a, b, c, d;
+    
     private void Update()
     {
+        // 아이템방 생성
+        if (ItemWaitTime <= 0 && spawnedItem == false)
+        {
+            for (a = 0; a < rooms.Count; a++)
+            {
+                if (a == rooms.Count - 1)
+                {
+                    Instantiate(item, rooms[a].transform.position, Quaternion.identity);
+                    spawnedItem = true;
+                }
+            }
+            if (a < 11)
+            {
+                // 현재 활성화된 씬 이름 가져오기
+                string currentSceneName = SceneManager.GetActiveScene().name;
+
+                // 현재 씬 다시 로드
+                SceneManager.LoadScene(currentSceneName);
+            }
+        }
+        else
+        {
+            if (ItemWaitTime >= 0)
+            {
+                ItemWaitTime -= Time.deltaTime;
+            }
+        }
+
         // 상점방 생성
         if (StoreWaitTime <= 0 && spawnedStore == false)
         {
-            for (i = 0; i < rooms.Count; i++)
+            for (b = 0; b < rooms.Count; b++)
             {
-                if (i == rooms.Count - 1)
+                if (b == rooms.Count - 1)
                 {
-                    Instantiate(store, rooms[i].transform.position, Quaternion.identity);
-                    //Destroy(rooms[i]);
+                    Instantiate(store, rooms[b].transform.position, Quaternion.identity);
                     spawnedStore = true;
                 }
             }
-            if (i < 11)
+            if (b <= a)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -66,16 +96,15 @@ public class RoomTemplates : MonoBehaviour
         // 시련방 생성
         if (TrialWaitTime <= 0 && spawnedTrial == false)
         {
-            for (j = 0; j < rooms.Count; j++)
+            for (c = 0; c < rooms.Count; c++)
             {
-                if (j == rooms.Count - 1)
+                if (c == rooms.Count - 1)
                 {
-                    Instantiate(trial, rooms[j].transform.position, Quaternion.identity);
-                    //Destroy(rooms[j]);
+                    Instantiate(trial, rooms[c].transform.position, Quaternion.identity);
                     spawnedTrial = true;
                 }
             }
-            if (j <= i)
+            if (c <= b)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -95,18 +124,19 @@ public class RoomTemplates : MonoBehaviour
         // 보스방 생성
         if (BossWaitTime <= 0 && spawnedBoss == false)
         {
-            for(k = 0; k < rooms.Count;k++)
+            for(d = 0; d < rooms.Count;d++)
             {
-                if(k == rooms.Count - 1)
+                if(d == rooms.Count - 1)
                 {
-                    Instantiate(boss, rooms[k].transform.position, Quaternion.identity);
+                    Instantiate(boss, rooms[d].transform.position, Quaternion.identity);
                     spawnedBoss = true;
-                    Destroy(rooms[i-1]);
-                    Destroy(rooms[j-1]);
-                    Destroy(rooms[k]);
+                    Destroy(rooms[a - 1]);
+                    Destroy(rooms[b - 1]);
+                    Destroy(rooms[c - 1]);
+                    Destroy(rooms[d]);
                 }
             }
-            if (k <= j)
+            if (d <= c)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
