@@ -22,9 +22,13 @@ public class Sword : Character
 
     void OnKeyboard()
     {
-        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot1"))
+        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot0"))
         {
             Managers.UI.ShowPopupUI<UI_Button>();
+        }
+        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot1"))
+        {
+            Managers.UI.ClosePopupUI();
         }
     }
     private void Update()
