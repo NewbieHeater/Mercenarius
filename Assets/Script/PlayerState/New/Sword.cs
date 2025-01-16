@@ -17,7 +17,10 @@ public class Sword : Character
     }
     void OnMouseClicked(Define.MouseEvent evt)
     {
-
+        if (evt == Define.MouseEvent.Press)
+            Debug.Log("Mouse Pressed");
+        else if (evt == Define.MouseEvent.Click)
+            Debug.Log("Mouse Clicked");
     }
 
     void OnKeyboard()

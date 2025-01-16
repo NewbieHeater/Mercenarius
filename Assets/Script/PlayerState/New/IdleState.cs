@@ -7,6 +7,7 @@ public class IdleState : IState<Character>
     public void OperateEnter(Character sender)
     {
         character = sender;
+        Debug.Log("Idle");
     }
 
     public void OperateExit(Character sender)

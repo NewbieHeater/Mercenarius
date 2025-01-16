@@ -19,10 +19,10 @@ public class MoveState : IState<Character>
 
     public void OperateUpdate(Character sender)
     {
-        Managers.Input.MouseAction = (mouseEvent) =>
-        {
+        //Managers.Input.MouseAction = (mouseEvent) =>
+        //{
 
-        };
+        //};
         
         if(Input.GetMouseButton(0))
             sender.agent.SetDestination(sender.MousePosition());
