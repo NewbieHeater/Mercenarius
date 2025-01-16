@@ -9,14 +9,12 @@ using UnityEngine.Playables;
 
 public abstract class Character : MonoBehaviour
 {
-    public string CharacterState = "";
-
     protected CharacterManager cm = CharacterManager.Instance;
     public NavMeshAgent agent;
     public Animator animator;
     public Transform attackTransform;
     protected SpriteRenderer spriteRender;
-    protected StatData statData;
+    public StatData statData;
 
 
     protected bool hit = false;
@@ -25,15 +23,20 @@ public abstract class Character : MonoBehaviour
     private const float WALL_MARGIN = 0.35f;    //대쉬시 벽에 부딪히면 0.35만큼 거리를 두고 정지
     bool alive;
 
-    protected Dictionary<string, IState<Character>> dicState = new Dictionary<string, IState<Character>>();
-    protected StateMachine<Character> sm;
+    public Dictionary<string, IState<Character>> dicState = new Dictionary<string, IState<Character>>();
+    public StateMachine<Character> sm;
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = statData.curMovementSpeed;
-        dicState.Add(CharacterState, new AttackState());
-        sm = new StateMachine<Character>(this, dicState[CharacterState]);
 
+        dicState.Add("Attack", new AttackState());
+        //dicState.Add("SkillAttack1", new SkillAttack1State());
+        //dicState.Add("SkillAttack2", new SkillAttack2State());
+        dicState.Add("Move", new MoveState());
+        dicState.Add("Idle", new IdleState());
+        dicState.Add("Dash", new DashState());
+        sm = new StateMachine<Character>(this, dicState["Idle"]);
 
         alive = true;
         animator = GetComponentInChildren<Animator>();
@@ -41,6 +44,19 @@ public abstract class Character : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         prevPosition = transform.position;
+    }
+
+    protected virtual void BasicAttack()
+    {
+
+    }
+    protected virtual void SkillAttack1()
+    {
+
+    }
+    protected virtual void SkillAttack2()
+    {
+
     }
 
     #region 대쉬관련
@@ -95,15 +111,31 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region 아마도 모든 캐릭터에 필요할거 같아서 만든부분
-    protected Vector3 MousePosition()
+    public Vector3 MousePosition()
+    {
+        Vector3 mousePosition;
+        if (IsMouseOverLayer("Ground", out RaycastHit hit))
+        {
+            mousePosition = hit.point; // Ground 레이어와 충돌한 지점 반환
+        }
+        else
+        {
+            mousePosition = transform.position; // 현재 오브젝트 위치 반환
+        }
+        return mousePosition;
+    }
+
+    public bool CheckMousePosition()
+    {
+        return IsMouseOverLayer("Ground", out _); // Ground 레이어와 충돌 여부만 반환
+    }
+
+    // 공통적으로 사용하는 메서드 추가
+    private bool IsMouseOverLayer(string layerName, out RaycastHit hit)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            return hit.point;
-        }  
-        else
-            return transform.position;
+        int layerMask = 1 << LayerMask.NameToLayer(layerName);
+        return Physics.Raycast(ray, out hit, 100, layerMask);
     }
 
     protected void OnAttackAnimeEnd()
@@ -120,7 +152,7 @@ public abstract class Character : MonoBehaviour
     }
 
     //이동시 좌우전환
-    protected void FlipSprite()
+    public void FlipSprite()
     {
         // 현재 위치와 이전 위치를 비교
         curPosition = transform.position;
@@ -139,7 +171,7 @@ public abstract class Character : MonoBehaviour
         prevPosition = curPosition;
     }
     //공격시 이동때와는 다른 방법으로 좌우변환해야함
-    protected void FlipSpriteByMousePosition()
+    public void FlipSpriteByMousePosition()
     {
         if (MousePosition().x < transform.position.x)
         {

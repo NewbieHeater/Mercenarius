@@ -19,8 +19,6 @@ public class StateMachine<T>
 
     public void SetState(IState<T> state)
     {
-        //Debug.Log("SetState : " + state);
-
         // null에러출력
         if (m_sender == null)
         {
@@ -30,7 +28,6 @@ public class StateMachine<T>
 
         if (CurState == state)
         {
-            //Debug.LogWarningFormat("Same state : ", state);
             return;
         }
 
@@ -44,10 +41,9 @@ public class StateMachine<T>
         if (CurState != null)
             CurState.OperateEnter(m_sender);
 
-        Debug.Log("SetNextState : " + state);
+        //Debug.Log("SetNextState : " + state);
     }
 
-    //State용 Update 함수.
     public void DoOperateUpdate()
     {
         if (m_sender == null)

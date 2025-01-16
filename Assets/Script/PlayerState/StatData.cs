@@ -92,7 +92,7 @@ public class StatData
     {
         get
         {
-            return (baseDashSpeed);
+            return (1f / baseDashSpeed);
         }
     }
 

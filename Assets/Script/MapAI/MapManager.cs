@@ -8,9 +8,6 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField]
     public NavMeshSurface nms;
-    public void Init()
-    {
-    }
 
     private void Start()
     {

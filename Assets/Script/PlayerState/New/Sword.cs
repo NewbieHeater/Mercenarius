@@ -8,30 +8,45 @@ public class Sword : Character
 {
     protected override void Start()
     {
+        Managers.Input.MouseAction -= OnMouseClicked;
+        Managers.Input.MouseAction += OnMouseClicked;
+
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
         base.Start();
     }
-    
+    void OnMouseClicked(Define.MouseEvent evt)
+    {
+
+    }
+
+    void OnKeyboard()
+    {
+        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot1"))
+        {
+            Managers.UI.ShowPopupUI<UI_Button>();
+        }
+    }
     private void Update()
     {
-        if(CharacterState == "Idle")
-        {
-            if(Input.GetMouseButtonDown(0))
-            {
-                sm.SetState(dicState["Move"]);
-            }
-            if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("BasicAttack")))
-            {
-                sm.SetState(dicState["Attack"]);
-            }
-            
-        }
-        if (CharacterState == "Move")
-        {
+        
+        sm.DoOperateUpdate();
+    }
 
-        }
-        if (CharacterState == "Attack")
-        {
+    protected override void BasicAttack()
+    {
+        agent.isStopped = true;
+        agent.SetDestination(transform.position);
+        animator.SetTrigger("isAttack");
+        animator.SetBool("Attack", true);
+        SetAttackDirection();
+    }
+    protected override void SkillAttack1()
+    {
 
-        }
+    }
+    protected override void SkillAttack2()
+    {
+
     }
 }

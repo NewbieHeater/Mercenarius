@@ -5,6 +5,7 @@ using UnityEngine;
 public class Store : MonoBehaviour
 {
     public int num = 0;
+    private bool isInTrigger = false;
     [SerializeField] private ItemShop mItemShop;
     public ItemShopSlot Slot;
     private void Start()
@@ -16,23 +17,23 @@ public class Store : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ItemShopManager.Instance.ItemShopInteract(Slot);
+            isInTrigger = true;
+            ItemShopManager.Instance.ItemShopInteractEnter(Slot);
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Interact")))
-        {
-            ItemShopManager.Instance.BuyItem(Slot);
-        }
 
-    }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        isInTrigger = false;
+        ItemShopManager.Instance.ItemShopInteractExit(Slot);
+    }
+
+    private void Update()
+    {
+        if (isInTrigger && Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Interact")))
         {
-            ItemShopManager.Instance.ItemShopInteract(Slot);
-            //ItemShopManager.Instance.CloseItemShop();
+            Debug.Log("Interact");
+            ItemShopManager.Instance.BuyItem(Slot);
         }
     }
 }

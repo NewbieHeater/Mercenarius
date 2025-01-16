@@ -140,7 +140,7 @@ public class EnemyGolemController : MonoBehaviour
                 {
                     stateMachineGolem.SetState(dicState[enemyGolemState.Move]);
                 }
-                if (dist*2 <= attackRange && anim.GetBool("Hit") == false)
+                if (dist <= attackRange && anim.GetBool("Hit") == false)
                 {
                     stateMachineGolem.SetState(dicState[enemyGolemState.Attack]);
                 }

@@ -74,7 +74,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         }
         //ItemCooltimeManager.Instance.AddCooltimeQueue(mItem.ItemID, mItem.Cooltime);
         SetColor(1);
-        Debug.Log(mItem.ItemID);
     }
 
     // 해당 슬롯의 아이템 개수 업데이트
@@ -107,6 +106,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("드래그 시작");
         if (mItem != null)
         {
             //Debug.Log(mItem + "dfas");
@@ -131,20 +131,21 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     // 마우스 드래그 종료 오버라이드
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (mItem != null)
+        Debug.Log("드래그 종료");
+        if (mItem == null)
         {
-            DragSlot.Instance.SetColor(0);
+            Debug.Log("askf");
+            DragSlot.Instance.AlphaZero();
             DragSlot.Instance.CurrentSlot = null;
-        }
-            
+        }   
     }
 
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("드랍");
-        //if (mItem == null)
-        //    return;
+        if (DragSlot.Instance.CurrentSlot.Item == null) { return; }
+
         //쉬프트 모드인 상황에서 해당 위치에 아이템이 있는경우, 반으로 나눌 수 없기에 리턴한다.
         if (DragSlot.Instance.IsShiftMode && mItem != null) { return; }
         //Debug.Log(DragSlot.Instance.CurrentSlot.Item);

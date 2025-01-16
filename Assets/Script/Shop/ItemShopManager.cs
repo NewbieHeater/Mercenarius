@@ -17,8 +17,7 @@ public class ItemShopManager : Singleton<ItemShopManager>
     [Header("상점 오브젝트 루트 오브젝트")]
     [SerializeField] public GameObject mShopRootGo;
 
-    [Header("상점 오브젝트의 프리팹 인스턴스 트랜스폼")]
-    [SerializeField] public RectTransform mSlotInstantiateTransform;
+    
 
     [Header("상점 슬롯 프리팹")]
     [SerializeField] public GameObject mShopSlotPrefab;
@@ -46,10 +45,15 @@ public class ItemShopManager : Singleton<ItemShopManager>
         ItemShopManager.Instance.RefreshSlots();
         mIsItemShopActive = true;
     }
-    public void ItemShopInteract(ItemShopSlot slot)
+    public void ItemShopInteractEnter(ItemShopSlot slot)
     {
         Debug.Log("작동ㅇ시작");
-        slot.InteractionManage();
+        slot.InteractionManageEnter();
+    }
+    public void ItemShopInteractExit(ItemShopSlot slot)
+    {
+        Debug.Log("작동ㅇ종료");
+        slot.InteractionManageExit();
     }
 
     /// <summary>

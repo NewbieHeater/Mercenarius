@@ -31,7 +31,7 @@ public class KeyManager : Singleton<KeyManager>
     private static string mOptionDataFileName = "/KeyData.json"; //키 데이터 파일 이름
     private static string mFilePath;
 
-    private Dictionary<string, KeyCode> mKeyDictionary;
+    public Dictionary<string, KeyCode> mKeyDictionary;
 
     void Awake()
     {
@@ -134,7 +134,33 @@ public class KeyManager : Singleton<KeyManager>
     /// <returns></returns>
     public KeyCode GetKeyCode(string keyName)
     {
-        return mKeyDictionary[keyName];
+        if (mKeyDictionary.ContainsKey(keyName))
+            return mKeyDictionary[keyName];
+
+        Debug.LogWarning($"키 이름 '{keyName}'을(를) 찾을 수 없습니다.");
+        return KeyCode.None;
+    }
+
+    // 키 입력을 직접 확인할 수 있는 메서드 추가
+    public bool GetKeyDown(string keyName)
+    {
+        if (mKeyDictionary.ContainsKey(keyName))
+            return Input.GetKeyDown(mKeyDictionary[keyName]);
+        return false;
+    }
+
+    public bool GetKey(string keyName)
+    {
+        if (mKeyDictionary.ContainsKey(keyName))
+            return Input.GetKey(mKeyDictionary[keyName]);
+        return false;
+    }
+
+    public bool GetKeyUp(string keyName)
+    {
+        if (mKeyDictionary.ContainsKey(keyName))
+            return Input.GetKeyUp(mKeyDictionary[keyName]);
+        return false;
     }
 
     /// <summary>

@@ -18,18 +18,16 @@ public class ItemShopSlot : MonoBehaviour
     {
         mItemShopInteract.enabled = false;
     }
-    public void InteractionManage()
+    public void InteractionManageEnter()
     {
-        if (interactOn)
-        {
-            mItemShopInteract.enabled = false;
-            interactOn = false;
-        }
-        else
-        {
-            mItemShopInteract.enabled = true;
-            interactOn = true;
-        }
+        mItemShopInteract.enabled = true;
+        interactOn = true;
+    }
+    public void InteractionManageExit()
+    {
+
+        mItemShopInteract.enabled = false;
+        interactOn = false;
     }
     public void RefreshSlot()
     {
@@ -45,13 +43,20 @@ public class ItemShopSlot : MonoBehaviour
         // 구매버튼 비활성화
         if (InventoryMain.Instance.CurrentCoin < mSellInfo.Cost
             || mSellInfo.ItemAmount <= 0)
+        {
             interactable = false;
+            mCostLabel.text = "판매완료";
+            Debug.Log(mSellInfo.ItemAmount);
+        }
         else
+        {
             interactable = true;
 
-        // 텍스트 갱신
-        mCostLabel.text = $"{mSellInfo.Cost} 골드";
-
+            // 텍스트 갱신
+            mCostLabel.text = $"{mSellInfo.Cost} 골드";
+            Debug.Log(mSellInfo.ItemAmount);
+        }
+            
     }
 
     public void InitSlot(ItemShopSlotInfo sellItem, int shopLevel)
@@ -71,6 +76,9 @@ public class ItemShopSlot : MonoBehaviour
 
     public void Buy()
     {
+        if(interactable == false)
+            return;
+        Debug.Log("구매");
         // 가격 지불
         InventoryMain.Instance.CurrentCoin -= mSellInfo.Cost;
         Debug.Log(InventoryMain.Instance.CurrentCoin);
