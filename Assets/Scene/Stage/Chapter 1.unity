@@ -644,7 +644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadingWaitTime: 6
-  Loading: {fileID: 1070688639}
   canvas: {fileID: 1519344692}
 --- !u!1001 &862505079
 PrefabInstance:
@@ -5441,7 +5440,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519344692}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
