@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: -6272428087550858397}
   - component: {fileID: 6351855984550105093}
   - component: {fileID: 2997019190854331964}
+  - component: {fileID: 2026713587262518952}
   m_Layer: 7
   m_Name: EnemySquare
   m_TagString: Enemy
@@ -422,6 +423,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2026713587262518952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630655988997322142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db19756e6cf33d43afc57e72c936ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7945418688513849631
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ public class Store : MonoBehaviour
     public ItemShopSlot Slot;
     private void Start()
     {
-        Debug.Log(num + "¤·¤·");
         ItemShopManager.Instance.OpenShop(mItemShop.mSellItemInfos, mItemShop.ShopLevel, num, transform.position, Slot);
     }
     private void OnTriggerEnter(Collider other)
@@ -30,7 +29,7 @@ public class Store : MonoBehaviour
 
     private void Update()
     {
-        if (isInTrigger && Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Interact")))
+        if (isInTrigger && Input.GetKeyDown(Managers.KeyInput.GetKeyCode("Interact")))
         {
             Debug.Log("Interact");
             ItemShopManager.Instance.BuyItem(Slot);

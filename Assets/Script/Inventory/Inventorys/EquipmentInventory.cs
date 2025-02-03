@@ -98,7 +98,7 @@ public class EquipmentInventory : InventoryBase
         //옵션이 켜져있는경우 비활성화
         //if (GameMenuManager.IsOptionActive) { return; }
 
-        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Settings")))
+        if (Input.GetKeyDown(Managers.KeyInput.GetKeyCode("Settings")))
         {
             if (mInventoryBase.activeInHierarchy)
             {

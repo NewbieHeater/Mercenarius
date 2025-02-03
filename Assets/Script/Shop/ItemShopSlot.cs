@@ -46,7 +46,6 @@ public class ItemShopSlot : MonoBehaviour
         {
             interactable = false;
             mCostLabel.text = "판매완료";
-            Debug.Log(mSellInfo.ItemAmount);
         }
         else
         {
@@ -54,7 +53,6 @@ public class ItemShopSlot : MonoBehaviour
 
             // 텍스트 갱신
             mCostLabel.text = $"{mSellInfo.Cost} 골드";
-            Debug.Log(mSellInfo.ItemAmount);
         }
             
     }

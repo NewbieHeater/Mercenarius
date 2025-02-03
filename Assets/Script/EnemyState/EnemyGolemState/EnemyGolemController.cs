@@ -181,11 +181,7 @@ public class EnemyGolemController : MonoBehaviour
         stateMachineGolem.DoOperateUpdate();
     }
 
-    void OnDisable()
-    {
-        ObjectPooler.ReturnToPool(gameObject);
-        CancelInvoke();
-    }
+    
 
     public void AnimeEnded()
     {

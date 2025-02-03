@@ -14,12 +14,12 @@ public class AttackState : IState<Character>
 
     public void OperateUpdate(Character sender)
     {
-        if (KeyManager.Instance.GetKeyDown("BasicAttack"))
+        if (Managers.KeyInput.GetKeyDown("BasicAttack"))
         {
             sender.animator.SetTrigger("isAttack");
         }
 
-        if (KeyManager.Instance.GetKeyDown("Dash"))
+        if (Managers.KeyInput.GetKeyDown("Dash"))
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }

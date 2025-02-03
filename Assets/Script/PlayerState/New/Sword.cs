@@ -17,19 +17,16 @@ public class Sword : Character
     }
     void OnMouseClicked(Define.MouseEvent evt)
     {
-        if (evt == Define.MouseEvent.Press)
-            Debug.Log("Mouse Pressed");
-        else if (evt == Define.MouseEvent.Click)
-            Debug.Log("Mouse Clicked");
+        
     }
 
     void OnKeyboard()
     {
-        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot0"))
+        if (Managers.KeyInput.GetKeyDown("SkillQuickSlot0"))
         {
-            Managers.UI.ShowPopupUI<UI_Button>();
+            Managers.UI.ShowPopupUI<UI_StartSceneBind>();
         }
-        if (KeyManager.Instance.GetKeyDown("SkillQuickSlot1"))
+        if (Managers.KeyInput.GetKeyDown("SkillQuickSlot1"))
         {
             Managers.UI.ClosePopupUI();
         }

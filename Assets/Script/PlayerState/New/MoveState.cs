@@ -27,11 +27,11 @@ public class MoveState : IState<Character>
         if(Input.GetMouseButton(0))
             sender.agent.SetDestination(sender.MousePosition());
         sender.FlipSprite();
-        if (KeyManager.Instance.GetKeyDown("BasicAttack"))
+        if (Managers.KeyInput.GetKeyDown("BasicAttack"))
         {
             sender.sm.SetState(sender.dicState["Attack"]);
         }
-        else if (KeyManager.Instance.GetKeyDown("Dash"))
+        else if (Managers.KeyInput.GetKeyDown("Dash"))
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }

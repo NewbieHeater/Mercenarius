@@ -156,11 +156,7 @@ public class EnemyRangerController : MonoBehaviour
         stateMachineRanger.DoOperateUpdate();
     }
 
-    void OnDisable()
-    {
-        ObjectPooler.ReturnToPool(gameObject);
-        CancelInvoke();
-    }
+
 
     public void AnimeEnded()
     {

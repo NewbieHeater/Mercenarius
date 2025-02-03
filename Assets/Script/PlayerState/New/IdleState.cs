@@ -7,7 +7,6 @@ public class IdleState : IState<Character>
     public void OperateEnter(Character sender)
     {
         character = sender;
-        Debug.Log("Idle");
     }
 
     public void OperateExit(Character sender)
@@ -17,11 +16,11 @@ public class IdleState : IState<Character>
 
     public void OperateUpdate(Character sender)
     {
-        if (KeyManager.Instance.GetKeyDown("BasicAttack"))
+        if (Managers.KeyInput.GetKeyDown("BasicAttack"))
         {
             sender.sm.SetState(sender.dicState["Attack"]);
         }
-        else if (KeyManager.Instance.GetKeyDown("Dash"))
+        else if (Managers.KeyInput.GetKeyDown("Dash"))
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }

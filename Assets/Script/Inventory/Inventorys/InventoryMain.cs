@@ -104,7 +104,7 @@ public class InventoryMain : InventoryBase
         //옵션이 켜져있는경우 비활성화
         //if (GameMenuManager.IsOptionActive) { return; }
 
-        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Inventory")))
+        if (Input.GetKeyDown(Managers.KeyInput.GetKeyCode("Inventory")))
         {
             if (!IsInventoryActive)
                 OpenInventory();
