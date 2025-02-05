@@ -1,17 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
-
+public interface ISettingsSaver
+{
+    void SaveSettings();
+}
 public class SettingsValue : MonoBehaviour
 {
-    protected Dictionary<string, int> volumeSettings = new Dictionary<string, int>();
-
-    public void SaveSettings()
+    // 이 스크립트를 소리 설정(VolumeVariable)과 해상도 설정(ResolutionManager)이 포함된 부모 오브젝트에 붙입니다.
+    // 버튼의 OnClick 이벤트에 이 메서드를 연결하세요.
+    public void SaveAllSettings()
     {
-        foreach (var setting in volumeSettings)
+        // 부모 오브젝트의 자식들 중 ISettingsSaver를 구현한 모든 컴포넌트를 가져옵니다.
+        ISettingsSaver[] settingSavers = GetComponentsInChildren<ISettingsSaver>();
+
+        foreach (ISettingsSaver saver in settingSavers)
         {
-            PlayerPrefs.SetInt(setting.Key, setting.Value);
+            saver.SaveSettings();
         }
-        PlayerPrefs.Save();
-        Debug.Log("설정 저장 완료");
+        Debug.Log("모든 설정 저장 완료");
     }
 }

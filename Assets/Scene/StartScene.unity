@@ -156,11 +156,11 @@ MonoBehaviour:
       m_Calls: []
   pools:
   - tag: MainMenu
-    prefab: {fileID: 4348938125309293031, guid: d91c43b02113fd1448dd95ea9a7cf2e0,
+    prefab: {fileID: 8737562563530350035, guid: d91c43b02113fd1448dd95ea9a7cf2e0,
       type: 3}
     size: 1
   - tag: SystemMenu
-    prefab: {fileID: 6603638517140548361, guid: 439248e99d9a9694fad0f596ba7352a5,
+    prefab: {fileID: 2371737717572119288, guid: 439248e99d9a9694fad0f596ba7352a5,
       type: 3}
     size: 1
 --- !u!4 &166654404

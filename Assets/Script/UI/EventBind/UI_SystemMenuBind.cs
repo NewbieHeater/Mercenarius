@@ -21,9 +21,7 @@ public class UI_SystemMenuBind : UI_Popup
 
     enum Texts
     {
-        MasterVolumeText,
-        MusicVolumeText,
-        SoundEffectVolumeText,
+
     }
 
     enum GameObjects
