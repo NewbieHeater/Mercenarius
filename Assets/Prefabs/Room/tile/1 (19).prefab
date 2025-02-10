@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5554883089111120362}
+  - {fileID: 2514999069582910772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5790583733714825985
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &4867628304842633694
+--- !u!1 &7338982784323128630
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,37 +115,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5554883089111120362}
-  - component: {fileID: 2792045222164485534}
-  m_Layer: 9
-  m_Name: Stage1_pond_All_4
+  - component: {fileID: 2514999069582910772}
+  - component: {fileID: 537110576466767580}
+  m_Layer: 0
+  m_Name: Stage1_pond_All 1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5554883089111120362
+--- !u!4 &2514999069582910772
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4867628304842633694}
+  m_GameObject: {fileID: 7338982784323128630}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 31.5, y: 31.5, z: 31.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 32, y: 32, z: 32}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7921886318133036587}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!212 &2792045222164485534
+--- !u!212 &537110576466767580
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4867628304842633694}
+  m_GameObject: {fileID: 7338982784323128630}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1031196894, guid: 35b2212266bbb2a4d86ac74f60e086a4, type: 3}
+  m_Sprite: {fileID: 1503291984, guid: 2b34e831b6028d94e8cc0cafa81b2884, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
