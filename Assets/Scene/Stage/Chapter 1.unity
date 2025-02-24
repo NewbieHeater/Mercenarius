@@ -4789,11 +4789,9 @@ MonoBehaviour:
   BossWaitTime: 5
   TrialWaitTime: 0.7
   StoreWaitTime: 0.5
-  ItemWaitTime: 0.3
   boss: {fileID: 5634572082239235217, guid: dbcbc26c108f4454884f96e7f83007da, type: 3}
   trial: {fileID: 5634572082239235217, guid: 1fc729601f569064297ded9a322c46be, type: 3}
   store: {fileID: 5634572082239235217, guid: 328c1ca3c75d6b248ae823989b80d904, type: 3}
-  item: {fileID: 6680983431926819072, guid: 556375f7ec8dcc646b5e219cf94f9e30, type: 3}
 --- !u!4 &936428187
 Transform:
   m_ObjectHideFlags: 0

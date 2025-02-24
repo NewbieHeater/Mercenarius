@@ -21,50 +21,19 @@ public class RoomTemplates : MonoBehaviour
     public float BossWaitTime;
     public float TrialWaitTime;
     public float StoreWaitTime;
-    public float ItemWaitTime;
 
     private bool spawnedBoss;
     private bool spawnedTrial;
     private bool spawnedStore;
-    private bool spawnedItem;
 
     public GameObject boss;
     public GameObject trial;
     public GameObject store;
-    public GameObject item;
 
-    private int a, b, c, d;
+    private int b, c, d;
     
     private void Update()
     {
-        // 아이템방 생성
-        if (ItemWaitTime <= 0 && spawnedItem == false)
-        {
-            for (a = 0; a < rooms.Count; a++)
-            {
-                if (a == rooms.Count - 1)
-                {
-                    Instantiate(item, rooms[a].transform.position, Quaternion.identity);
-                    spawnedItem = true;
-                }
-            }
-            if (a < 11)
-            {
-                // 현재 활성화된 씬 이름 가져오기
-                string currentSceneName = SceneManager.GetActiveScene().name;
-
-                // 현재 씬 다시 로드
-                SceneManager.LoadScene(currentSceneName);
-            }
-        }
-        else
-        {
-            if (ItemWaitTime >= 0)
-            {
-                ItemWaitTime -= Time.deltaTime;
-            }
-        }
-
         // 상점방 생성
         if (StoreWaitTime <= 0 && spawnedStore == false)
         {
@@ -76,7 +45,7 @@ public class RoomTemplates : MonoBehaviour
                     spawnedStore = true;
                 }
             }
-            if (b <= a)
+            if (b < 11)
             {
                 // 현재 활성화된 씬 이름 가져오기
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -130,7 +99,6 @@ public class RoomTemplates : MonoBehaviour
                 {
                     Instantiate(boss, rooms[d].transform.position, Quaternion.identity);
                     spawnedBoss = true;
-                    Destroy(rooms[a - 1]);
                     Destroy(rooms[b - 1]);
                     Destroy(rooms[c - 1]);
                     Destroy(rooms[d]);
