@@ -17,6 +17,7 @@ public class UI_SystemMenuBind : UI_Popup
         Sound,
         Graphics,
         KeySetting,
+        LeaveButton,
     }
 
     enum Texts
@@ -58,14 +59,22 @@ public class UI_SystemMenuBind : UI_Popup
         buttonToPanelMap[Buttons.Graphics] = GameObjects.OptionGraphicParent;
         buttonToPanelMap[Buttons.KeySetting] = GameObjects.OptionKeySettingParent;
 
-        // 버튼 이벤트 등록 자동화
         foreach (Buttons btn in Enum.GetValues(typeof(Buttons)))
         {
             GetButton((int)btn).gameObject.BindEvent((PointerEventData data) =>
             {
-                ChangeSettingScreen(btn);
+                if (btn == Buttons.LeaveButton)
+                {
+                    // 나가기 버튼 클릭 시 팝업을 닫는 함수 호출
+                    ClosePopupUI();
+                }
+                else
+                {
+                    ChangeSettingScreen(btn);
+                }
             });
         }
+
 
         // 초기화면 설정
         ChangeSettingScreen(Buttons.Sound);

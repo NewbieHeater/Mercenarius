@@ -132,12 +132,10 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("드래그 종료");
-        if (mItem == null)
-        {
-            Debug.Log("askf");
-            DragSlot.Instance.AlphaZero();
-            DragSlot.Instance.CurrentSlot = null;
-        }   
+        Debug.Log("askf");
+        DragSlot.Instance.AlphaZero();
+        DragSlot.Instance.CurrentSlot = null;
+  
     }
 
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트

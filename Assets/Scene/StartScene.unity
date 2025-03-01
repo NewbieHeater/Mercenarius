@@ -163,6 +163,10 @@ MonoBehaviour:
     prefab: {fileID: 2371737717572119288, guid: 439248e99d9a9694fad0f596ba7352a5,
       type: 3}
     size: 1
+  - tag: SaveMenu
+    prefab: {fileID: 6517474483031704125, guid: a06801b9b23dd4645b1867c39fe4da44,
+      type: 3}
+    size: 1
 --- !u!4 &166654404
 Transform:
   m_ObjectHideFlags: 0

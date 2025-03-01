@@ -18,7 +18,7 @@ abstract public class InventoryBase : MonoBehaviour
     {
         if (mInventoryBase.activeSelf)
         {
-            mInventoryBase.SetActive(false);
+            //mInventoryBase.SetActive(false);
         }
 
         mSlots = mInventorySlotsParent.GetComponentsInChildren<InventorySlot>();

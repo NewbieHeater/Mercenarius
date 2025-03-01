@@ -1,31 +1,41 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class AttackState : IState<Character>
 {
+    Character character;
+    
     public void OperateEnter(Character sender)
     {
-        
+        character = sender;
+        if (character.agent != null)
+        {
+            character.agent.isStopped = true;
+            //character.agent.enabled = false;
+        }
+        character.animator.SetBool("Attack", true);
+        character.BasicAttack();
     }
 
     public void OperateExit(Character sender)
     {
-        sender.animator.SetBool("Attack", false);
+        character.animator.SetBool("Attack", false);
+        character.ResetCombo();
     }
 
     public void OperateUpdate(Character sender)
     {
         if (Managers.KeyInput.GetKeyDown("BasicAttack"))
-        {
-            sender.animator.SetTrigger("isAttack");
-        }
+            character.BasicAttack();
+        
 
-        if (Managers.KeyInput.GetKeyDown("Dash"))
+        if (Managers.KeyInput.GetKeyDown("Dash") && character.CheckMousePosition())
         {
-            sender.sm.SetState(sender.dicState["Dash"]);
+            character.sm.SetState(character.dicState["Dash"]);
         }
-        else if (sender.animator.GetBool("Attack") == true)
+        else if (character.animator.GetBool("Attack") == true)
             return;
         else
-            sender.sm.SetState(sender.dicState["Idle"]);
+            character.sm.SetState(character.dicState["Idle"]);
     }
 }

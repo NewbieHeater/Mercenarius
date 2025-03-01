@@ -57,7 +57,7 @@ public class UI_StartSceneBind : UI_Popup
 
     public void OnNewGameButtonClicked(PointerEventData data)
     {
-        ClosePopupUI();   
+        Managers.Scene.LoadScene(Define.Scene.Game);
 
     }
 
@@ -68,7 +68,7 @@ public class UI_StartSceneBind : UI_Popup
 
     public void OnLoadGameButtonClicked(PointerEventData data)
     {
-        Managers.UI.ShowPopupUI<UI_SystemMenuBind>("SystemMenu");
+        Managers.UI.ShowPopupUI<UI_SaveMenu>("SaveMenu");
     }
 
 }

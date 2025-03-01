@@ -63,7 +63,7 @@ public class KeySettingController : MonoBehaviour
 
                             // 빨간색으로 설정 완료됨을 연출
                             mKeyButtonColorCor = StartCoroutine(CorChangeButtonColor(Color.red));
-                            
+
                         }
                     }
                 }

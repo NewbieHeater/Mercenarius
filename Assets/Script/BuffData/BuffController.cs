@@ -77,7 +77,7 @@ public class BuffController : MonoBehaviour
         switch (buff.buffType)
         {
             case BuffType.AttackBuff:
-                statData.baseAttack += buff.value;
+                statData.mBaseAttack += buff.value;
                 break;
 
             case BuffType.Bleed:
@@ -113,7 +113,7 @@ public class BuffController : MonoBehaviour
             switch (buff.buffType)
             {
                 case BuffType.AttackBuff:
-                    statData.baseAttack -= buff.value;
+                    statData.mBaseAttack -= buff.value;
                     break;
             }
 

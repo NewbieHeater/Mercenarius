@@ -23,33 +23,33 @@ public class StatData
 
 
     [field: Header("초기화 시 기본 공격력")]
-    [field: SerializeField] public float baseAttack { set; get; }
+    [field: SerializeField] public float mBaseAttack { set; get; }
     public float curAttack
     {
         get
         {
-            return ((baseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
+            return ((mBaseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
         }
     }
     [field: SerializeField] public float AttackRange { set; get; }
 
     [field: Header("초기화 시 기본 공격속도")]
-    [field: SerializeField] public float baseAttackSpeed { private set; get; }
+    [field: SerializeField] public float mBaseAttackSpeed { private set; get; }
     public float curAttackSpeed
     {
         get
         {
-            return ((baseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
+            return ((mBaseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
         }
     }
 
     [field: Header("초기화 시 기본 이동속도")]
-    [field: SerializeField] public float baseMovementSpeed { private set; get; }
+    [field: SerializeField] public float mBaseMovementSpeed { private set; get; }
     public float curMovementSpeed
     {
         get
         {
-            return baseMovementSpeed +
+            return mBaseMovementSpeed +
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
@@ -57,33 +57,33 @@ public class StatData
 
 
     [field: Header("초기화 시 기본 방어력")]
-    [field: SerializeField] public float baseDefense {  set; get; }
+    [field: SerializeField] public float mBaseDefense {  set; get; }
     public float DefenseCurrent
     {
         get
         {
-            return baseDefense + 
+            return mBaseDefense + 
             (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Defense : 0f);
         }
     }
 
 
     [field: Header("초기화 시 기본 대쉬쿨다운")]
-    [field: SerializeField] public float baseDashCoolDown {  set; get; }
+    [field: SerializeField] public float mBaseDashCoolDown {  set; get; }
     public float curDashCoolDown
     {
         get
         {
-            return (baseDashCoolDown);
+            return (mBaseDashCoolDown);
         }
     }
     [field: Header("초기화 시 기본 대쉬거리")]
-    [field: SerializeField] public float baseDashPower {  set; get; }
+    [field: SerializeField] public float mBaseDashPower {  set; get; }
     public float curDashPower
     {
         get
         {
-            return (baseDashPower);
+            return (mBaseDashPower);
         }
     }
     [field: Header("초기화 시 기본 대쉬속도")]
@@ -92,7 +92,15 @@ public class StatData
     {
         get
         {
-            return (1f / baseDashSpeed);
+            return (baseDashSpeed);
+        }
+    }
+    public int mInvincibleTime { set; get; }
+    public int invincibleTime
+    {
+        get
+        {
+            return mInvincibleTime;
         }
     }
 

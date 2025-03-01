@@ -22,4 +22,6 @@ MonoBehaviour:
   mItemDescription: dfd
   mEffect:
     mDamage: 10
+    mHp: 0
     mDefense: 15
+    mSpeed: 0

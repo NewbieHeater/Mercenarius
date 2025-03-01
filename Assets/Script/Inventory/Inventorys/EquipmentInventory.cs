@@ -45,8 +45,8 @@ public class EquipmentInventory : InventoryBase
 
         mCurrentEquipmentEffect = calcedEffect;
 
-        mDamageLabel.text = mCurrentEquipmentEffect.Damage.ToString();
-        mDefenseLabel.text = mCurrentEquipmentEffect.Defense.ToString();
+        //mDamageLabel.text = mCurrentEquipmentEffect.Damage.ToString();
+       // mDefenseLabel.text = mCurrentEquipmentEffect.Defense.ToString();
     }
 
     /// <summary>
@@ -93,28 +93,6 @@ public class EquipmentInventory : InventoryBase
         return null;
     }
 
-    private void Update()
-    {
-        //옵션이 켜져있는경우 비활성화
-        //if (GameMenuManager.IsOptionActive) { return; }
-
-        if (Input.GetKeyDown(Managers.KeyInput.GetKeyCode("Settings")))
-        {
-            if (mInventoryBase.activeInHierarchy)
-            {
-                mInventoryBase.SetActive(false);
-                IsInventoryActive = false;
-                GameManager.Instance.isUIOpen = false;
-                //UtilityManager.TryLockCursor();
-            }
-            else
-            {
-                mInventoryBase.SetActive(true);
-                IsInventoryActive = true;
-                GameManager.Instance.isUIOpen = true;
-                //UtilityManager.UnlockCursor();
-            }
-        }
-    }
+    
 
 }

@@ -54,13 +54,15 @@ public class ObjectPooler : MonoBehaviour
 
 
     public static GameObject SpawnFromPool(string tag, Vector3 position) =>
-        inst._SpawnFromPool(tag, position, inst.transform);
+        inst._SpawnFromPool(tag, position, inst.transform, Quaternion.identity);
+    public static GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) =>
+        inst._SpawnFromPool(tag, position, inst.transform, rotation);
     public static GameObject SpawnFromPool(string tag, Vector3 position, Transform parent) =>
-        inst._SpawnFromPool(tag, position, parent);
+        inst._SpawnFromPool(tag, position, parent, Quaternion.identity);
 
     public static T SpawnFromPool<T>(string tag, Vector3 position) where T : Component
     {
-        GameObject obj = inst._SpawnFromPool(tag, position, inst.transform);
+        GameObject obj = inst._SpawnFromPool(tag, position, inst.transform, Quaternion.identity);
         if (obj.TryGetComponent(out T component))
             return component;
         else
@@ -71,7 +73,18 @@ public class ObjectPooler : MonoBehaviour
     }
     public static T SpawnFromPool<T>(string tag, Vector3 position, Transform parent) where T : Component
     {
-        GameObject obj = inst._SpawnFromPool(tag, position, parent ?? inst.transform);
+        GameObject obj = inst._SpawnFromPool(tag, position, parent ?? inst.transform, Quaternion.identity);
+        if (obj.TryGetComponent(out T component))
+            return component;
+        else
+        {
+            obj.SetActive(false);
+            throw new Exception($"Component not found");
+        }
+    }
+    public static T SpawnFromPool<T>(string tag, Vector3 position, Quaternion rotation) where T : Component
+    {
+        GameObject obj = inst._SpawnFromPool(tag, position, inst.transform, rotation);
         if (obj.TryGetComponent(out T component))
             return component;
         else
@@ -117,7 +130,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    GameObject _SpawnFromPool(string tag, Vector3 position, Transform transform)
+    GameObject _SpawnFromPool(string tag, Vector3 position, Transform transform, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
             throw new Exception($"Pool with tag {tag} doesn't exist.");
@@ -134,6 +147,7 @@ public class ObjectPooler : MonoBehaviour
         // 큐에서 꺼내서 사용
         GameObject objectToSpawn = poolQueue.Dequeue();
         objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
         objectToSpawn.transform.SetParent(transform);
         objectToSpawn.SetActive(true);
 

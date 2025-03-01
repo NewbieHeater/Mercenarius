@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2daa42591e007074a817c9ae5102e3d7, type: 3}
   m_Name: Item 1
   m_EditorClassIdentifier: 
-  mItemID: 0
+  mItemID: 3
   mCanOverlap: 0
   mIsInteractivity: 1
   mIsConsumable: 0
@@ -22,4 +22,6 @@ MonoBehaviour:
   mItemDescription: 
   mEffect:
     mDamage: 0
+    mHp: 0
     mDefense: 0
+    mSpeed: 0

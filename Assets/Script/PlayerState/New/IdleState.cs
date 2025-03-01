@@ -11,7 +11,7 @@ public class IdleState : IState<Character>
 
     public void OperateExit(Character sender)
     {
-
+        //Managers.Input.BindActionKeyDown("Attack", OnKeyboard);
     }
 
     public void OperateUpdate(Character sender)
@@ -20,7 +20,11 @@ public class IdleState : IState<Character>
         {
             sender.sm.SetState(sender.dicState["Attack"]);
         }
-        else if (Managers.KeyInput.GetKeyDown("Dash"))
+        else if (Managers.KeyInput.GetKeyDown("SkillQuickSlot2"))//B
+        {
+            sender.sm.SetState(sender.dicState["SharedSkill"]);
+        }
+        else if (Managers.KeyInput.GetKeyDown("Dash") && sender.CheckMousePosition())
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }
@@ -28,7 +32,10 @@ public class IdleState : IState<Character>
         {
             sender.sm.SetState(sender.dicState["Move"]);
         }
+        
         //else
-            //sender.sm.SetState(sender.dicState["Idle"]);
+        //sender.sm.SetState(sender.dicState["Idle"]);
     }
+
+
 }

@@ -29,7 +29,6 @@ public class HitStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 
         _golemController.Hpbar.fillAmount = _golemController.curHealth / _golemController.maxHealth;                                      //체력바
         KnockBackPos = transform.position + (-_golemController.target.transform.position + transform.position).normalized * knockbackSpeed;   //넉백위치
-        Debug.Log(_golemController.curHealth / _golemController.maxHealth);
     }
     float knockbackSpeed = 0.3f;
 

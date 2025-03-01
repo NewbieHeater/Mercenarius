@@ -21,7 +21,7 @@ public class Managers : MonoBehaviour
     private void Awake()
     {
         KeyInput.Init();
-        
+        //Input.EInit();
     }
     void Start()
     {

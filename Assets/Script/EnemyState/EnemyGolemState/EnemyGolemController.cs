@@ -62,7 +62,7 @@ public class EnemyGolemController : MonoBehaviour
         maxHealth = 100f;
         curHealth = 100f;
         //이동속도
-        originalSpeed = stat.baseMovementSpeed;
+        originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
         //공격범위
         attackRange = stat.AttackRange;
@@ -95,7 +95,7 @@ public class EnemyGolemController : MonoBehaviour
         target = GameManager._instance.character.GetComponent<Rigidbody>();
         curHealth = stat.curHp;
         //이동속도
-        originalSpeed = stat.baseMovementSpeed;
+        originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
         //공격범위
         attackRange = stat.AttackRange;
@@ -196,6 +196,6 @@ public class EnemyGolemController : MonoBehaviour
         {
             stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);
 
-        }
+        }                                                                                           
     }
 }
