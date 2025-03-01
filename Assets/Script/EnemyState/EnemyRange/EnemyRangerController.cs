@@ -48,7 +48,7 @@ public class EnemyRangerController : MonoBehaviour
     }
     void Start()
     {
-        target = GameManager._instance.player.GetComponent<Rigidbody>();
+        target = GameManager._instance.character.GetComponent<Rigidbody>();
         //GetComponentInParent
         //AttackPoint = transform.GetChild(0);
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -81,7 +81,7 @@ public class EnemyRangerController : MonoBehaviour
     {
         //agent.enabled = true;
         MoveAble = true;
-        target = GameManager._instance.player.GetComponent<Rigidbody>();
+        target = GameManager._instance.character.GetComponent<Rigidbody>();
         isLive = true;
     }
     void Update()
@@ -156,11 +156,7 @@ public class EnemyRangerController : MonoBehaviour
         stateMachineRanger.DoOperateUpdate();
     }
 
-    void OnDisable()
-    {
-        ObjectPooler.ReturnToPool(gameObject);
-        CancelInvoke();
-    }
+
 
     public void AnimeEnded()
     {

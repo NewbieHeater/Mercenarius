@@ -7,19 +7,35 @@ using TMPro;
 public class ItemShopSlot : MonoBehaviour
 {
     [SerializeField] private InventorySlot mItemSlot;
-    [SerializeField] private TextMeshProUGUI mNameLabel, mCostLabel;
-    [SerializeField] private Button mBuyButton;
-
+    [SerializeField] private TextMeshProUGUI mCostLabel;
+    [SerializeField] private TextMeshProUGUI mItemShopInteract;
+    private bool interactable = false;
+    private bool interactOn = false;
     private ItemShopSlotInfo mSellInfo; // 현재 판매중인 아이템의 정보
     private int mCalledShopLevel; // 현재 상점의 판매 단계
 
+    private void Awake()
+    {
+        mItemShopInteract.enabled = false;
+    }
+    public void InteractionManageEnter()
+    {
+        mItemShopInteract.enabled = true;
+        interactOn = true;
+    }
+    public void InteractionManageExit()
+    {
+
+        mItemShopInteract.enabled = false;
+        interactOn = false;
+    }
     public void RefreshSlot()
     {
         // 아이템의 요구 단계가 현재 상점의 판매 단계가 보다 높으면?
         if (mSellInfo.NeedShopLevel > mCalledShopLevel)
         {
             mCostLabel.text = "지금은 구매할 수 없습니다.";
-            mBuyButton.interactable = false;
+            interactable = false;
 
             return;
         }
@@ -27,13 +43,18 @@ public class ItemShopSlot : MonoBehaviour
         // 구매버튼 비활성화
         if (InventoryMain.Instance.CurrentCoin < mSellInfo.Cost
             || mSellInfo.ItemAmount <= 0)
-            mBuyButton.interactable = false;
+        {
+            interactable = false;
+            mCostLabel.text = "판매완료";
+        }
         else
-            mBuyButton.interactable = true;
+        {
+            interactable = true;
 
-        // 텍스트 갱신
-        mCostLabel.text = $"{mSellInfo.Cost} ({mSellInfo.ItemAmount}개 남음)";
-
+            // 텍스트 갱신
+            mCostLabel.text = $"{mSellInfo.Cost} 골드";
+        }
+            
     }
 
     public void InitSlot(ItemShopSlotInfo sellItem, int shopLevel)
@@ -48,11 +69,14 @@ public class ItemShopSlot : MonoBehaviour
         // 슬롯 설정
         
         InventoryMain.Instance.AcquireItem(mSellInfo.SellItem, mItemSlot, mSellInfo.GiveAmountPerTrade);
-        mNameLabel.text = ItemDataManager.Instance.GetName(mSellInfo.SellItem.ItemID);
+
     }
 
-    public void BTN_BuyItem()
+    public void Buy()
     {
+        if(interactable == false)
+            return;
+        Debug.Log("구매");
         // 가격 지불
         InventoryMain.Instance.CurrentCoin -= mSellInfo.Cost;
         Debug.Log(InventoryMain.Instance.CurrentCoin);
@@ -65,7 +89,6 @@ public class ItemShopSlot : MonoBehaviour
 
         // 모든 슬롯을 갱신
         ItemShopManager.Instance.RefreshSlots();
-
         // 사운드 재생
         //SoundManager.Instance.PlaySound2D("Item purchase " + SoundManager.Range(1, 3));
     }

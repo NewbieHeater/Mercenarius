@@ -13,7 +13,7 @@ public class ItemActionManager : MonoBehaviour
     /// </summary>
     public static string _SkillMessage = "ActiveSkill";
 
-    [SerializeField] private PlayerController mPlayerController;
+    [SerializeField] private Character mCharacter;
 
     [Header("Preloaded objects into the scene")]
     [SerializeField] private GameObject[] mObjects;
@@ -61,7 +61,7 @@ public class ItemActionManager : MonoBehaviour
 
                     break;
                 }
-            case ItemType.Equipment_HELMET:
+            case ItemType.Equipment_NORMAL:
             case ItemType.Equipment_ARMORPLATE:
             case ItemType.Equipment_GLOVE:
             case ItemType.Equipment_PANTS:

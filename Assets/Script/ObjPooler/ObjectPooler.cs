@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using Unity.VisualScripting;
+
 
 
 #if UNITY_EDITOR
@@ -26,7 +28,12 @@ public class ObjectPoolerEditor : Editor
 public class ObjectPooler : MonoBehaviour
 {
     static ObjectPooler inst;
-    void Awake() => inst = this;
+    void Awake()
+    {
+        inst = this;
+        Init();
+    }
+
     public UnityEvent readyToPool;
     [Serializable]
     public class Pool
@@ -38,6 +45,7 @@ public class ObjectPooler : MonoBehaviour
 
     [SerializeField] Pool[] pools;
     List<GameObject> spawnObjects;
+
     Dictionary<string, Queue<GameObject>> poolDictionary;
     readonly string INFO = " 오브젝트에 다음을 적으세요 \nvoid OnDisable()\n{\n" +
         "    ObjectPooler.ReturnToPool(gameObject);    // 한 객체에 한번만 \n" +
@@ -46,11 +54,15 @@ public class ObjectPooler : MonoBehaviour
 
 
     public static GameObject SpawnFromPool(string tag, Vector3 position) =>
-        inst._SpawnFromPool(tag, position, Quaternion.identity);
+        inst._SpawnFromPool(tag, position, inst.transform, Quaternion.identity);
+    public static GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) =>
+        inst._SpawnFromPool(tag, position, inst.transform, rotation);
+    public static GameObject SpawnFromPool(string tag, Vector3 position, Transform parent) =>
+        inst._SpawnFromPool(tag, position, parent, Quaternion.identity);
 
     public static T SpawnFromPool<T>(string tag, Vector3 position) where T : Component
     {
-        GameObject obj = inst._SpawnFromPool(tag, position, Quaternion.identity);
+        GameObject obj = inst._SpawnFromPool(tag, position, inst.transform, Quaternion.identity);
         if (obj.TryGetComponent(out T component))
             return component;
         else
@@ -59,10 +71,20 @@ public class ObjectPooler : MonoBehaviour
             throw new Exception($"Component not found");
         }
     }
-
+    public static T SpawnFromPool<T>(string tag, Vector3 position, Transform parent) where T : Component
+    {
+        GameObject obj = inst._SpawnFromPool(tag, position, parent ?? inst.transform, Quaternion.identity);
+        if (obj.TryGetComponent(out T component))
+            return component;
+        else
+        {
+            obj.SetActive(false);
+            throw new Exception($"Component not found");
+        }
+    }
     public static T SpawnFromPool<T>(string tag, Vector3 position, Quaternion rotation) where T : Component
     {
-        GameObject obj = inst._SpawnFromPool(tag, position, rotation);
+        GameObject obj = inst._SpawnFromPool(tag, position, inst.transform, rotation);
         if (obj.TryGetComponent(out T component))
             return component;
         else
@@ -108,7 +130,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    GameObject _SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    GameObject _SpawnFromPool(string tag, Vector3 position, Transform transform, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
             throw new Exception($"Pool with tag {tag} doesn't exist.");
@@ -126,12 +148,13 @@ public class ObjectPooler : MonoBehaviour
         GameObject objectToSpawn = poolQueue.Dequeue();
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
+        objectToSpawn.transform.SetParent(transform);
         objectToSpawn.SetActive(true);
 
         return objectToSpawn;
     }
 
-    void Start()
+    void Init()
     {
         spawnObjects = new List<GameObject>();
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -159,6 +182,7 @@ public class ObjectPooler : MonoBehaviour
     {
         var obj = Instantiate(prefab, transform);
         obj.name = tag;
+        //Managers.Resource.Disable(obj);
         obj.SetActive(false); // 비활성화시 ReturnToPool을 하므로 Enqueue가 됨
         return obj;
     }

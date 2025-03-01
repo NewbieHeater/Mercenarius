@@ -13,7 +13,6 @@ public class AttackStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
     public void OperateEnter(EnemyGolemController sender)
     {
         _golemController = sender;
-        
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!anim) anim = GetComponentInChildren<Animator>();
         if (!sprite) sprite = GetComponentInChildren<SpriteRenderer>();

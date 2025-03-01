@@ -45,8 +45,8 @@ public class EquipmentInventory : InventoryBase
 
         mCurrentEquipmentEffect = calcedEffect;
 
-        mDamageLabel.text = mCurrentEquipmentEffect.Damage.ToString();
-        mDefenseLabel.text = mCurrentEquipmentEffect.Defense.ToString();
+        //mDamageLabel.text = mCurrentEquipmentEffect.Damage.ToString();
+       // mDefenseLabel.text = mCurrentEquipmentEffect.Defense.ToString();
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class EquipmentInventory : InventoryBase
     {
         switch (type)
         {
-            case ItemType.Equipment_HELMET:
+            case ItemType.Equipment_NORMAL:
                 {
                     //장갑 슬롯은 두개이기때문에, 빈 슬롯을 우선으로 리턴하도록 한다.
                     if (mSlots[0].Item == null) { return mSlots[0]; }
@@ -93,28 +93,6 @@ public class EquipmentInventory : InventoryBase
         return null;
     }
 
-    private void Update()
-    {
-        //옵션이 켜져있는경우 비활성화
-        //if (GameMenuManager.IsOptionActive) { return; }
-
-        if (Input.GetKeyDown(KeyManager.Instance.GetKeyCode("Settings")))
-        {
-            if (mInventoryBase.activeInHierarchy)
-            {
-                mInventoryBase.SetActive(false);
-                IsInventoryActive = false;
-
-                //UtilityManager.TryLockCursor();
-            }
-            else
-            {
-                mInventoryBase.SetActive(true);
-                IsInventoryActive = true;
-
-                //UtilityManager.UnlockCursor();
-            }
-        }
-    }
+    
 
 }

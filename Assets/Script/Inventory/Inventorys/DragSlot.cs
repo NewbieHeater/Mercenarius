@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class DragSlot : Singleton<DragSlot>
 {
-    [HideInInspector] public InventorySlot CurrentSlot;
+    public InventorySlot CurrentSlot;
     [HideInInspector] public bool IsShiftMode;
     [SerializeField] private Image mItemImage;
 
@@ -14,6 +14,10 @@ public class DragSlot : Singleton<DragSlot>
     {
         mItemImage.sprite = _itemImage.sprite;
         SetColor(1);
+    }
+    public void AlphaZero()
+    {
+        SetColor(0);
     }
 
     public void SetColor(float alpha)

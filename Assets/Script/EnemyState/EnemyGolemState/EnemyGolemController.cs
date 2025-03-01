@@ -41,14 +41,14 @@ public class EnemyGolemController : MonoBehaviour
     private Animator anim;
     //public Transform MainBody;
     public UnitCode unitCode;
-    public Stat stat;
+    public StatData stat;
+
 
     private Dictionary<enemyGolemState, IState<EnemyGolemController>> dicState = new Dictionary<enemyGolemState, IState<EnemyGolemController>>();
     private StateMachine<EnemyGolemController> stateMachineGolem;
     private void Awake()
     {
-        stat = new Stat();
-        stat = stat.SetUnitStat(unitCode);
+        
     }
     void Start()
     {
@@ -58,20 +58,18 @@ public class EnemyGolemController : MonoBehaviour
         nav.updateRotation = false; 
         //MainBody = transform.parent;
         enemyRb = GetComponent<Rigidbody>();
-        //적종류
-        enemytype = stat.name;
         //체력
-        maxHealth = stat.maxHp;
-        curHealth = maxHealth;
+        maxHealth = 100f;
+        curHealth = 100f;
         //이동속도
-        originalSpeed = stat.originalSpeed;
+        originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
         //공격범위
         attackRange = stat.AttackRange;
         //공격속도
-        attackSpeed = stat.AttackSpeed;
+        attackSpeed = stat.curAttackSpeed;
         //공격 딜레이
-        beforCastDelay = stat.beforeCastDelay;
+        beforCastDelay = 1f;
 
         IState<EnemyGolemController> enemyGolemIdle = gameObject.AddComponent<IdleStateEnemyGolem>();
         IState<EnemyGolemController> enemyGolemMove = gameObject.AddComponent<MoveStateEnemyGolem>();
@@ -94,8 +92,17 @@ public class EnemyGolemController : MonoBehaviour
     void OnEnable()
     {
         MoveAble = true;
-        target = GameManager._instance.player.GetComponent<Rigidbody>();
-        curHealth = maxHealth;
+        target = GameManager._instance.character.GetComponent<Rigidbody>();
+        curHealth = stat.curHp;
+        //이동속도
+        originalSpeed = stat.mBaseMovementSpeed;
+        CurSpeed = originalSpeed;
+        //공격범위
+        attackRange = stat.AttackRange;
+        //공격속도
+        attackSpeed = stat.curAttackSpeed;
+        //공격 딜레이
+        beforCastDelay = 1f;
         isLive = true;
     }
     void Update()
@@ -174,11 +181,7 @@ public class EnemyGolemController : MonoBehaviour
         stateMachineGolem.DoOperateUpdate();
     }
 
-    void OnDisable()
-    {
-        ObjectPooler.ReturnToPool(gameObject);
-        CancelInvoke();
-    }
+    
 
     public void AnimeEnded()
     {
@@ -193,6 +196,6 @@ public class EnemyGolemController : MonoBehaviour
         {
             stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);
 
-        }
+        }                                                                                           
     }
 }

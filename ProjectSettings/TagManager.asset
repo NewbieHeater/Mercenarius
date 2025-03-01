@@ -12,6 +12,7 @@ TagManager:
   - Item
   - NPC
   - Ground
+  - Button
   layers:
   - Default
   - TransparentFX

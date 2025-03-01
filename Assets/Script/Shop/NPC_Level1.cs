@@ -10,9 +10,9 @@ public class NPC_Level1 : MonoBehaviour
     List<int> itemList = new List<int>();
 
     int min = 0;
-    int max = 5;
+    int max = 3;
 
-    void Start()
+    void Awake()
     {
         CreateUnDuplicateRandom(min, max);
         

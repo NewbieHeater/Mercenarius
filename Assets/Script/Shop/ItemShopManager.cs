@@ -16,14 +16,14 @@ public class ItemShopManager : Singleton<ItemShopManager>
     [Header("상점 오브젝트 루트 오브젝트")]
     [SerializeField] public GameObject mShopRootGo;
 
-    [Header("상점 오브젝트의 프리팹 인스턴스 트랜스폼")]
-    [SerializeField] public RectTransform mSlotInstantiateTransform;
+    
 
     [Header("상점 슬롯 프리팹")]
     [SerializeField] public GameObject mShopSlotPrefab;
 
-    private List<ItemShopSlot> mCurrentSlots = new List<ItemShopSlot>(); // 현재 인스턴스된 슬롯들
 
+    private List<ItemShopSlot> mCurrentSlots = new List<ItemShopSlot>(); // 현재 인스턴스된 슬롯들
+    private ItemShopSlot slot;
     private void Awake()
     {
         // 초기화시 전역 활성화상태 해제
@@ -35,24 +35,24 @@ public class ItemShopManager : Singleton<ItemShopManager>
     /// </summary>
     /// <param name="sellItems">상점에서 판매하는 아이템들</param>
     /// <param name="shopLevel">상점의 진척도 레벨</param>
-    public void OpenItemShop(ItemShopSlotInfo[] sellItems, int shopLevel,int itemNumber, Transform parent)
+    public void OpenShop(ItemShopSlotInfo[] sellItems, int shopLevel, int itemNumber, Vector3 parent, ItemShopSlot slot)
     {
-        Debug.Log(mSlotInstantiateTransform);
-        ItemShopSlot slot = Instantiate(mShopSlotPrefab, Vector3.zero, Quaternion.identity, mSlotInstantiateTransform).GetComponent<ItemShopSlot>();
+        //ItemShopSlot slot = Instantiate(mShopSlotPrefab, parent, Quaternion.Euler(45, 0, 0), mSlotInstantiateTransform).GetComponent<ItemShopSlot>();
         slot.InitSlot(sellItems[itemNumber], shopLevel);
-
         mCurrentSlots.Add(slot);
-        mShopRootGo.transform.SetParent(parent, false);
-        mShopRootGo.transform.LookAt(Camera.main.transform.position, Vector3.up);
         mShopRootGo.SetActive(true);
-
-        // 모든 슬롯을 갱신
         ItemShopManager.Instance.RefreshSlots();
-
-        // 활성화 토글
         mIsItemShopActive = true;
-
-        //UtilityManager.UnlockCursor();
+    }
+    public void ItemShopInteractEnter(ItemShopSlot slot)
+    {
+        Debug.Log("작동ㅇ시작");
+        slot.InteractionManageEnter();
+    }
+    public void ItemShopInteractExit(ItemShopSlot slot)
+    {
+        Debug.Log("작동ㅇ종료");
+        slot.InteractionManageExit();
     }
 
     /// <summary>
@@ -60,6 +60,7 @@ public class ItemShopManager : Singleton<ItemShopManager>
     /// </summary>
     public void CloseItemShop()
     {
+        //GameManager.Instance.isUIOpen = false;
         foreach (ItemShopSlot slot in mCurrentSlots)
             Destroy(slot.gameObject);
 
@@ -83,5 +84,10 @@ public class ItemShopManager : Singleton<ItemShopManager>
 
         // 라벨 갱신
         InventoryMain.Instance.RefreshLabels();
+    }
+
+    public void BuyItem(ItemShopSlot slot)
+    {
+        slot.Buy();
     }
 }
