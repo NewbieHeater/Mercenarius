@@ -12,11 +12,11 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void OnSelectIceBlast()
     {
-        playerCharacter.SelectSharedSkill("IceBlast");
+        //playerCharacter.SelectSharedSkill("IceBlast");
     }
 
     public void OnSelectLightningStrike()
     {
-        playerCharacter.SelectSharedSkill("LightningStrike");
+        //playerCharacter.SelectSharedSkill("LightningStrike");
     }
 }

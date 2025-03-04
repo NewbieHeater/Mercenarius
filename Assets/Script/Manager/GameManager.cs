@@ -2,17 +2,18 @@ using Common.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
+    private static GameManager _instance;
 
     public float gameTIme;
     public float maxGameTIme = 2 * 10f;
-    public Character character;
     public ObjectPooler pool;
     public ItemDescription mItemDescription;
+    public Image hpImage;
     //public EnemyVariables variables;
     public bool isUIOpen = false;
     public static GameManager Instance

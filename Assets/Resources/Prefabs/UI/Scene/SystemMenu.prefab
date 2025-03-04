@@ -8156,8 +8156,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ResolutionManager, Assembly-CSharp
+      - m_Target: {fileID: 9118347262877412918}
+        m_TargetAssemblyTypeName: ResolutionSetting, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:

@@ -56,8 +56,9 @@ public class DashState : IState<Character>
 
     private Vector3 SetDashDestination()
     {
-        Vector3 mousePosition = character.MousePosition();
-        Debug.Log("Mouse Position: " + mousePosition);
+        Vector3 mousePosition; 
+        if (!character.TryGetGroundPosition(out mousePosition))
+            mousePosition = character.transform.position;
         Vector3 dashDestDir = (mousePosition - character.transform.position).normalized;
         RaycastHit dashHit;
         float margin = 0.25f;  // 벽과 일정 간격(margin)을 유지

@@ -98,7 +98,7 @@ public class EnemyBannermanController : MonoBehaviour
     void OnEnable()
     {
         MoveAble = true;
-        target = GameManager._instance.character.GetComponent<Rigidbody>();
+        target = CharacterManager.Instance.character.GetComponent<Rigidbody>();
         curHealth = 100f;
         isLive = true;
     }

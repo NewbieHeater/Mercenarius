@@ -43,8 +43,8 @@ public class UI_SaveMenu : UI_Popup
         Bind<Image>(typeof(Images));
 
         GetButton((int)Buttons.Exit).gameObject.BindEvent((PointerEventData data) => { gameObject.SetActive(false); });
-        GetButton((int)Buttons.Save1).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Game); });
-        GetButton((int)Buttons.Save2).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Game); });
-        GetButton((int)Buttons.Save3).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Game); });
+        GetButton((int)Buttons.Save1).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Select); });
+        GetButton((int)Buttons.Save2).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Select); });
+        GetButton((int)Buttons.Save3).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.Select); });
     }
 }

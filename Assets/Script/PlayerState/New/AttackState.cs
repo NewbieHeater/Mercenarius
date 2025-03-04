@@ -29,7 +29,7 @@ public class AttackState : IState<Character>
             character.BasicAttack();
         
 
-        if (Managers.KeyInput.GetKeyDown("Dash") && character.CheckMousePosition())
+        if (Managers.KeyInput.GetKeyDown("Dash") && character.IsMouseOverGround())
         {
             character.sm.SetState(character.dicState["Dash"]);
         }

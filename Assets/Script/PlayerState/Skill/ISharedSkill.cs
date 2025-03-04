@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public interface ISharedSkill
 {
@@ -12,7 +13,9 @@ public class DaggerThrow : ISharedSkill
     public void Execute(Character sender)
     {
         Vector3 playerPosition = sender.transform.position;
-        Vector3 mouseWorldPosition = sender.MousePosition();
+        Vector3 mouseWorldPosition;
+        if (!sender.TryGetGroundPosition(out mouseWorldPosition))
+            return;
         playerPosition.y = 1;
         mouseWorldPosition.y = 1;
         Vector3 directionCenter = (mouseWorldPosition - playerPosition).normalized;

@@ -1,0 +1,747 @@
+fileFormatVersion: 2
+guid: 197490c49dc7e4c43b5fe5a05c29255f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 2
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 42.666668
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c2c9196711809648a512decc0951b62
+      internalID: -1984491153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a217c1b455aba42ba98f67b6c1ec81
+      internalID: 1014412303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92e3fd1ad310c87478dc35a6d3ac65a4
+      internalID: 1197515390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b95496c6511184c82a92ef942bfd3f
+      internalID: 42477112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b7eadae0a00aa34ba95eff00422bf9b
+      internalID: -117773398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd5802a9a2df42f479b75f08ec2a3b74
+      internalID: -1360341685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b6598a3a369db74287f72eeec90e0d0
+      internalID: -1029028607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01726f5b430cbb84fab4da4d0b9a5fd1
+      internalID: -1840333873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40ffe107dd5c16c46bc5909b46676b71
+      internalID: -1720319133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ce46617a41eaec459370cb0642cc323
+      internalID: -1673879632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90fea7a8cb009eb42b64d0fd14ab53f2
+      internalID: -1610746342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_11
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cab72cdd402b924e96c34c915786dac
+      internalID: -2041349667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_12
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28fd7dcf4a0f1db4d84da57db3810015
+      internalID: 902457620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_13
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 629ed507560df5c48aea57b48af05fac
+      internalID: 1416757203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_14
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19ff381e8901c4b45aedae3157347399
+      internalID: -1008707295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_15
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2c11fde45f28c04bbc21b65d8fdeac7
+      internalID: 330408535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_16
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28a042af6383294981d19fec926b07f
+      internalID: 1662400167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_17
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c498d48d89a801499bcdf41a4e32c3e
+      internalID: 2104961103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_18
+      rect:
+        serializedVersion: 2
+        x: 2142
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebbd0121853f63f46866ae28a59be97b
+      internalID: 672823482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_19
+      rect:
+        serializedVersion: 2
+        x: 2261
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd75e72b1db061479cff9c441074745
+      internalID: -166890024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_20
+      rect:
+        serializedVersion: 2
+        x: 2380
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 046831bc63461ac4d9ce5f7ba1c73d6d
+      internalID: -1064110947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_21
+      rect:
+        serializedVersion: 2
+        x: 2499
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82869640a56d3e54bbc12d0272dd78a6
+      internalID: -1146090758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_22
+      rect:
+        serializedVersion: 2
+        x: 2618
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c3cbe11c4768704f919b65628e36fb3
+      internalID: -1894719248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_23
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 611878a480a99a548be2dfd7c209ae48
+      internalID: 1479461442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_24
+      rect:
+        serializedVersion: 2
+        x: 2856
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca7153ba0e0ed78408791fe14bf6145c
+      internalID: -1991375992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_25
+      rect:
+        serializedVersion: 2
+        x: 2975
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e311eda535f74c24ab3f47c66480effc
+      internalID: 608997001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sg_attack-Sheet 1_26
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 4
+        width: 119
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f21593e8396e4f14786d7a9eeccf6f3e
+      internalID: -896855163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7b9562ba028607846885f94d6a47a931
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sg_attack-Sheet 1_0: -1984491153
+      sg_attack-Sheet 1_1: 1014412303
+      sg_attack-Sheet 1_10: -1610746342
+      sg_attack-Sheet 1_11: -2041349667
+      sg_attack-Sheet 1_12: 902457620
+      sg_attack-Sheet 1_13: 1416757203
+      sg_attack-Sheet 1_14: -1008707295
+      sg_attack-Sheet 1_15: 330408535
+      sg_attack-Sheet 1_16: 1662400167
+      sg_attack-Sheet 1_17: 2104961103
+      sg_attack-Sheet 1_18: 672823482
+      sg_attack-Sheet 1_19: -166890024
+      sg_attack-Sheet 1_2: 1197515390
+      sg_attack-Sheet 1_20: -1064110947
+      sg_attack-Sheet 1_21: -1146090758
+      sg_attack-Sheet 1_22: -1894719248
+      sg_attack-Sheet 1_23: 1479461442
+      sg_attack-Sheet 1_24: -1991375992
+      sg_attack-Sheet 1_25: 608997001
+      sg_attack-Sheet 1_26: -896855163
+      sg_attack-Sheet 1_3: 42477112
+      sg_attack-Sheet 1_4: -117773398
+      sg_attack-Sheet 1_5: -1360341685
+      sg_attack-Sheet 1_6: -1029028607
+      sg_attack-Sheet 1_7: -1840333873
+      sg_attack-Sheet 1_8: -1720319133
+      sg_attack-Sheet 1_9: -1673879632
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

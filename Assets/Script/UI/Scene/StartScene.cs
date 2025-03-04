@@ -9,20 +9,14 @@ public class StartScene : BaseScene
     {
         base.Init();
 
-        SceneType = Define.Scene.MainMenu;
+        SceneType = Define.Scene.StartScene;
         
     }
     private void Start()
     {
-        Managers.UI.ShowPopupUI<UI_Popup>("MainMenu");
+        Managers.UI.ShowPopupUI<UI_StartSceneBind>("MainMenu");
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Managers.Scene.LoadScene(Define.Scene.Game);
-        }
-    }
+
 
     public override void Clear()
     {

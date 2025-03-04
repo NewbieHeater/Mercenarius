@@ -28,7 +28,7 @@ public class ObjectPoolerEditor : Editor
 public class ObjectPooler : MonoBehaviour
 {
     static ObjectPooler inst;
-    void Awake()
+    void Start()
     {
         inst = this;
         Init();

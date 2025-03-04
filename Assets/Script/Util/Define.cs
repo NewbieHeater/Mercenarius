@@ -7,7 +7,8 @@ public class Define
     public enum Scene
     {
         Unknown,
-        MainMenu,
+        StartScene,
+        Select,
         Game,
     }
     public enum UIEvent

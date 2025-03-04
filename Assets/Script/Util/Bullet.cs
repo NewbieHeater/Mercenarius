@@ -13,8 +13,8 @@ public class Bullet : MonoBehaviour
     {
         bulletSpeed = 200f;
         rb = GetComponent<Rigidbody>();
-        target = GameManager._instance.character.GetComponent<Transform>();
-        
+        target = CharacterManager.Instance.character.GetComponent<Transform>();
+
         targetPosition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
         transform.LookAt(targetPosition);
         rb.AddForce(transform.forward * bulletSpeed * 2f);

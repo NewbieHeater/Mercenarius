@@ -57,7 +57,7 @@ public class UI_StartSceneBind : UI_Popup
 
     public void OnNewGameButtonClicked(PointerEventData data)
     {
-        Managers.Scene.LoadScene(Define.Scene.Game);
+        Managers.Scene.LoadScene(Define.Scene.Select);
 
     }
 

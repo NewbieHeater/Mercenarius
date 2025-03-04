@@ -45,6 +45,6 @@ public class UI_InGameSettings : UI_Popup
         GetButton((int)Buttons.Resume).gameObject.BindEvent((PointerEventData data) => { gameObject.SetActive(false); });
         GetButton((int)Buttons.System).gameObject.BindEvent((PointerEventData data) => { Managers.UI.ShowPopupUI<UI_SystemMenuBind>("SystemMenu"); });
         GetButton((int)Buttons.Achivement).gameObject.BindEvent((PointerEventData data) => { Debug.Log("도전과제"); });
-        GetButton((int)Buttons.MainMenu).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.MainMenu); });
+        GetButton((int)Buttons.MainMenu).gameObject.BindEvent((PointerEventData data) => { Managers.Scene.LoadScene(Define.Scene.StartScene); });
     }
 }

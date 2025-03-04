@@ -92,7 +92,7 @@ public class EnemyGolemController : MonoBehaviour
     void OnEnable()
     {
         MoveAble = true;
-        target = GameManager._instance.character.GetComponent<Rigidbody>();
+        target = CharacterManager.Instance.character.GetComponent<Rigidbody>();
         curHealth = stat.curHp;
         //이동속도
         originalSpeed = stat.mBaseMovementSpeed;

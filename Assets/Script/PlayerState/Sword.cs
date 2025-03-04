@@ -10,17 +10,17 @@ public class Sword : Character
 {
     int attackComboValue = 0;
     
-    protected override void Start()
+    protected override void OnEnable()
     {
         
         //Managers.Input.OnMouseButtonDown += OnMouseButtonDown;
-        base.Start();
+        base.OnEnable();
     }
     public void OnMouseButtonDown(int button)
     {
         if (button == 0)
         {
-            agent.SetDestination(MousePosition());
+            //agent.SetDestination(MousePosition());
         }
     }
     void OnKeyboard()
@@ -47,7 +47,8 @@ public class Sword : Character
             attackComboValue = 0;
         }
         FlipSpriteByMousePosition();
-        attackTransform.transform.LookAt(MousePosition());
+        if(!TryGetGroundPosition(out Vector3 LookPosition))
+        attackTransform.transform.LookAt(LookPosition);
         attackCombo = false;
         
     }

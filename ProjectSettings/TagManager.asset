@@ -13,6 +13,8 @@ TagManager:
   - NPC
   - Ground
   - Button
+  - Road Spawn
+  - Rooms
   layers:
   - Default
   - TransparentFX

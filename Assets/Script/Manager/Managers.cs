@@ -18,10 +18,11 @@ public class Managers : MonoBehaviour
     public static UIManager UI { get { return Instance._ui; } }
     public static KeyManager KeyInput { get { return Instance._keyManager; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+
     private void Awake()
     {
         KeyInput.Init();
-        //Input.EInit();
+
     }
     void Start()
     {

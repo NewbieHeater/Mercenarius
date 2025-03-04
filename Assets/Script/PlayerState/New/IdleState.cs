@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 
 public class IdleState : IState<Character>
@@ -24,11 +25,11 @@ public class IdleState : IState<Character>
         {
             sender.sm.SetState(sender.dicState["SharedSkill"]);
         }
-        else if (Managers.KeyInput.GetKeyDown("Dash") && sender.CheckMousePosition())
+        else if (Managers.KeyInput.GetKeyDown("Dash") && sender.IsMouseOverGround())
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }
-        else if(Input.GetMouseButton(0) && sender.CheckMousePosition())
+        else if(Input.GetMouseButton(0) && sender.IsMouseOverGround() && !EventSystem.current.IsPointerOverGameObject())
         {
             sender.sm.SetState(sender.dicState["Move"]);
         }

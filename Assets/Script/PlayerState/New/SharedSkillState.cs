@@ -4,12 +4,17 @@ using UnityEngine.TextCore.Text;
 public class SharedSkillState : IState<Character>
 {
     Character character;
-    private float duration = 2f; // 스킬 지속 시간
+    private float duration = 0.5f; // 스킬 지속 시간
     private float timer = 0f;
 
     public void OperateEnter(Character sender)
     {
         character = sender;
+        if (character.agent != null)
+        {
+            character.agent.isStopped = true;
+            //character.agent.enabled = false;
+        }
         timer = 0f;
         // 스킬 애니메이션 트리거 등 초기화
         //character.animator.SetTrigger("SharedSkill");
