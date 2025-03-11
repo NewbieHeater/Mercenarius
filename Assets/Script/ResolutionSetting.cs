@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ResolutionSetting : SettingsValue, ISettingsSaver
+public class ResolutionSetting : MonoBehaviour, ISettingsSaver
 {
     public TMP_Dropdown resolutionDropdown;
 

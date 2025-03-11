@@ -11,6 +11,7 @@ public class ItemShopSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mItemShopInteract;
     private bool interactable = false;
     private bool interactOn = false;
+    [SerializeField]
     private ItemShopSlotInfo mSellInfo; // 현재 판매중인 아이템의 정보
     private int mCalledShopLevel; // 현재 상점의 판매 단계
 

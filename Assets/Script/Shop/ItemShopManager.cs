@@ -29,21 +29,17 @@ public class ItemShopManager : Singleton<ItemShopManager>
         // 초기화시 전역 활성화상태 해제
         ItemShopManager.mIsItemShopActive = false;
     }
-
-    /// <summary>
-    /// 상점으로부터 호출되어 아이템 상점 다이얼로그를 열음
-    /// </summary>
-    /// <param name="sellItems">상점에서 판매하는 아이템들</param>
-    /// <param name="shopLevel">상점의 진척도 레벨</param>
     public void OpenShop(ItemShopSlotInfo[] sellItems, int shopLevel, int itemNumber, Vector3 parent, ItemShopSlot slot)
     {
-        //ItemShopSlot slot = Instantiate(mShopSlotPrefab, parent, Quaternion.Euler(45, 0, 0), mSlotInstantiateTransform).GetComponent<ItemShopSlot>();
+        
         slot.InitSlot(sellItems[itemNumber], shopLevel);
         mCurrentSlots.Add(slot);
         mShopRootGo.SetActive(true);
         ItemShopManager.Instance.RefreshSlots();
         mIsItemShopActive = true;
     }
+    
+
     public void ItemShopInteractEnter(ItemShopSlot slot)
     {
         Debug.Log("작동ㅇ시작");

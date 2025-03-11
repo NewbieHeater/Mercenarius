@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4762449899466552222}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0.0707107, z: 0.0707107}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.125, z: -1.769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6829018880876383929}
-  m_Father: {fileID: 360296700721343136}
+  m_Father: {fileID: 4261586018559909924}
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &4941978119271783054
 GameObject:
@@ -147,13 +147,13 @@ MonoBehaviour:
   stat:
     <mMaxHp>k__BackingField: 100
     mHpCurrent: 0
-    <baseAttack>k__BackingField: 5
+    <mBaseAttack>k__BackingField: 5
     <AttackRange>k__BackingField: 2
-    <baseAttackSpeed>k__BackingField: 2
-    <baseMovementSpeed>k__BackingField: 2
-    <baseDefense>k__BackingField: 5
-    <baseDashCoolDown>k__BackingField: 5
-    <baseDashPower>k__BackingField: 5
+    <mBaseAttackSpeed>k__BackingField: 5
+    <mBaseMovementSpeed>k__BackingField: 5
+    <mBaseDefense>k__BackingField: 5
+    <mBaseDashCoolDown>k__BackingField: 5
+    <mBaseDashPower>k__BackingField: 5
     <baseDashSpeed>k__BackingField: 5
     equipmentInventory: {fileID: 0}
 --- !u!114 &5511109019727455206
@@ -232,7 +232,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.125, z: 1.169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4436521315716466563}
   m_Father: {fileID: 4625694806361512024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7196419803361950948
@@ -266,8 +267,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4436521315716466563}
+  m_Children: []
   m_Father: {fileID: 4625694806361512024}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!212 &3025098608832268399

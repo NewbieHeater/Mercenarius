@@ -15,16 +15,17 @@ public class MoveState : IState<Character>
         {
             character.agent.isStopped = false;
         }
-        character.animator.SetBool("Move", true);
+
         if (character.TryGetGroundPosition(out Vector3 groundPos))
             character.agent.SetDestination(groundPos);
         else
             character.agent.SetDestination(character.transform.position);
+        character.animator.CrossFade("Move", 0.1f, -1, 0f);
     }
 
     public void OperateExit(Character sender)
     {
-        character.animator.SetBool("Move", false);
+
     }
 
     public void OperateUpdate(Character sender)
@@ -41,31 +42,22 @@ public class MoveState : IState<Character>
                 character.agent.speed = character.statData.curMovementSpeed * 0.6f;
             }
         }
-
-
-        
+        if (Input.GetMouseButton(0) && character.TryGetGroundPosition(out Vector3 destination) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            character.agent.SetDestination(destination);
+            character.FlipSprite();
+        }
         if (Managers.KeyInput.GetKeyDown("BasicAttack"))
         {
-            character.sm.SetState(character.dicState["Attack"]);
+            sender.sm.SetState(sender.dicState["Attack"]);
         }
-        else if (Managers.KeyInput.GetKeyDown("SkillQuickSlot2"))//B
-        {
-            character.sm.SetState(character.dicState["SharedSkill"]);
-        }
-        else if (Managers.KeyInput.GetKeyDown("Dash"))
+        else if (Managers.KeyInput.GetKeyDown("Dash") && character.dashCoolDown == -1)
         {
             character.sm.SetState(character.dicState["Dash"]);
         }
         else if(character.agent.remainingDistance < 0.1f)
         {
             character.sm.SetState(character.dicState["Idle"]);
-        }
-
-        if (Input.GetMouseButton(0) && character.TryGetGroundPosition(out Vector3 destination) && !EventSystem.current.IsPointerOverGameObject())
-        {
-            character.agent.SetDestination(destination);
-            character.FlipSprite();
-        }
-            
+        }   
     }
 }

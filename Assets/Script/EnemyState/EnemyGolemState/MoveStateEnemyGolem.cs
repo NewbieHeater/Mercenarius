@@ -27,12 +27,12 @@ public class MoveStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 
     public void OperateUpdate(EnemyGolemController sender)
     {
-        if (transform.position != _golemController.target.transform.position)
+        if (transform.position != _golemController.target.transform.position && agent.isOnNavMesh)
         {
             agent.SetDestination(_golemController.target.transform.position);
             sprite.flipX = _golemController.target.transform.position.x < transform.position.x;
         }
-        else
+        else if(agent.isOnNavMesh)
         {
             agent.SetDestination(transform.position);
         }

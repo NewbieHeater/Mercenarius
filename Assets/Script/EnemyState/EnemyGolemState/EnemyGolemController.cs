@@ -59,8 +59,8 @@ public class EnemyGolemController : MonoBehaviour
         //MainBody = transform.parent;
         enemyRb = GetComponent<Rigidbody>();
         //체력
-        maxHealth = 100f;
-        curHealth = 100f;
+        maxHealth = 1000f;
+        curHealth = 1000f;
         //이동속도
         originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
@@ -182,20 +182,17 @@ public class EnemyGolemController : MonoBehaviour
     }
 
     
+    public void TakeDamage(float asdf)
+    {
+        curHealth -= 10;
 
+        Hpbar.fillAmount = curHealth / maxHealth;
+        stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);
+    }
     public void AnimeEnded()
     {
         anim.SetBool("Attack", false);
         MoveAble = true;
         anim.SetBool("Hit", false);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PlayerAttack"))
-        {
-            stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);
-
-        }                                                                                           
     }
 }

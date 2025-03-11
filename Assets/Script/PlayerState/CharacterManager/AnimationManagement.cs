@@ -30,15 +30,14 @@ public class AnimationManagement : MonoBehaviour
     {
         if (parentCharacter != null)
         {
-            parentCharacter.animator.SetTrigger("NextCombo");
+            parentCharacter.ComboExit();
         }
     }
     public void AttackEnd()
     {
         if (parentCharacter != null)
         {
-            parentCharacter.animator.ResetTrigger("NextCombo");
-            parentCharacter.animator.SetBool("Attack", false);
+            parentCharacter.AttackEnd();
         }
     }
 }

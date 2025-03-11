@@ -28,15 +28,15 @@ public class DashState : IState<Character>
         dashDest = SetDashDestination();
         curPosition = character.transform.position;
         character.FlipSpriteByMousePosition();
+        character.dashCoolDown = character.statData.curDashCoolDown;
         time = 0; // 타이머 초기화
-        character.animator.SetBool("Dash", true);
+        character.animator.CrossFade("Dash", 0.1f);
     }
 
     public void OperateExit(Character sender)
     {
         //character.transform.position = dashDest;
         character.agent.enabled = true;
-        character.animator.SetBool("Dash", false);
     }
 
     public void OperateUpdate(Character sender)

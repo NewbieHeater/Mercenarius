@@ -1,10 +1,11 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 public class AttackState : IState<Character>
 {
     Character character;
-    
+    private bool allowAttack;
     public void OperateEnter(Character sender)
     {
         character = sender;
@@ -13,29 +14,53 @@ public class AttackState : IState<Character>
             character.agent.isStopped = true;
             //character.agent.enabled = false;
         }
-        character.animator.SetBool("Attack", true);
-        character.BasicAttack();
+        allowAttack = false;
+        character.attackComboValue = 0;
+        character.animator.Play("Attack" + character.attackComboValue);
+        Debug.Log("attackIn");
     }
 
     public void OperateExit(Character sender)
     {
-        character.animator.SetBool("Attack", false);
+        Debug.Log("attackOut");
         character.ResetCombo();
     }
 
     public void OperateUpdate(Character sender)
     {
         if (Managers.KeyInput.GetKeyDown("BasicAttack"))
-            character.BasicAttack();
-        
+        {
+            if (character.attackCombo)
+            {
+                character.attackComboValue++;
+                allowAttack = true;
+            }
+                
 
-        if (Managers.KeyInput.GetKeyDown("Dash") && character.IsMouseOverGround())
+            Debug.Log("attackValue");
+            
+            if (character.attackComboValue >= 3)
+            {
+                character.attackComboValue = 0;
+            }
+            character.attackCombo = false;
+            
+        }
+        if (character.nextAttack && allowAttack)
+        {
+            Debug.Log("attack");
+            character.animator.Play("Attack" + character.attackComboValue);
+            character.nextAttack = false;
+            allowAttack = false;
+        }
+        
+        if (Managers.KeyInput.GetKeyDown("Dash") && character.IsMouseOverGround()&& character.dashCoolDown == -1)
         {
             character.sm.SetState(character.dicState["Dash"]);
         }
-        else if (character.animator.GetBool("Attack") == true)
-            return;
-        else
-            character.sm.SetState(character.dicState["Idle"]);
+        else if (Input.GetMouseButtonDown(0))
+        {
+            allowAttack = false;
+        }
     }
 }

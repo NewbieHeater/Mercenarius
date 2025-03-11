@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class VolumeVariable : MonoBehaviour, ISettingsSaver
 {
@@ -35,6 +36,17 @@ public class VolumeVariable : MonoBehaviour, ISettingsSaver
         foreach (var control in volumeControls)
         {
             InitializeVolumeControl(control);
+            // 초기화 후 강제로 초기값 적용
+            SetVolume(control, control.key, volumeSettings[control.key]);
+        }
+    }
+    private void OnEnable()
+    {
+        foreach (var control in volumeControls)
+        {
+            InitializeVolumeControl(control);
+            // 초기화 후 강제로 초기값 적용
+            SetVolume(control, control.key, volumeSettings[control.key]);
         }
     }
 
@@ -87,22 +99,30 @@ public class VolumeVariable : MonoBehaviour, ISettingsSaver
 
     private void ApplyVolume(string key, int value)
     {
-        float normalizedValue = value / (float)MaxVolume;
+        float normalizedValue;
+        if (value != 0)
+        {
+            normalizedValue = Mathf.Log10(value / (float)MaxVolume) * 20;
+        }
+        else
+            normalizedValue = Mathf.Log10(0.01f / (float)MaxVolume) * 20;
+
         switch (key)
         {
             case "MainVolume":
-                AudioListener.volume = normalizedValue;
+                SoundManager.Instance.SetVolume(SoundType.Master, normalizedValue);
                 break;
             case "MusicVolume":
-                // AudioMixer를 사용하는 경우, 여기에 음악 볼륨 적용 로직 추가
+                SoundManager.Instance.SetVolume(SoundType.BGM, normalizedValue);
                 break;
             case "SFXVolume":
-                // AudioMixer를 사용하는 경우, 여기에 SFX 볼륨 적용 로직 추가
+                SoundManager.Instance.SetVolume(SoundType.EFFECT, normalizedValue);
                 break;
             default:
                 break;
         }
     }
+
 
     public void SaveSettings()
     {

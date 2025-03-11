@@ -8,6 +8,7 @@ public class IdleState : IState<Character>
     public void OperateEnter(Character sender)
     {
         character = sender;
+        character.animator.CrossFade("Idle", 0, -1, 0f);
     }
 
     public void OperateExit(Character sender)
@@ -25,7 +26,7 @@ public class IdleState : IState<Character>
         {
             sender.sm.SetState(sender.dicState["SharedSkill"]);
         }
-        else if (Managers.KeyInput.GetKeyDown("Dash") && sender.IsMouseOverGround())
+        else if (Managers.KeyInput.GetKeyDown("Dash") && sender.IsMouseOverGround() && character.dashCoolDown == -1)
         {
             sender.sm.SetState(sender.dicState["Dash"]);
         }
