@@ -185,8 +185,7 @@ public class EnemyGolemController : MonoBehaviour
     
     public void TakeDamage(float asdf)
     {
-        Debug.Log("dafs");
-        curHealth -= 10;
+        curHealth -= asdf;
 
         Hpbar.fillAmount = curHealth / maxHealth;
         stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);

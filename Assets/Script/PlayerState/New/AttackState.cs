@@ -17,12 +17,10 @@ public class AttackState : IState<Character>
         allowAttack = false;
         character.attackComboValue = 0;
         character.animator.Play("Attack" + character.attackComboValue);
-        Debug.Log("attackIn");
     }
 
     public void OperateExit(Character sender)
     {
-        Debug.Log("attackOut");
         character.ResetCombo();
     }
 
@@ -35,9 +33,6 @@ public class AttackState : IState<Character>
                 character.attackComboValue++;
                 allowAttack = true;
             }
-                
-
-            Debug.Log("attackValue");
             
             if (character.attackComboValue >= 3)
             {
@@ -48,7 +43,6 @@ public class AttackState : IState<Character>
         }
         if (character.nextAttack && allowAttack)
         {
-            Debug.Log("attack");
             character.animator.Play("Attack" + character.attackComboValue);
             character.nextAttack = false;
             allowAttack = false;

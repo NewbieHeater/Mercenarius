@@ -251,7 +251,6 @@ public abstract class Character : MonoBehaviour
         #region 애니메이션 및 콤보 관리
     public void ComboEnable()
     {
-        Debug.Log("attackEnter");
 
         BasicAttack();
         attackCombo = true;
@@ -277,7 +276,6 @@ public abstract class Character : MonoBehaviour
     {
         sm.SetState(dicState["Idle"]);
         animator.SetBool("Attack", false);
-        Debug.Log("attackEnd");
     }
     #endregion
 }

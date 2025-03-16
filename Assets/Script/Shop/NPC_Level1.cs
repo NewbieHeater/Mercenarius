@@ -6,8 +6,10 @@ public class NPC_Level1 : MonoBehaviour
 {
     private List<Store> ItemRandomNumber = new List<Store>();
     private GameObject[] gameObjects;
-
     private List<int> itemList = new List<int>();
+
+    int min = 0;
+    int max = 20;
 
     public void Init()
     {
@@ -25,14 +27,24 @@ public class NPC_Level1 : MonoBehaviour
         }
 
         int count = ItemRandomNumber.Count;
-        CreateUnDuplicateRandom(0, count - 1);
+        if (count == 0)
+        {
+            Debug.LogWarning("Store 오브젝트가 하나도 없습니다.");
+            return;
+        }
 
+
+        CreateUnDuplicateRandom(min, count - 1);
+
+
+        if (itemList.Count < count)
+        {
+            Debug.LogError("itemList의 개수가 스토어 수보다 작습니다.");
+            return;
+        }
 
         for (int i = 0; i < count; i++)
         {
-            Debug.Log(ItemRandomNumber.Count);
-            Debug.Log(itemList.Count);
-            Debug.Log(count);
             ItemRandomNumber[i].num = itemList[i];
             ItemRandomNumber[i].Init();
         }
@@ -47,6 +59,7 @@ public class NPC_Level1 : MonoBehaviour
             numbers.Add(i);
         }
 
+
         for (int i = numbers.Count - 1; i > 0; i--)
         {
             int j = Random.Range(0, i + 1);
@@ -54,7 +67,6 @@ public class NPC_Level1 : MonoBehaviour
             numbers[i] = numbers[j];
             numbers[j] = temp;
         }
-
         itemList = numbers;
     }
 }

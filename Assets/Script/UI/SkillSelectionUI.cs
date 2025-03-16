@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class SkillSelectionUI : MonoBehaviour
 {
-    public Character playerCharacter;
+    private Character playerCharacter;
+    private void Start()
+    {
+        playerCharacter = CharacterManager.Instance.character.GetComponent<Character>();
+    }
 
     public void OnSelectFireball()
     {
