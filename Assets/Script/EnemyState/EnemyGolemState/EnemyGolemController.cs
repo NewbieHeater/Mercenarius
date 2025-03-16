@@ -23,8 +23,8 @@ public class EnemyGolemController : MonoBehaviour
     public bool MoveAble = true;
 
     public string enemytype = "Null";
-    public float maxHealth { get; set; }
-    public float curHealth { get; set; }
+    public float maxHealth = 1000;
+    public float curHealth = 1000;
     public float originalSpeed { get; set; }
     public float attackRange { get; set; }
     public float attackSpeed { get; set; }
@@ -48,7 +48,8 @@ public class EnemyGolemController : MonoBehaviour
     private StateMachine<EnemyGolemController> stateMachineGolem;
     private void Awake()
     {
-        
+        maxHealth = 1000f;
+        curHealth = 1000f;
     }
     void Start()
     {
@@ -59,8 +60,7 @@ public class EnemyGolemController : MonoBehaviour
         //MainBody = transform.parent;
         enemyRb = GetComponent<Rigidbody>();
         //체력
-        maxHealth = 1000f;
-        curHealth = 1000f;
+        
         //이동속도
         originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
@@ -91,9 +91,10 @@ public class EnemyGolemController : MonoBehaviour
 
     void OnEnable()
     {
+        maxHealth = 1000f;
+        curHealth = 1000f;
         MoveAble = true;
         target = CharacterManager.Instance.character.GetComponent<Rigidbody>();
-        curHealth = stat.curHp;
         //이동속도
         originalSpeed = stat.mBaseMovementSpeed;
         CurSpeed = originalSpeed;
@@ -109,7 +110,7 @@ public class EnemyGolemController : MonoBehaviour
     {
         if (curHealth <= 0)
         {
-            //onPlayerDead.Invoke();
+            Debug.Log("dead");  
             stateMachineGolem.SetState(dicState[enemyGolemState.Dead]);
             return;
         }
@@ -184,10 +185,26 @@ public class EnemyGolemController : MonoBehaviour
     
     public void TakeDamage(float asdf)
     {
+        Debug.Log("dafs");
         curHealth -= 10;
 
         Hpbar.fillAmount = curHealth / maxHealth;
         stateMachineGolem.SetState(dicState[enemyGolemState.Hit]);
+    }
+    public void ApplyBleedingEffect(float value)
+    {
+        StartCoroutine(Bleed(value));
+        Debug.Log("출혈");
+    }
+    IEnumerator Bleed(float value)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            TakeDamage(value);
+            yield return new WaitForSeconds(1f);
+            Debug.Log("출혈");
+        }
+        yield break;
     }
     public void AnimeEnded()
     {

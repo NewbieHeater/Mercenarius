@@ -28,7 +28,7 @@ public class StatData
     {
         get
         {
-            return ((mBaseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
+            return ((mBaseAttack + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Value : 0f)));
         }
     }
     [field: SerializeField] public float AttackRange { set; get; }
@@ -39,7 +39,7 @@ public class StatData
     {
         get
         {
-            return ((mBaseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Damage : 0f)));
+            return ((mBaseAttackSpeed + (equipmentInventory is not null ? equipmentInventory.CurrentEquipmentEffect.Value : 0f)));
         }
     }
 

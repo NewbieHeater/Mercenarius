@@ -10,6 +10,11 @@ public class InventoryMain : InventoryBase
     public static bool IsInventoryActive = false;  // 인벤토리 활성화 되었는가?
     public TextMeshProUGUI gold;
     public int CurrentCoin = 1000;
+    public float multiplyer = 1;
+    public void AddCoin(int value)
+    {
+        CurrentCoin += (int)(value * multiplyer);
+    }
     public static InventoryMain Instance
     {
         get

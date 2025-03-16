@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9207162819210156252}
   m_Layer: 0
   m_Name: Item3
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 0
-  mItemShop: {fileID: 4539041546036798494}
+  isStore: 1
+  mItemShop: {fileID: 0}
   Slot: {fileID: 8031620803073367724}
 --- !u!136 &9207162819210156252
 CapsuleCollider:
@@ -1666,6 +1667,12 @@ MonoBehaviour:
   mItemSlot: {fileID: 2064097897732951996}
   mCostLabel: {fileID: 5422448294279449265}
   mItemShopInteract: {fileID: 5797877740197831356}
+  mSellInfo:
+    SellItem: {fileID: 0}
+    Cost: 0
+    ItemAmount: 0
+    GiveAmountPerTrade: 0
+    NeedShopLevel: 0
 --- !u!1 &2999033831589249049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,7 +2044,7 @@ GameObject:
   - component: {fileID: 4437983372233796866}
   m_Layer: 0
   m_Name: Item1
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2123,7 +2130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 0
-  mItemShop: {fileID: 4539041546036798494}
+  isStore: 1
+  mItemShop: {fileID: 0}
   Slot: {fileID: 5766433435029615758}
 --- !u!136 &4437983372233796866
 CapsuleCollider:
@@ -2482,6 +2490,12 @@ MonoBehaviour:
   mItemSlot: {fileID: 6477672633922224938}
   mCostLabel: {fileID: 4657881625901898868}
   mItemShopInteract: {fileID: 4601113712398391977}
+  mSellInfo:
+    SellItem: {fileID: 0}
+    Cost: 0
+    ItemAmount: 0
+    GiveAmountPerTrade: 0
+    NeedShopLevel: 0
 --- !u!1 &4603078902223838121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,7 +3142,7 @@ GameObject:
   - component: {fileID: 730352309857665477}
   m_Layer: 0
   m_Name: Item2
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3214,7 +3228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 0
-  mItemShop: {fileID: 4539041546036798494}
+  isStore: 1
+  mItemShop: {fileID: 0}
   Slot: {fileID: 3229203872864179160}
 --- !u!136 &730352309857665477
 CapsuleCollider:
@@ -3730,6 +3745,12 @@ MonoBehaviour:
   mItemSlot: {fileID: 5415325596452326979}
   mCostLabel: {fileID: 2336756327701401670}
   mItemShopInteract: {fileID: 5347924971460402611}
+  mSellInfo:
+    SellItem: {fileID: 0}
+    Cost: 0
+    ItemAmount: 0
+    GiveAmountPerTrade: 0
+    NeedShopLevel: 0
 --- !u!1 &8333117591980795352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,8 +3760,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3765070918660947872}
-  - component: {fileID: 4539041546036798494}
-  - component: {fileID: 717941284733239338}
   m_Layer: 0
   m_Name: Store
   m_TagString: Untagged
@@ -3765,62 +3784,6 @@ Transform:
   - {fileID: 7570169453225308366}
   m_Father: {fileID: 744612206048215428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4539041546036798494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333117591980795352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7de890796238f00429687954cf88855f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ShopId>k__BackingField: 2
-  mSellItemInfos:
-  - SellItem: {fileID: 11400000, guid: be35a5873d8c954419b2dc037be65e78, type: 2}
-    Cost: 200
-    ItemAmount: 1
-    GiveAmountPerTrade: 1
-    NeedShopLevel: 0
-  - SellItem: {fileID: 11400000, guid: d846b86293f6ec344b112358cafc14b4, type: 2}
-    Cost: 100
-    ItemAmount: 1
-    GiveAmountPerTrade: 1
-    NeedShopLevel: 0
-  - SellItem: {fileID: 11400000, guid: f2d844b6272d485478cb34ab4468b028, type: 2}
-    Cost: 100
-    ItemAmount: 1
-    GiveAmountPerTrade: 1
-    NeedShopLevel: 0
-  - SellItem: {fileID: 11400000, guid: 6244deecaa592fa4896efaf55f544175, type: 2}
-    Cost: 100
-    ItemAmount: 1
-    GiveAmountPerTrade: 1
-    NeedShopLevel: 0
-  - SellItem: {fileID: 11400000, guid: 313f653b82756a54b94326ba7aa9e1da, type: 2}
-    Cost: 100
-    ItemAmount: 1
-    GiveAmountPerTrade: 1
-    NeedShopLevel: 0
-  ShopLevel: 0
---- !u!114 &717941284733239338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333117591980795352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8290c6f01c6b8ac4ea8002058da24939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemRandomNumber:
-  - {fileID: 4495161635154091343}
-  - {fileID: 6139191598656199065}
-  - {fileID: 496302998503338757}
 --- !u!1 &8483689248029401291
 GameObject:
   m_ObjectHideFlags: 0

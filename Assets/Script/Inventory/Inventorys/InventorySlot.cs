@@ -26,7 +26,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
 
     [Header("아이템 슬롯에 있는 UI 오브젝트")]
-    [SerializeField] private Image mItemImage; //아이템의 이미지
+    [SerializeField] public Image mItemImage; //아이템의 이미지
     [SerializeField] private Image mCooltimeImage; //아이템 쿨타임 이미지
     [SerializeField] private Text mTextCount; //아이템의 개수 텍스트
 
@@ -159,6 +159,13 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         ChangeSlot();
 
         mItemActionManager.SlotOnDropEvent(this); //드롭 이벤트 호출
+    }
+    public void UpdateEquipmentImage(Sprite newSprite)
+    {
+        if (mItemImage != null)
+        {
+            mItemImage.sprite = newSprite;
+        }
     }
 
     private void ChangeSlot()

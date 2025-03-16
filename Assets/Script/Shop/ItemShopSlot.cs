@@ -46,7 +46,7 @@ public class ItemShopSlot : MonoBehaviour
             || mSellInfo.ItemAmount <= 0)
         {
             interactable = false;
-            mCostLabel.text = "판매완료";
+            mCostLabel.text = "획득완료";
         }
         else
         {
@@ -92,5 +92,11 @@ public class ItemShopSlot : MonoBehaviour
         ItemShopManager.Instance.RefreshSlots();
         // 사운드 재생
         //SoundManager.Instance.PlaySound2D("Item purchase " + SoundManager.Range(1, 3));
+
     }
+    public Item Item
+    {
+        get { return mItemSlot != null ? mItemSlot.Item : null; }
+    }
+
 }

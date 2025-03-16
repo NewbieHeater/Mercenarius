@@ -8,7 +8,9 @@ public class DeadStateEnemyGolem : MonoBehaviour, IState<EnemyGolemController>
 
     public void OperateEnter(EnemyGolemController sender)
     {
+        Debug.Log("WHY");
         _monsterController = sender;
+        InventoryMain.Instance.CurrentCoin += 100;
         this.transform.gameObject.SetActive(false);
     }
 

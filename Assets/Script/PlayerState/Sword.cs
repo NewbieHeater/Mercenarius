@@ -1,45 +1,30 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.VFX;
 
 public class Sword : Character
 {
-    public float AttackRadiusA = 2.5f;
-    public float AttackRadiusB = 3f;
-    public float AttackRadiusC = 4f;
+    public float AttackRadiusA = 1.5f;
+    public float AttackRadiusB = 2f;
+    public float AttackRadiusC = 3f;
     
 
+    List<EnemyGolemController> targets = new List<EnemyGolemController>();
     protected override void OnEnable()
     {
         dashCoolDown = 0f;
-        //Managers.Input.OnMouseButtonDown += OnMouseButtonDown;
         base.OnEnable();
     }
-    public void OnMouseButtonDown(int button)
-    {
-        if (button == 0)
-        {
-            //agent.SetDestination(MousePosition());
-        }
-    }
-    void OnKeyboard()
-    {
-        
-    }
+
     private void Update()
     {
         if (dashCoolDown > 0)
-        {
             dashCoolDown -= Time.deltaTime;
-        }
         else
             dashCoolDown = -1;
         sm.DoOperateUpdate();
     }
+
     private void Effect()
     {
         if (TryGetGroundPosition(out Vector3 mouse))
@@ -56,39 +41,39 @@ public class Sword : Character
             }
         }
     }
+
     public override void BasicAttack()
     {
-        
         if (attackComboValue == 0)
         {
-            PerformOptimizedHemisphereAttack(transform.position, AttackRadiusA, statData.curAttack * 1.0f, 2);
+            // 반구 공격: 반환된 적들에게 데미지 적용
+            targets = GetEnemiesInHemisphere(transform.position, AttackRadiusA);
+            DamageEnemies(targets, statData.curAttack * 1.0f, 2);
             SoundManager.Instance.PlaySound2D("DualBlades_atk_" + (attackComboValue + 1));
             Effect();
+            
         }
         else if (attackComboValue == 1)
         {
-            // 두 번째 공격: 반원 공격 1회
-            PerformOptimizedHemisphereAttack(transform.position, AttackRadiusB, statData.curAttack * 1.5f, 1);
+            // 반구 공격: 다른 범위 (AttackRadiusB)
+            targets = GetEnemiesInHemisphere(transform.position, AttackRadiusB);
+            DamageEnemies(targets, statData.curAttack * 1.5f, 1);
             SoundManager.Instance.PlaySound2D("DualBlades_atk_" + (attackComboValue + 1));
             Effect();
         }
         else if (attackComboValue == 2)
         {
-            // 세 번째 공격: 원형 공격 5회
-            PerformOptimizedSphericalAttack(transform.position, AttackRadiusC, statData.curAttack * 0.8f, 6);
+            // 구형 공격: 반환된 적들에게 데미지 적용
+            targets = GetEnemiesInSphere(transform.position, AttackRadiusC);
+            DamageEnemies(targets, statData.curAttack * 0.8f, 6);
             SoundManager.Instance.PlaySound2D("DualBlades_atk_" + (attackComboValue + 1));
             Effect();
         }
         
     }
-    public override void SkillAttack1()
-    {
 
-    }
-    public override void SkillAttack2()
-    {
-
-    }
+    public override void SkillAttack1() { }
+    public override void SkillAttack2() { }
     public override void SharedSkill()
     {
         if (SelectedSharedSkill != null)
@@ -105,7 +90,7 @@ public class Sword : Character
     public override void ResetCombo()
     {
         attackComboValue = 0;
-        animator.SetInteger("AttackCombo", attackComboValue);
+        nextAttack = false;
         attackCombo = false;
     }
 }

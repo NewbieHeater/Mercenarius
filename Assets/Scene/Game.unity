@@ -3369,6 +3369,171 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652975577}
   m_CullTransparentMesh: 1
+--- !u!1 &653257964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653257965}
+  - component: {fileID: 653257966}
+  - component: {fileID: 653257967}
+  m_Layer: 0
+  m_Name: RandomItemGenerater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653257965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653257964}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2275696, y: 0, z: 0.0025157928}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &653257966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653257964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de890796238f00429687954cf88855f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ShopId>k__BackingField: 3
+  mSellItemInfos:
+  - SellItem: {fileID: 11400000, guid: e184edbb4db93e94a80858ff1905e687, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 5e6f8639a5afe844295a359b6380c497, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0cbaa0155f70bb74b94005137dfad2f7, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: cf075edd14b28be4a863da4a59734675, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 93306df914cf8524a8e6de156222759c, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: bca12765816d355488a9da568e759a69, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0871e136a075a574eba4cf8550307261, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: e0fb9413df0c4844fa55ba3a94e80b50, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 7214507f170027146b8629b93be9a30c, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0741ff58bf1e1a545bb482ec7b031032, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 28dc84f324253f048b925940b34c5f4b, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 98f322f2cc9d6ac4fb440454c5a630f7, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: a096fb92ac5d8a7499c1bd608392bb1d, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: c56cef29bd148bc4286b93017a7e355d, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 5bf30dd55bc6d504d8ec3b546a412100, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: cc2db3ccd6308604f9c7eac56fd49bf1, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: b952bf04ab993664e98dcd2a89332d5f, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 11bdfb7409220d846851288f06016b08, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: c542e065117bd2743be4e7298e5421b2, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: bef099b8325af1944ae7c834326af335, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 80524ce5317f6b748a59eaf61c3db7b6, type: 2}
+    Cost: 0
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  ShopLevel: 0
+--- !u!114 &653257967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653257964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8290c6f01c6b8ac4ea8002058da24939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &685384769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3490,6 +3655,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingWaitTime: 6
   canvas: {fileID: 1240417964}
+  mapGenerateEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 653257967}
+        m_TargetAssemblyTypeName: NPC_Level1, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 992494296}
+        m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &712761233
 GameObject:
   m_ObjectHideFlags: 0
@@ -4909,7 +5101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14a73d1b3b439546a52fdf5579e1268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mItem: {fileID: 11400000, guid: cf075edd14b28be4a863da4a59734675, type: 2}
+  mItem: {fileID: 0}
   mIndicatorHeight: 1
 --- !u!23 &929306521
 MeshRenderer:
@@ -7817,6 +8009,158 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620378627}
   m_CullTransparentMesh: 1
+--- !u!1 &1621045716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621045717}
+  - component: {fileID: 1621045718}
+  m_Layer: 0
+  m_Name: RandomItemGeneraterStore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621045717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621045716}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2275696, y: 0, z: 0.0025157928}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1621045718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621045716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de890796238f00429687954cf88855f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ShopId>k__BackingField: 3
+  mSellItemInfos:
+  - SellItem: {fileID: 11400000, guid: e184edbb4db93e94a80858ff1905e687, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 5e6f8639a5afe844295a359b6380c497, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0cbaa0155f70bb74b94005137dfad2f7, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: cf075edd14b28be4a863da4a59734675, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 93306df914cf8524a8e6de156222759c, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: bca12765816d355488a9da568e759a69, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0871e136a075a574eba4cf8550307261, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: e0fb9413df0c4844fa55ba3a94e80b50, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 7214507f170027146b8629b93be9a30c, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 0741ff58bf1e1a545bb482ec7b031032, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 28dc84f324253f048b925940b34c5f4b, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 98f322f2cc9d6ac4fb440454c5a630f7, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: a096fb92ac5d8a7499c1bd608392bb1d, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: c56cef29bd148bc4286b93017a7e355d, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 5bf30dd55bc6d504d8ec3b546a412100, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: cc2db3ccd6308604f9c7eac56fd49bf1, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: b952bf04ab993664e98dcd2a89332d5f, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 11bdfb7409220d846851288f06016b08, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: c542e065117bd2743be4e7298e5421b2, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: bef099b8325af1944ae7c834326af335, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  - SellItem: {fileID: 11400000, guid: 80524ce5317f6b748a59eaf61c3db7b6, type: 2}
+    Cost: 100
+    ItemAmount: 1
+    GiveAmountPerTrade: 1
+    NeedShopLevel: 0
+  ShopLevel: 0
 --- !u!1 &1649636578
 GameObject:
   m_ObjectHideFlags: 0
@@ -8078,19 +8422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyToPool:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 992494296}
-        m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
-        m_MethodName: Spawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   pools:
   - tag: EnemyRanger
     prefab: {fileID: 7630655988997322142, guid: f225ae6c5052c7844a70e9c5959fddbd,
@@ -8111,7 +8443,11 @@ MonoBehaviour:
   - tag: SharedSkillDagger
     prefab: {fileID: 4835218271172177459, guid: a26191b9611b1494d92f8b2bbba53254,
       type: 3}
-    size: 3
+    size: 6
+  - tag: Arrow
+    prefab: {fileID: 7703050935413378862, guid: 29888d382bb514140bffb04539296a47,
+      type: 3}
+    size: 10
 --- !u!1 &1667683502
 GameObject:
   m_ObjectHideFlags: 3
@@ -9176,6 +9512,7 @@ MonoBehaviour:
   mSlots: []
   gold: {fileID: 739035806}
   CurrentCoin: 1000
+  multiplyer: 1
 --- !u!114 &1895388026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9797,8 +10134,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mSellItemInfos.Array.data[0].SellItem
       value: 
-      objectReference: {fileID: 11400000, guid: cf075edd14b28be4a863da4a59734675,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3946686824434768214, guid: bdd787e92a7de41419e0497ee52f4142,
         type: 3}
       propertyPath: mSellItemInfos.Array.data[1].SellItem
@@ -10088,7 +10424,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006889189
 MonoBehaviour:
@@ -10112,7 +10448,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a22715b1b07b4964794095ce00216e21, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10176,7 +10512,7 @@ MonoBehaviour:
   m_margin: {x: 32.14319, y: 0, z: 30.865234, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2006889190
@@ -10798,6 +11134,8 @@ SceneRoots:
   - {fileID: 746983425}
   - {fileID: 992494297}
   - {fileID: 1991191674}
+  - {fileID: 653257965}
+  - {fileID: 1621045717}
   - {fileID: 57548609}
   - {fileID: 2032927950}
   - {fileID: 1778123385}

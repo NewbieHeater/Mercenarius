@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +10,9 @@ public abstract class Character : MonoBehaviour
     protected CharacterManager cm = CharacterManager.Instance;
     public NavMeshAgent agent { get; private set; }
     public Animator animator { get; private set; }
-    public Transform attackTransform;
+    public Transform attackHemisphereTransform;
+    public Transform attackSphereTransform;
+    public Transform attackBoxTransform;
     protected SpriteRenderer spriteRender;
     public StatData statData;
     public Image HpImage;
@@ -30,12 +33,33 @@ public abstract class Character : MonoBehaviour
     public Dictionary<string, IState<Character>> dicState = new Dictionary<string, IState<Character>>();
     public StateMachine<Character> sm;
 
-    // DrawAttackBox에서 사용할 코너 배열(매 호출 시 할당하지 않도록)
-    private Vector3[] corners = new Vector3[8];
+    #region 아이템
+    //public GenericItemEffect genericItemEffect { get; private set; }
+    public event Action<List<EnemyGolemController>> OnAttack;
+    // 피격 이벤트: 플레이어가 피해를 입을 때 호출, 피해량 인자 포함
+    public event Action<float> OnHit;
+
+    // 피해 처리 함수 (예시)
+    public void OnHitExecute(float damage)
+    {
+        TakeDamage(damage);
+        OnHit?.Invoke(damage);
+    }
+    public void TakeDamage(float damage)
+    {
+        statData.ModifyCurrentHp(-damage);
+        HpImage.fillAmount = statData.curHp / statData.maxHp;
+    }
+    public void ApplyBleedingEffect(float value)
+    {
+        TakeDamage(value);
+    }
+    #endregion
 
     #region 초기화 및 컴포넌트 캐싱
     protected virtual void OnEnable()
     {
+        //genericItemEffect = GetComponent<GenericItemEffect>();
         enemyLayerMask = LayerMask.GetMask("Enemy");
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
@@ -63,19 +87,12 @@ public abstract class Character : MonoBehaviour
         SelectedSharedSkill = skill;
     }
 
-    public virtual void BasicAttack() { }
+    public virtual void BasicAttack() {  }
     public virtual void SkillAttack1() { }
     public virtual void SkillAttack2() { }
     public virtual void SharedSkill() { }
     public virtual void ResetCombo() { }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("EnemyAttack"))
-        {
-            statData.ModifyCurrentHp(-10f);
-        }
-    }
     #endregion
 
     #region 마우스 위치 및 방향 계산
@@ -95,7 +112,7 @@ public abstract class Character : MonoBehaviour
     public bool IsMouseOverGround() => TryGetGroundPosition(out _);
 
     // 공격 방향 계산: 캐릭터 위치에서 마우스 월드 좌표까지의 단위 벡터 (수평 유지)
-    protected Vector3 GetAttackDirection()
+    public Vector3 GetAttackDirection()
     {
         if (TryGetGroundPosition(out Vector3 mousePos))
         {
@@ -127,107 +144,115 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region 공격 범위 및 판정
+    public bool bleed = false;
+
     // 반원 공격: origin을 중심으로 OverlapSphereNonAlloc을 사용하여, 공격 방향 내의 적에게 데미지 적용
-    protected void PerformOptimizedHemisphereAttack(Vector3 origin, float radius, float damage, int hitCount)
+    /// <summary>
+    /// 반구 범위 내 적들을 반환합니다.
+    /// </summary>
+    public List<EnemyGolemController> GetEnemiesInHemisphere(Vector3 origin, float radius)
     {
         FlipSpriteByMousePosition();
+        Vector3 attackDirection;
+        List<EnemyGolemController> enemies = new List<EnemyGolemController>();
         int count = Physics.OverlapSphereNonAlloc(origin, radius, overlapResults, enemyLayerMask);
-        Vector3 attackDirection = GetAttackDirection();
+        if(TryGetGroundPosition(out attackDirection))
+        {
+            attackHemisphereTransform.localScale = new Vector3(radius, radius, radius);
+            attackHemisphereTransform.LookAt(new Vector3(attackDirection.x, 0.5696364f, attackDirection.z));
+            attackHemisphereTransform.gameObject.SetActive(true);
+        }
+        attackDirection = GetAttackDirection();
         for (int i = 0; i < count; i++)
         {
             Collider col = overlapResults[i];
-            if (col == null) continue;
+            if (col == null)
+                continue;
             Vector3 toTarget = (col.transform.position - origin).normalized;
             if (Vector3.Dot(attackDirection, toTarget) >= 0f)
             {
                 EnemyGolemController enemy = col.GetComponent<EnemyGolemController>();
                 if (enemy != null)
-                {
-                    for (int j = 0; j < hitCount; j++)
-                        enemy.TakeDamage(damage);
-                }
+                    enemies.Add(enemy);
             }
         }
+        OnAttack?.Invoke(enemies);
+        return enemies;
     }
 
-    // 원형 공격: origin을 중심으로 OverlapSphereNonAlloc을 사용하여, 범위 내의 모든 적에게 데미지 적용
-    protected void PerformOptimizedSphericalAttack(Vector3 origin, float radius, float damage, int hitCount)
+    /// <summary>
+    /// 구 형태 범위 내 적들을 반환합니다.
+    /// </summary>
+    public List<EnemyGolemController> GetEnemiesInSphere(Vector3 origin, float radius)
     {
         FlipSpriteByMousePosition();
+        List<EnemyGolemController> enemies = new List<EnemyGolemController>();
         int count = Physics.OverlapSphereNonAlloc(origin, radius, overlapResults, enemyLayerMask);
+        attackSphereTransform.localScale = new Vector3(radius, radius, radius);
+        attackSphereTransform.gameObject.SetActive(true);
         for (int i = 0; i < count; i++)
         {
             Collider col = overlapResults[i];
-            if (col == null) continue;
+            if (col == null)
+                continue;
             EnemyGolemController enemy = col.GetComponent<EnemyGolemController>();
             if (enemy != null)
-            {
-                for (int j = 0; j < hitCount; j++)
-                    enemy.TakeDamage(damage);
-            }
+                enemies.Add(enemy);
         }
+        OnAttack?.Invoke(enemies);
+        return enemies;
     }
 
-    // 직육면체 공격: 공격자의 위치(origin)에서 공격 방향으로 halfExtents.z만큼 떨어진 center를 기준으로 OverlapBoxNonAlloc 사용
-    protected void PerformOptimizedBoxAttackInFront(Vector3 origin, Vector3 halfExtents, float damage, int hitCount)
+    /// <summary>
+    /// 직육면체 범위 내 적들을 반환합니다.
+    /// </summary>
+    public List<EnemyGolemController> GetEnemiesInBox(Vector3 center, Vector3 halfExtents, Quaternion orientation)
     {
         FlipSpriteByMousePosition();
-        Vector3 attackDirection = GetAttackDirection();
-        Vector3 center = origin + attackDirection * halfExtents.z;
-        Quaternion orientation = Quaternion.LookRotation(attackDirection);
-        DrawAttackBox(center, halfExtents, orientation, Color.green, 0.1f);
-        Debug.Log($"Attack Box - halfExtents: {halfExtents}, center: {center}");
+        List<EnemyGolemController> enemies = new List<EnemyGolemController>();
         int count = Physics.OverlapBoxNonAlloc(center, halfExtents, overlapResults, orientation, enemyLayerMask);
+        Vector3 attackDirection;
+        if (TryGetGroundPosition(out attackDirection))
+        {
+            attackSphereTransform.localScale = new Vector3(halfExtents.x, 1, halfExtents.z);
+            attackBoxTransform.LookAt(new Vector3(attackDirection.x, 0.5696364f, attackDirection.z));
+            attackBoxTransform.gameObject.SetActive(true);
+        }
         for (int i = 0; i < count; i++)
         {
             Collider col = overlapResults[i];
-            if (col == null) continue;
+            if (col == null)
+                continue;
             EnemyGolemController enemy = col.GetComponent<EnemyGolemController>();
             if (enemy != null)
+                enemies.Add(enemy);
+        }
+        OnAttack?.Invoke(enemies);
+        return enemies;
+    }
+
+    /// <summary>
+    /// 리스트로 반환된 적들에게 데미지를 적용합니다.
+    /// hitCount: 한 적에게 몇 번의 데미지를 줄 것인가 (중복 타격)
+    /// </summary>
+    public void DamageEnemies(List<EnemyGolemController> enemies, float damage, int hitCount)
+    {
+        foreach (var enemy in enemies)
+        {
+            for (int i = 0; i < hitCount; i++)
             {
-                for (int j = 0; j < hitCount; j++)
-                    enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
         }
     }
 
-    // 공격 범위를 시각화: 캐릭터 공격 범위를 Debug.DrawLine으로 그립니다.
-    private void DrawAttackBox(Vector3 center, Vector3 halfExtents, Quaternion orientation, Color color, float duration = 0f)
-    {
-        // 캐싱된 corners 배열을 사용하여 8개 코너 계산
-        corners[0] = center + orientation * new Vector3(-halfExtents.x, -halfExtents.y, -halfExtents.z);
-        corners[1] = center + orientation * new Vector3(halfExtents.x, -halfExtents.y, -halfExtents.z);
-        corners[2] = center + orientation * new Vector3(halfExtents.x, -halfExtents.y, halfExtents.z);
-        corners[3] = center + orientation * new Vector3(-halfExtents.x, -halfExtents.y, halfExtents.z);
-        corners[4] = center + orientation * new Vector3(-halfExtents.x, halfExtents.y, -halfExtents.z);
-        corners[5] = center + orientation * new Vector3(halfExtents.x, halfExtents.y, -halfExtents.z);
-        corners[6] = center + orientation * new Vector3(halfExtents.x, halfExtents.y, halfExtents.z);
-        corners[7] = center + orientation * new Vector3(-halfExtents.x, halfExtents.y, halfExtents.z);
-
-        // 밑면
-        Debug.DrawLine(corners[0], corners[1], color, duration);
-        Debug.DrawLine(corners[1], corners[2], color, duration);
-        Debug.DrawLine(corners[2], corners[3], color, duration);
-        Debug.DrawLine(corners[3], corners[0], color, duration);
-        // 윗면
-        Debug.DrawLine(corners[4], corners[5], color, duration);
-        Debug.DrawLine(corners[5], corners[6], color, duration);
-        Debug.DrawLine(corners[6], corners[7], color, duration);
-        Debug.DrawLine(corners[7], corners[4], color, duration);
-        // 수직선
-        Debug.DrawLine(corners[0], corners[4], color, duration);
-        Debug.DrawLine(corners[1], corners[5], color, duration);
-        Debug.DrawLine(corners[2], corners[6], color, duration);
-        Debug.DrawLine(corners[3], corners[7], color, duration);
-    }
     #endregion
 
-    #region 애니메이션 및 콤보 관리
+        #region 애니메이션 및 콤보 관리
     public void ComboEnable()
     {
         Debug.Log("attackEnter");
-        
-        
+
         BasicAttack();
         attackCombo = true;
     }
@@ -238,9 +263,14 @@ public abstract class Character : MonoBehaviour
     }
 
     public bool nextAttack = false;
+
+
     public void ComboExit()
     {
         nextAttack = true;
+        attackHemisphereTransform.gameObject.SetActive(false);
+        attackSphereTransform.gameObject.SetActive(false);
+        attackBoxTransform.gameObject.SetActive(false);
     }
 
     public void AttackEnd()

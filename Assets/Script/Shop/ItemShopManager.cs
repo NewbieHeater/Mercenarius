@@ -34,7 +34,7 @@ public class ItemShopManager : Singleton<ItemShopManager>
         
         slot.InitSlot(sellItems[itemNumber], shopLevel);
         mCurrentSlots.Add(slot);
-        mShopRootGo.SetActive(true);
+        //mShopRootGo.SetActive(true);
         ItemShopManager.Instance.RefreshSlots();
         mIsItemShopActive = true;
     }
@@ -85,5 +85,14 @@ public class ItemShopManager : Singleton<ItemShopManager>
     public void BuyItem(ItemShopSlot slot)
     {
         slot.Buy();
+        Item item = slot.Item;
+        if (item is Item_Equipment equipment)
+        {
+            Debug.Log("효과발동");
+            // 플레이어 캐릭터를 가져옵니다.
+            Character playerCharacter = CharacterManager.Instance.character.GetComponent<Character>();
+            // 새 장비를 추가하고 효과 적용
+            EquipmentInventory.Instance.AddAndEquipItem(equipment, playerCharacter);
+        }
     }
 }

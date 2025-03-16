@@ -10,16 +10,33 @@ using System;
 [Serializable]
 public struct EquipmentEffect
 {
-    [Header("추가 공격력")]
-    [SerializeField] private float mDamage;
-    public float Damage
+    [Header("수치")]
+    [SerializeField] private float mValue;
+    public float Value
     {
         get
         {
-            return mDamage;
+            return mValue;
         }
     }
-
+    [Header("추가 공격")]
+    [SerializeField] private float mAttack;
+    public float Attack
+    {
+        get
+        {
+            return mAttack;
+        }
+    }
+    [Header("수치")]
+    [SerializeField] private float mAttackSpeed;
+    public float AttackSpeed
+    {
+        get
+        {
+            return mAttackSpeed;
+        }
+    }
     [Header("추가 체력")]
     [SerializeField] private float mHp;
     public float Hp
@@ -54,31 +71,42 @@ public struct EquipmentEffect
     {
         EquipmentEffect calcedEffect;
 
-        calcedEffect.mDamage = param1.mDamage + param2.mDamage;
+        calcedEffect.mValue = param1.mValue + param2.mValue;
+        calcedEffect.mAttack = param1.mAttack + param2.mAttack;
         calcedEffect.mHp = param1.mHp + param2.mHp;
         calcedEffect.mDefense = param1.mDefense + param2.mDefense;
         calcedEffect.mSpeed = param1.mSpeed + param2.mSpeed;
+        calcedEffect.mAttackSpeed = param1.mAttackSpeed + param2.mAttackSpeed;
 
         return calcedEffect;
     }
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Add Item/Item(Equipment)")]
-public class Item_Equipment : Item
+public class Item_Equipment : Item // Item은 기존 아이템 기본 클래스
 {
-    [Space(50)]
     [Header("장비 아이템 효과 (착용시 발동)")]
-    [SerializeField] private EquipmentEffect mEffect;
+    public ItemEffect[] effects;
 
-    /// <summary>
-    /// 해당 아이템을 장착했을 때 받는 추가 효과
-    /// </summary>
-    /// <value></value>
-    public EquipmentEffect Effect
+    [Space(50)]
+    [Header("기본 장비 효과")]
+    [SerializeField] private EquipmentEffect mEffect;
+    public EquipmentEffect Effect => mEffect;
+
+    
+    public void Equip(Character character)
     {
-        get
+        foreach (var effect in effects)
         {
-            return mEffect;
+            effect.OnEquip(character);
+        }
+    }
+
+    public void Unequip(Character character)
+    {
+        foreach (var effect in effects)
+        {
+            effect.OnUnequip(character);
         }
     }
 }

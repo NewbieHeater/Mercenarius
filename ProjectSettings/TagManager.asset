@@ -15,6 +15,7 @@ TagManager:
   - Button
   - Road Spawn
   - Rooms
+  - Store
   layers:
   - Default
   - TransparentFX

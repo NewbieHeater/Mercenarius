@@ -4,44 +4,57 @@ using UnityEngine;
 
 public class NPC_Level1 : MonoBehaviour
 {
-    public Store[] ItemRandomNumber;
+    private List<Store> ItemRandomNumber = new List<Store>();
+    private GameObject[] gameObjects;
 
+    private List<int> itemList = new List<int>();
 
-    List<int> itemList = new List<int>();
-
-    int min = 0;
-    int max = 3;
-
-    void Awake()
+    public void Init()
     {
-        CreateUnDuplicateRandom(min, max);
-        
-        for (int i = 0; i < itemList.Count; i++)
+
+        gameObjects = GameObject.FindGameObjectsWithTag("Store");
+        ItemRandomNumber.Clear();
+
+        foreach (GameObject go in gameObjects)
         {
-        
-            ItemRandomNumber[i].num = itemList[i];
-            
+            Store store = go.GetComponent<Store>();
+            if (store != null)
+            {
+                ItemRandomNumber.Add(store);
+            }
         }
 
+        int count = ItemRandomNumber.Count;
+        CreateUnDuplicateRandom(0, count - 1);
+
+
+        for (int i = 0; i < count; i++)
+        {
+            Debug.Log(ItemRandomNumber.Count);
+            Debug.Log(itemList.Count);
+            Debug.Log(count);
+            ItemRandomNumber[i].num = itemList[i];
+            ItemRandomNumber[i].Init();
+        }
     }
 
-    // 랜덤 생성 (중복 배제)
+
     void CreateUnDuplicateRandom(int min, int max)
     {
-        int currentNumber = Random.Range(min, max);
-
-        for (int i = 0; i < 3;)
+        List<int> numbers = new List<int>();
+        for (int i = min; i <= max; i++)
         {
-            if (itemList.Contains(currentNumber))
-            {
-                currentNumber = Random.Range(min, max);
-            }
-            else
-            {
-                itemList.Add(currentNumber);
-                i++;
-            }
+            numbers.Add(i);
         }
 
+        for (int i = numbers.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+
+        itemList = numbers;
     }
 }

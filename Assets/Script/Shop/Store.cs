@@ -6,11 +6,21 @@ public class Store : MonoBehaviour
 {
     public int num = 0;
     private bool isInTrigger = false;
+    public bool isStore = false;
     [SerializeField] private ItemShop mItemShop;
     public ItemShopSlot Slot;
-    private void Start()
+    public void Init()
     {
+        if (mItemShop == null && !isStore)
+        {
+            mItemShop = GameObject.Find("RandomItemGenerater").GetComponent<ItemShop>();
+        }
+        else if(mItemShop == null && isStore)
+        {
+            mItemShop = GameObject.Find("RandomItemGeneraterStore").GetComponent<ItemShop>();
+        }
         ItemShopManager.Instance.OpenShop(mItemShop.mSellItemInfos, mItemShop.ShopLevel, num, transform.position, Slot);
+
     }
     private void OnTriggerEnter(Collider other)
     {

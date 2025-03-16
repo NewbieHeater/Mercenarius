@@ -23,6 +23,11 @@ public class ItemActionManager : MonoBehaviour
     [SerializeField] private EquipmentInventory mEquipmentInventory;
     [SerializeField] private InventoryMain mMainInventory;
 
+    private void Start()
+    {
+        mCharacter = CharacterManager.Instance.GetComponent<Character>();
+    }
+
     /// <summary>
     /// 아이템 사용 이벤트 호출
     /// 각 아이템마다 실행되는 기능을 수행
@@ -47,12 +52,13 @@ public class ItemActionManager : MonoBehaviour
                     {
                         case (int)ItemCode.SMALL_HEALTH_POTION:
                             {
-                                //GameManager._instance.player.curHealth += 1;
+                                mCharacter.TakeDamage(-100);
                                 //SoundManager.Instance.PlaySound2D("Food Drink " + SoundManager.Range(1, 4, true));
                                 break;
                             }
-                        case (int)ItemCode.SMALL_MANA_POTION:
+                        case (int)ItemCode.BIG_HEALTH_POTION:
                             {
+                                mCharacter.TakeDamage(-400);
                                 //GameManager._instance.player.curHealth -= 1;
                                 //SoundManager.Instance.PlaySound2D("Food Drink " + SoundManager.Range(1, 4, true));
                                 break;
@@ -148,6 +154,6 @@ public class ItemActionManager : MonoBehaviour
 public enum ItemCode
 {
     SMALL_HEALTH_POTION,
-    SMALL_MANA_POTION,
+    BIG_HEALTH_POTION,
 }
 
